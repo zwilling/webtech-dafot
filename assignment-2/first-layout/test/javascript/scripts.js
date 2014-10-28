@@ -17,11 +17,16 @@ function initReservatioCanvas() {
 	//init some global variables
 	rows = 10;
 	cols = 16;
-	seatOffsetX = canvasReservation.width / 2 - seat_free.width * (cols / 2);
-	seatOffsetY = 80;
 
 	//add on click event
 	canvasReservation.addEventListener("click", clickOnReservationCanvas, false);
+	
+	//draw reservations when the seat-picture is loaded
+	seat_free.onload = function(){
+		seatOffsetX = canvasReservation.width / 2 - seat_free.width * (cols / 2);
+		seatOffsetY = 80;
+		drawReservationCanvas();
+	};
 }
 
 /**
