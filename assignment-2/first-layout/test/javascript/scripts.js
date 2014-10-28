@@ -19,6 +19,9 @@ function initReservatioCanvas() {
 	cols = 16;
 	seatOffsetX = canvasReservation.width / 2 - seat_free.width * (cols / 2);
 	seatOffsetY = 80;
+
+	//add on click event
+	canvasReservation.addEventListener("click", clickOnReservationCanvas, false);
 }
 
 /**
@@ -46,9 +49,6 @@ function drawReservationCanvas() {
 			ctx.drawImage(seat_free, posx, posy);
 		}
 	}
-
-	//add on click event
-	canvasReservation.addEventListener("click", clickOnReservationCanvas, false);
 }
 
 /**
