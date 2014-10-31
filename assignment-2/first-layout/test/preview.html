@@ -4,43 +4,70 @@
 	<title> Preview </title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-	<style type="text/css">
-		p {font-family: 'Roboto', sans-serif; font-size: 15px; color: white}	
-	</style>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,900italic' rel='stylesheet' type='text/css'>
 	<script src="javascript/scripts.js"></script>
 </head>
 <body>
 	<img class="header" src="images/banner.png" alt="RWTH KINO" />
-	<!-- Geolocation -->
-	<input type="button" value="Find Nearest" onclick="javascript:chooseNearestCinema()">
-	<!-- Canvas for the reservation: -->
-	<canvas id="can-reservation" width="600" height="400">
-		<script>initReservatioCanvas();</script>
-	</canvas>
-
 	<div class="content">
-		<div class="row">
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:50px 50px 50px 25px"></div>
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:50px 50px 50px 25px"> </div>
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:50px 50px 50px 25px" ></div>
-		</div>
-		<div class="row">
-			<div class="col-4" style="padding:0px 50px 50px 25px"><p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p></div>
-			<div class="col-4" style="padding: 0px 50px 50px 25px"> <p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p> </div>
-			<div class="col-4" style="padding:0px 50px 50px 25px"> <p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p> </div>
-		</div>
+		
+		<div class="row" bottom: 50px><h2> LATEST MOVIES</h2></div>
+		
+		<div class= "row" style="position: relative;left: 100px; bottom: 50px;"> 
+			<div class="container">
+			<div id="content-slider">
+    			<div id="slider">
+		        	<div id="mask">
+		            	<ul>
+		           		<li id="first" class="firstanimation">
+		            	<a href="#">
+		            	<img src="images/AboutTime.jpg" alt="About Time" width=150% />
+		            	</a>
+		            	</li>
+		            	<li id="second" class="secondanimation">
+		            	<a href="#">
+		            	<img src="images/AMERICANHUSTLE.jpg" alt="American Hustle" width=150%/>
+		            	</a>
+		            	</li>
+		           		<li id="third" class="thirdanimation">
+		            	<a href="#">
+		            	<img src="images/duchess.jpg" alt="duchess" width=150%/>
+		            	</a>
+		            	</li>        
+		            	<li id="fourth" class="fourthanimation">
+		            	<a href="#">
+			            <img src="images/inter.jpg" alt="interstellar" width=150% />
+			            </a>
+			            </li>
+			            <li id="fifth" class="fifthanimation">
+	            		<a href="#">
+	            		<img src="images/ultron.jpg" alt="Avengers" width=150%/>
+	            		</a>
+	            		</li>
+			            </ul>
+		            </div>
+		        		<div class="progress-bar"></div>
+        		</div>
+    		</div>
+			</div> </div>
+		
+		<div class="row" style="position: relative;top: 100px;"> <h2> NEAREST CINEMAS</h2> </div>
+		
+		<div class="row" style="position: relative;top: 100px;"> <!-- Geolocation -->
+			<input type="button" value="Find Nearest" onclick="javascript:chooseNearestCinema()">
+		</div>	
 
-		<div class="row">
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:0px 50px 50px 25px"></div>
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:0px 50px 50px 25px"> </div>
-			<div class="col-4"> <img src="http://placehold.it/350x200" style="padding:0px 50px 50px 25px" ></div>
+		<div class="row" style="position: relative;top: 100px;"> <h2> SEATING RESERVATION</h2> </div>
+		
+		<div class="row"style="position: relative;top: 100px; left: 30px;">
+			<canvas id="can-reservation" width="600" height="400">
+				<script>initReservatioCanvas();</script>
+			</canvas>
 		</div>
-		<div class="row">
-			<div class="col-4" style="padding:0px 50px 50px 25px"><p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p></div>
-			<div class="col-4" style="padding: 0px 50px 50px 25px"> <p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p> </div>
-			<div class="col-4" style="padding:0px 50px 50px 25px"> <p> Bacon ipsum dolor sit amet pastrami ribeye sausage, sirloin short ribs pork belly strip steak tenderloin boudin. Landjaeger beef ham hock, doner bacon pork belly filet mignon tenderloin short loin beef ribs tongue. Bresaola salami short ribs venison, pastrami jerky landjaeger. Hamburger meatball cow pork loin ham. </p> </div>
 		</div>
 	</div>
+	<footer>
+  		<img class="footer" src="images/footer.jpg" alt="footer" />
+	</footer>
 </body>
 </html>
