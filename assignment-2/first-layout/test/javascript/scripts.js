@@ -60,7 +60,12 @@ function resetReservation() {
 	for (var i = 0; i < cols; i++) {
 		seats[i] = new Array(rows);
 		for (var j = 0; j < rows; j++) {
-			seats[i][j] = new Seat(i, j, true);
+			//randomized initial reservation
+			var free = true;
+			if(Math.random() > 0.9){
+				free = false;
+			}
+			seats[i][j] = new Seat(i, j, free);
 		}
 	}
 	saveReservation();
