@@ -64,6 +64,7 @@ function resetReservation() {
 		}
 	}
 	saveReservation();
+	drawReservationCanvas();
 }
 
 function saveReservation(){
@@ -114,14 +115,21 @@ function clickOnReservationCanvas(e) {
 
 	//get seat number
 	var seat = getSeatFromClick(e);
-	if (seat.row < 0 || seat.column < 0 || seat.row >= rows || seat.column >= cols) {
+	if(!seat){
+		console.log("Click was not on seat.");
 		return;
 	}
 
-	//draw red seat over the green one
-	var posx = seatOffsetX + seat.column * seat_free.width;
-	var posy = seatOffsetY + seat.row * seat_free.height;
-	ctx.drawImage(seat_booked, posx, posy);
+	//check if seat is free
+	if(!seat.free){
+		alert("This seat is already booked.");
+		return;
+	}
+
+	//reserve seat
+	seat.free = false;
+	saveReservation();
+	drawReservationCanvas();
 }
 
 /**
@@ -135,7 +143,12 @@ function getSeatFromClick(e) {
 	//find seat number
 	x = Math.floor(x / seat_free.width);
 	y = Math.floor(y / seat_free.height);
-	var seat = new Seat(x, y, false);
+	
+	if (x < 0 || y < 0 || y >= rows || x >= cols) {
+		return false;
+	}
+	
+	var seat = seats[x][y];
 	return seat;
 }
 
