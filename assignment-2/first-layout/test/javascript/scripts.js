@@ -88,11 +88,18 @@ function drawReservationCanvas() {
 	ctx.fillText("Screen", canvasReservation.width / 2, 30);
 
 	//draw seats
-	for ( i = 0; i < rows; i++) {
-		for ( j = 0; j < cols; j++) {
-			var posx = seatOffsetX + j * seat_free.width;
-			var posy = seatOffsetY + i * seat_free.height;
-			ctx.drawImage(seat_free, posx, posy);
+	for (var i = 0; i < seats.length; i++) {
+		for (var j = 0; j < seats[i].length; j++) {
+			var posx = seatOffsetX + i * seat_free.width;
+			var posy = seatOffsetY + j * seat_free.height;
+			var imgSeat;
+			if(seats[i][j].free){
+				imgSeat = seat_free;
+			}
+			else{
+				imgSeat = seat_booked;
+			}
+			ctx.drawImage(imgSeat, posx, posy);
 		}
 	}
 }
