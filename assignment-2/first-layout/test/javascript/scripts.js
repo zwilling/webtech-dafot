@@ -69,7 +69,6 @@ function resetReservation() {
 		}
 	}
 	saveReservation();
-	drawReservationCanvas();
 }
 
 function saveReservation(){
