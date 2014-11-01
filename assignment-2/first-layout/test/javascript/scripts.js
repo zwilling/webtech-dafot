@@ -111,8 +111,20 @@ function getSeatFromClick(e) {
 		x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 		y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 	}
-	x -= canvasReservation.offsetLeft + seatOffsetX;
-	y -= canvasReservation.offsetTop + seatOffsetY;
+
+	// Here I get the offset relative to the canvas, somehow i found no trivial solution
+	// I add the offsets of all parents together.
+	var totalOffsetX = 0;
+    var totalOffsetY = 0;
+    var currentElement = canvasReservation;
+    do{
+        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+    }
+    while(currentElement = currentElement.offsetParent);
+		
+	x -= totalOffsetX + seatOffsetX;
+	y -= totalOffsetY + seatOffsetY;
 
 	//find seat number
 	x = Math.floor(x / seat_free.width);
