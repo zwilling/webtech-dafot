@@ -181,7 +181,7 @@ function findNearestCinema(position) {
 		}
 	}
 	localStorage.setItem('chosen_cinema', nearestCinema);
-	expandCinameOptions(nearestCinema);
+	expandCinemaOptions(nearestCinema);
 }
 
 /**
