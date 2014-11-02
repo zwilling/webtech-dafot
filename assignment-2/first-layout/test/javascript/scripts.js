@@ -228,3 +228,7 @@ function chooseCinemaOnButtonSelect() {
 function expandCinemaOptions() {
 
 }
+
+function thanks() {
+	alert("Thanks, enjoy the movie");
+}

@@ -3,6 +3,9 @@
 <head>
 	<title> Preview </title>
 	<meta charset="utf-8">
+	<!--[if lt IE 9]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Lato:400,900italic' rel='stylesheet' type='text/css'>
 	<script src="javascript/scripts.js"></script>
@@ -53,20 +56,20 @@
 		
 		<div class="row" style="position: relative;top: 100px;"> <h2> NEAREST CINEMAS</h2> </div>
 		
-		<div class="row" style="position: relative;top: 100px;"> <!-- Geolocation -->
-			<input type="button" value="Find Nearest" onclick="javascript:chooseNearestCinema()">
+		<div class="loginform cf" style="position: relative;top: 100px; left: 550px;"> <!-- Geolocation -->
+			<input type="submit" value="Find Nearest" onclick="javascript:chooseNearestCinema()">
 		</div>	
 
 		<div class="row" style="position: relative;top: 100px;"> <h2> SEATING RESERVATION</h2> </div>
 		
-		<div class="row"style="position: relative;top: 100px; left: 30px;">
+		<div class="row"style="position: relative;top: 100px; left: 300px;">
 			<canvas id="can-reservation" width="600" height="400">
 				<script>initReservatioCanvas();</script>
 			</canvas>
 		</div>
 		
-		<div class="row" style="position: relative;top: 100px;">
-			<input type="button" value="Top Secret Button for resetting the reservation" onclick="resetReservation(); drawReservationCanvas();">
+		<div class="loginform cf" style="position: relative;top: 110px;left: 450px;">
+			<input type="submit" value="Top Secret Button for resetting the reservation" onclick="resetReservation(); drawReservationCanvas();">
 		</div>
 		<div class="row" style="position: relative;top: 100px;" ><h2> REGISTRATION FORM</h2> </div>
 
@@ -94,7 +97,7 @@
             			<li>  
         					<table border="0"  width="100%" cellspacing="50" >
     							<tr>
-      								<td><input type="submit" value="Register and Book" margin-right="100px"></td>
+      								<td><input type="submit" value="Register and Book" margin-right="100px" onclick="thanks();"></td>
       			<!-- TODO: navigation back -->
     							</tr>
         					</table>
