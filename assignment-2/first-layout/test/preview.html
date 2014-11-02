@@ -62,25 +62,37 @@
 		</div>
 		
 		<div class="row" style="position: relative;top: 100px;"> <h2> NEAREST CINEMAS</h2> </div>
-		
-		<div class="loginform cf" style="position: relative;top: 100px; left: 550px;"> <!-- Geolocation -->
+		<div class="row" style="position: relative;left: 2px; top: 60px;">
+			<article>
+				<p>Out of 100 cinema's find out which one is closest to you.</p>
+			</article>
+		</div>
+		<div class="loginform cf" style="position: relative;top: 50px; left: 550px;"> <!-- Geolocation -->
 			<input type="submit" value="Find Nearest" onclick="javascript:chooseNearestCinema()">
 		</div>	
 
-		<div class="row" style="position: relative;top: 100px;"> <h2> SEATING RESERVATION</h2> </div>
-		
-		<div class="row"style="position: relative;top: 100px; left: 300px;">
+		<div class="row" style="position: relative;top: 50px;"> <h2> SEATING RESERVATION</h2> </div>
+		<div class="row" style="position: relative;left: 2px; top: 10px;">
+			<article>
+				<p>Reserve your seats with just a click by selecting the seats. Red seats are already booked and all green seats are open for reservation.</p>
+			</article>
+		</div>
+		<div class="row"style="position: relative;top: 50px; left: 300px;">
 			<canvas id="can-reservation" width="600" height="400">
 				<script>initReservatioCanvas();</script>
 			</canvas>
 		</div>
 		
-		<div class="loginform cf" style="position: relative;top: 110px;left: 450px;">
+		<div class="loginform cf" style="position: relative;top: 50px;left: 450px;">
 			<input type="submit" value="Top Secret Button for resetting the reservation" onclick="resetReservation(); drawReservationCanvas();">
 		</div>
-		<div class="row" style="position: relative;top: 100px;" ><h2> REGISTRATION FORM</h2> </div>
-
-		<div class="row"style="position: relative;top: 100px;">
+		<div class="row" style="position: relative;top: 50px;" ><h2> REGISTRATION FORM</h2> </div>
+		<div class="row" style="position: relative;left: 2px; top: 10px;">
+			<article>
+				<p>Just one last step! Please register and book your tickets.</p>
+			</article>
+		</div>
+		<div class="row"style="position: relative;top: 50px;">
 			<section class="loginform cf" >  
       			<form name="register" action="register" method="get" accept-charset="utf-8">  
           			<ul>  
