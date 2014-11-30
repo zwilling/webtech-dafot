@@ -68,21 +68,21 @@
             <div class="headline">Choose your cinema</div>
             <ul class="feature" style="overflow: hidden; position: relative; height: 412px; margin-bottom: 20px">
                 <li class="cinema" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);">
-                    <a href="#" id="IMAX" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="IMAX">
+                    <a href="#movie_choice" id="IMAX" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="IMAX">
                         <img src="./img/imax.png" alt="">
                         <div class="date"><span class="d">IMAX</span></div>
                     </a>
                     <div class="caption"><b>Bringing the world inside!</b></div>
                 </li>
                 <li class="cinema" style="position: absolute; left: 0px; top: 0px; transform: translate3d(320px, 0px, 0px);">
-                    <a href="#" id="Red Eye" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="Red Eye">
+                    <a href="#movie_choice" id="Red Eye" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="Red Eye">
                         <img src="./img/red_eye.png" alt="">
                         <div class="date"><span class="d">Red Eye</span></div>
                     </a>
                     <div class="caption"><b>Movies the way they were meant to be.</b></div>
                 </li>
                 <li class="cinema" style="position: absolute; left: 0px; top: 0px; transform: translate3d(640px, 0px, 0px);">
-                    <a href="#" id="Lakes Outdoor" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="Lakes Outdoor">
+                    <a href="#movie_choice" id="Lakes Outdoor" class="thumb" onclick="chooseCinemaOnButtonSelect(this);return false;" data-name="Lakes Outdoor">
                         <img src="./img/lakes.png" alt="">
                         <div class="date"><span class="d">Lakes Outdoor</span></div>
                     </a>
@@ -94,62 +94,64 @@
         <!-- ENDS cinema list -->
         <!-- Movies -->
         <section class="movies">
+	    <a name="movie_choice"></a>
             <div class="headline">Choose your movie</div>
             <ul class="feature no-left-margin">
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="Fury">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="Fury">
                     <img src="./img/fury.png" alt=""></a>
                     <div class="movie-description">Fury</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="John Wick">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="John Wick">
                     <img src="./img/john_wick.png" alt=""></a>
                     <div class="movie-description">John Wick</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="Mockingjay">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="Mockingjay">
                     <img src="./img/hunger_games.png" alt=""></a>
                     <div class="movie-description">Mockingjay</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="Dracula Untold">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="Dracula Untold">
                     <img src="./img/dracula.png" alt=""></a>
                     <div class="movie-description">Dracula Untold</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="The Judge">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="The Judge">
                     <img src="./img/judge.png" alt=""></a>
                     <div class="movie-description">The Judge</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="Intersellar">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="Intersellar">
                     <img src="./img/intersellar.png" alt=""></a>
                     <div class="movie-description">Intersellar</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="The Hobbit">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="The Hobbit">
                     <img src="./img/hobbit.png" alt=""></a>
                     <div class="movie-description">The Hobbit</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="TMNT">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="TMNT">
                     <img src="./img/turtles.png" alt=""></a>
                     <div class="movie-description">TMNT</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="The Equalizer">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="The Equalizer">
                     <img src="./img/equalizer.png" alt=""></a>
                     <div class="movie-description">The Equalizer</div>
                 </li>
                 <li class="cover">
-                    <a href="#" class="movie" onclick="chooseMovie(this);return false;" data-name="Lucy">
+                    <a href="#reservation_section" class="movie" onclick="chooseMovie(this);return false;" data-name="Lucy">
                     <img src="./img/lucy.png" alt=""></a>
                     <div class="movie-description">Lucy</div>
                 </li>
             </ul>
         </section>
         <!-- ENDS Movies -->
-         <button id="reserve-button" class="pomegranate-flat-button">Reserve seats</button>
+	<a name="reservation_section"></a>
+        <button id="reserve-button" class="pomegranate-flat-button">Reserve seats</button>
     </div>
 </div>
 <!-- ENDS MAIN -->
