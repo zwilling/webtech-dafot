@@ -6,6 +6,7 @@
     <title>DAFOT Assignment 2</title>
     <meta name="description" content="">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magnific-popup.css"> 
     <script src="javascript/scripts.js"></script>
 </head>
 <body cz-shortcut-listen="true">
@@ -148,45 +149,7 @@
             </ul>
         </section>
         <!-- ENDS Movies -->
-        <!-- Reservation -->
-        <section class="reservation">
-            <div class="headline">Choose your seats</div>
-                <div id="canvas-container" class="central-container">
-                    <canvas id="can-reservation" width="600" height="400" class="dark-shadow">
-                        <script>initReservationCanvas();</script>
-                    </canvas>
-                </div>
-            <button id="buy-button" onclick="reserveSeats()" class="pomegranate-flat-button">Reserve seats</button>
-        </section>
-        <!-- ENDS Reservation -->
-        <!-- Contacts -->
-        <section class="contacts">
-            <div class="headline">Please enter your contact details</div>
-            <form name="contacts" action="fill" onsubmit="return false;" accept-charset="utf-8">
-                <div class="feature">
-                    <fieldset class="fields">
-                        <div class="form-group">
-                            <label for="firstname">First name :</label>  
-                            <input type="text" name="firstname" placeholder="Peter" size="20" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastname">Last name : </label>  
-                            <input type="text" name="lastname" placeholder="Mustermann" size="20" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="usermail">Email :</label>  
-                            <input type="email" name="usermail" placeholder="example@email.com" size="20" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone :</label>  
-                            <input type="tel" name="phone" placeholder="0123 01234567" size="20" required>
-                        </div>
-                    </fieldset>
-                </div>
-                <input type="submit" class="pomegranate-flat-button" value="Confirm">
-            </form>
-        </section>
-        <!-- ENDS Contacts -->
+         <button id="reserve-button" class="pomegranate-flat-button">Reserve seats</button>
     </div>
 </div>
 <!-- ENDS MAIN -->
@@ -212,4 +175,20 @@
     <!-- ENDS wrapper -->
 </footer>
 </body>
+<script src="javascript/jquery.min.js"></script>
+<script src="javascript/jquery.magnific-popup.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#reserve-button').magnificPopup({
+            items: {
+                type:'ajax',
+                src: 'reservation.html',
+            },
+            closeOnContentClick: false,
+            closeOnBgClick: false
+
+        });
+    });
+    
+</script>
 </html>

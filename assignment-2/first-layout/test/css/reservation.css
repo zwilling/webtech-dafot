@@ -1,0 +1,43 @@
+body {
+  background: #95c9c3;
+}
+
+.container {
+  position: relative;
+  margin: 40px auto;
+  min-height: 500px;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 5px 15px 0px 15px;
+  width: 900px;
+  background: #95c9c3; 
+  background-image: url(../img/grunge.png);
+  background-repeat: repeat-x;
+  background-position: center 0px;
+  position:relative;       
+    -webkit-box-shadow:0 1px 15px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2) inset;
+       -moz-box-shadow:0 1px 15px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2) inset;
+            box-shadow:0 1px 15px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2) inset;
+}
+
+.reservation {
+	display: inline-block;	
+	float: left;
+}
+
+.contacts {
+	display: inline-block;
+	float: right;
+}
+
+#submit-form {
+	position: relative;
+	margin-top: 60%;
+}
+
+.mfp-close {
+	color: white !important;
+	padding-right: 185px !important;
+	padding-top: 0px !important;
+}
