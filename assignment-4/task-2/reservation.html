@@ -26,7 +26,7 @@
             <!-- Contacts -->
             <section class="contacts">
                 <!-- <div class="headline">Please enter your contact details</div> -->
-                <form name="contacts" action="fill" onsubmit="return false;" accept-charset="utf-8">
+                <form name="contacts" action="do-reservation.php" accept-charset="utf-8">
                     <div class="feature">
                         <fieldset class="fields">
                             <div class="form-group">
@@ -41,6 +41,14 @@
                     </div>
                     <input type="submit" id="submit-form" class="pomegranate-flat-button" value="Confirm">
                 </form>
+		<script>
+		  //add cinema as hidden field to the form
+		  var cinemaInput = document.createElement('input');
+		  cinemaInput.type = 'hidden';
+		  cinemaInput.name = 'cinema';
+		  cinemaInput.value = selectedCinema;
+		  document.forms["contacts"].appendChild(cinemaInput);
+		</script>
             </section>
             <!-- ENDS Contacts -->
         </div>

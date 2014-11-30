@@ -194,6 +194,8 @@ function clickOnReservationCanvas(e) {
     //seat.free = false;
     saveReservation();
     drawReservationCanvas();
+    
+    addSelectedSeatsAsInputInForm();
 }
 
 /**
@@ -288,6 +290,7 @@ function chooseCinemaOnButtonSelect(e) {
     var data = e.dataset;
     if (data) {
         localStorage.setItem('chosen_cinema', data['name']);
+	selectedCinema = data['name'];
     }
     resetCinemas();
     resetMovies();
@@ -363,4 +366,35 @@ function setSelected(e) {
     if (e.children.length > 1) {
         e.children[1].style.background = "#E1C693"
     }
+}
+
+/**
+* add selected seats as string to the reservation form as input
+**/
+function addSelectedSeatsAsInputInForm() {
+    //create input
+    var seatsInput= document.getElementById("seatsInput");
+    if(!seatsInput){
+	console.info("created new input for seats");
+	seatsInput = document.createElement('input');
+	seatsInput.type = 'hidden';
+	seatsInput.name = 'seats';
+	seatsInput.id = 'seatsInput';
+	document.forms["contacts"].appendChild(seatsInput);
+    }
+    //get selected seats as string
+    //(similar to how we stored it before in the local storage)
+    var selectedSeats = new Array();
+    var numberSelected = 0;
+    for (var i = 0; i < seats.length; i++) {
+        for (var j = 0; j < seats[i].length; j++) {
+            if (seats[i][j].inReservation) {
+                selectedSeats[numberSelected] = seats[i][j];
+		numberSelected++;
+            }
+        }
+    }
+    //set value in input
+    seatsInput.value = JSON.stringify(selectedSeats);
+    console.info(JSON.stringify(selectedSeats));
 }
