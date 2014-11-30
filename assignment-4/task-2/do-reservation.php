@@ -14,8 +14,9 @@
 <!-- MAIN -->
 <div role="main" id="main">
     <section class="reservation">
+        <div class="container">
         <div class="headline">We reservated your seats.</div>
-	Please remember your reservation id:
+	<div class="headline">Please remember your reservation id:
 	<!-- connect to SQL database and insert new reservation-->
 	<?php
     	    //connect
@@ -44,10 +45,12 @@
 	    //print reservatioid for the user
 	    print($reservationId);
 	?>
+	</div>
+	<br>
+    	<button id="back-button" class="pomegranate-flat-button" onclick="window.history.back()">Back to reservation</button>
+	</div>
     </section>
 </div>
-
-<button id="back-button" class="pomegranate-flat-button" onclick="window.history.back()">Back to reservation</button>
 <!-- ENDS MAIN -->
 
 </body>
