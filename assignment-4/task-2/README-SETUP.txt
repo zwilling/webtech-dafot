@@ -14,10 +14,11 @@ We used XAMPP for this task. Here are the steps to setup the site:
 	  cinema varchar(150),
 	  reservationid int,
 	  email varchar(150),
-	  name varchar(150));
-	INSERT INTO reservations VALUES (1, 'IMAX', 1111, 'already@booked.de', 'Someone');
-	INSERT INTO reservations VALUES (2, 'Red Eye', 2222, 'already@booked.de', 'Someone');
-	INSERT INTO reservations VALUES (3, 'Lakes Outdoor', 3333, 'already@booked.de', 'Someone');
+	  name varchar(150),
+	  seats varchar(500));
+	INSERT INTO reservations VALUES (1, 'IMAX', 1111, 'already@booked.de', 'Someone', '[{"row":9,"column":4,"free":true,"inReservation":true},{"row":9,"column":5,"free":true,"inReservation":true},{"row":9,"column":6,"free":true,"inReservation":true},{"row":9,"column":7,"free":true,"inReservation":true},{"row":9,"column":8,"free":true,"inReservation":true}]');
+	INSERT INTO reservations VALUES (2, 'Red Eye', 2222, 'already@booked.de', 'Someone', '[{"row":9,"column":4,"free":true,"inReservation":true},{"row":9,"column":5,"free":true,"inReservation":true},{"row":9,"column":6,"free":true,"inReservation":true},{"row":9,"column":7,"free":true,"inReservation":true},{"row":9,"column":8,"free":true,"inReservation":true}]');
+	INSERT INTO reservations VALUES (3, 'Lakes Outdoor', 3333, 'already@booked.de', 'Someone', '[{"row":9,"column":4,"free":true,"inReservation":true},{"row":9,"column":5,"free":true,"inReservation":true},{"row":9,"column":6,"free":true,"inReservation":true},{"row":9,"column":7,"free":true,"inReservation":true},{"row":9,"column":8,"free":true,"inReservation":true}]');
 5. Setup config for XAMPP:
     in etc/httpd.conf:
       comment "Include etc/extra/httpd-vhosts.conf" in
