@@ -16,7 +16,12 @@
         <!-- Reservation -->
         <div class="headline">Choose your seats</div>
             <section class="reservation">
-	        <?php
+	        <!-- get reservation info from MySQL to js -->
+		<script>
+		  //create map from cinema to list of reservated seats
+		  mapCinemaReservations = new Map();
+		  
+	          <?php
 		    //connect to database
 		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
 
@@ -25,14 +30,21 @@
 		    $result = $db->query($query);
 		    if($result){
 		        foreach($result as $row){
-		            print($row['cinema']);
-		            //TODO: add seats to javascript
+		            print(
+		              "//this will be prcessed in setReservedSeatsFromDb in scripts.js
+		               if( typeof mapCinemaReservations.get(\"".$row['cinema']."\")=='undefined'){
+		                   mapCinemaReservations.set(\"".$row['cinema']."\",[]);
+		               }\n
+		               mapCinemaReservations.get(\"".$row['cinema']."\").push(".$row['seats'].");\n"
+
+		            );
 		        }
 		    }
 		    else{
 		        print("No current reservations found");
 		    }
-		?>
+		  ?>
+		</script>
                     <div id="canvas-container" class="central-container">
                         <canvas id="can-reservation" width="520" height="400" class="dark-shadow">
                             <script>initReservationCanvas();</script>

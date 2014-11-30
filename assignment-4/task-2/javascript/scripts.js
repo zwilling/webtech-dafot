@@ -41,14 +41,9 @@ function initReservationCanvas() {
     //add on click event
     canvasReservation.addEventListener("click", clickOnReservationCanvas, false);
 
-    //init reservation data (read from local storage or create)
-    var seatsString = localStorage.getItem('reservation');
-    if (seatsString) {
-        seats = JSON.parse(seatsString);
-    }
-    else {
-        generateRandomReservation();
-    }
+    //init reservation data from data in mysql
+    generateFreeReservation();
+    setReservedSeatsFromDb();
 
     //draw reservations when the seat-picture is loaded
     imgSeatReserved.onload = function () {
@@ -94,6 +89,40 @@ function generateRandomReservation() {
         }
     }
     saveReservation();
+}
+
+function generateFreeReservation() {
+    seats = new Array(cols);
+    for (var i = 0; i < cols; i++) {
+        seats[i] = new Array(rows);
+        for (var j = 0; j < rows; j++) {
+            var free = true;
+            seats[i][j] = new Seat(i, j, free);
+        }
+    }
+}
+
+/**
+ * Set seats to reserved according to the mysql database
+**/
+function setReservedSeatsFromDb(){
+    //mapCinemaReservations is filled by php
+    //select reservation from current cinema
+    if(typeof selectedCinema == 'undefined'){
+	console.error("no cinema selected");
+	alert("no cinema selected");
+	return;
+    }
+    var reserved = mapCinemaReservations.get(selectedCinema);
+    console.log(mapCinemaReservations);
+    console.log(reserved);
+    for (var i = 0; i < reserved.length; i++){
+	console.info("handling reservation", i);
+        var reservation = reserved[i];
+    	for(var j = 0; j < reservation.length; j++){
+    	    seats[reservation[j].column][reservation[j].row].free = false;
+    	}
+    }
 }
 
 function saveReservation() {
