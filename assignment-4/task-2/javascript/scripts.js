@@ -114,10 +114,7 @@ function setReservedSeatsFromDb(){
 	return;
     }
     var reserved = mapCinemaReservations.get(selectedCinema);
-    console.log(mapCinemaReservations);
-    console.log(reserved);
     for (var i = 0; i < reserved.length; i++){
-	console.info("handling reservation", i);
         var reservation = reserved[i];
     	for(var j = 0; j < reservation.length; j++){
     	    seats[reservation[j].column][reservation[j].row].free = false;
@@ -207,7 +204,6 @@ function clickOnReservationCanvas(e) {
     //get seat number
     var seat = getSeatFromClick(e);
     if (!seat) {
-        console.log("Click was not on seat.");
         return;
     }
 
@@ -233,13 +229,15 @@ function clickOnReservationCanvas(e) {
  */
 function getSeatFromClick(e) {
     var x = e.layerX - seatOffsetX;
-    var y = e.layerY - seatOffsetY;
+    var y = e.layerY - seatOffsetY - document.body.scrollTop;
+    //somehow subtracting scrollTop is only necessary in Chrome
 
     //find seat number
     x = Math.floor(x / imgSeatFree.width);
     y = Math.floor(y / imgSeatFree.height);
 
     if (x < 0 || y < 0 || y >= rows || x >= cols) {
+        console.log("Click was not on seat. x: ", x, " y: ", y);
         return false;
     }
 
@@ -294,6 +292,7 @@ function findNearestCinema(position) {
     }
     var cinema = document.getElementById(nearestCinema);
     localStorage.setItem('chosen_cinema', nearestCinema);
+    selectedCinema = nearestCinema;
     resetCinemas();
     resetMovies();
     setSelected(cinema)
@@ -348,7 +347,7 @@ function chooseMovie(e) {
  **/
 function expandSection(name) {
     var section = document.getElementsByClassName(name);
-    if (section) {
+    if (typeof section[0] != 'undefined') {
         section[0].style.display = 'block';
     }
 }
@@ -358,7 +357,7 @@ function expandSection(name) {
 **/
 function hideSection (name) {
     var section = document.getElementsByClassName(name);
-    if (section) {
+    if (typeof section[0] != 'undefined') {
         section[0].style.display = 'none';
     }
 }
@@ -404,7 +403,6 @@ function addSelectedSeatsAsInputInForm() {
     //create input
     var seatsInput= document.getElementById("seatsInput");
     if(!seatsInput){
-	console.info("created new input for seats");
 	seatsInput = document.createElement('input');
 	seatsInput.type = 'hidden';
 	seatsInput.name = 'seats';
@@ -425,5 +423,4 @@ function addSelectedSeatsAsInputInForm() {
     }
     //set value in input
     seatsInput.value = JSON.stringify(selectedSeats);
-    console.info(JSON.stringify(selectedSeats));
 }
