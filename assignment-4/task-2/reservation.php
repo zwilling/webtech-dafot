@@ -16,6 +16,23 @@
         <!-- Reservation -->
         <div class="headline">Choose your seats</div>
             <section class="reservation">
+	        <?php
+		    //connect to database
+		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
+
+		    //get reservated seats and add them to js
+		    $query = "SELECT * FROM reservations";
+		    $result = $db->query($query);
+		    if($result){
+		        foreach($result as $row){
+		            print($row['cinema']);
+		            //TODO: add seats to javascript
+		        }
+		    }
+		    else{
+		        print("No current reservations found");
+		    }
+		?>
                     <div id="canvas-container" class="central-container">
                         <canvas id="can-reservation" width="520" height="400" class="dark-shadow">
                             <script>initReservationCanvas();</script>

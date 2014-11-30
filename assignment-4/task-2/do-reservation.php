@@ -20,10 +20,6 @@
 	<?php
     	    //connect
     	    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
-	    // $db = mysql_connect("localhost", "root","")
-	    //   or die ("Connection to MySQL not possible. Username or password wrong.");
-	    // mysql_select_db("cinemareservation") 
-    	    //   or die ("MySQL db does not exist.");
 
     	    //insert reservation:
     	    //get variables from form
