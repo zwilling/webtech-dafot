@@ -20,6 +20,17 @@ window.onload = function (e) {
     localStorage.setItem('cinemas', JSON.stringify(cinemas));
 };
 
+function bindPopupWindow(url) {
+    $('#reserve-button').magnificPopup({
+        items: {
+            type: 'ajax',
+            src: url
+        },
+        closeOnContentClick: false,
+        closeOnBgClick: false
+    });
+}
+
 function initReservationCanvas() {
     //create canvas element and context to draw in
     canvasReservation = document.getElementById("can-reservation");
@@ -339,6 +350,8 @@ function chooseMovie(e) {
     }
     resetMovies();
     setSelected(e);
+	var url = "reservation.php?cinema_name=" + selectedCinema + "&movie_name=" + selectedMovie;
+    bindPopupWindow(url);
     expandSection("reservation");
     hideSection("contacts");
 }

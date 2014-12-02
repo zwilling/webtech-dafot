@@ -20,7 +20,7 @@
 	<!-- connect to SQL database and insert new reservation-->
 	<?php
     	    //connect
-    	    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
+    	    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','masterkey');
 
     	    //insert reservation:
     	    //get variables from form
@@ -31,8 +31,7 @@
 	    $seats = $_REQUEST['seats'];
     
 	    //determine reservation id
-    	    $reservationId = rand(1000, 9999);
-
+			$reservationId = uniqid();
 
     	    // print($cinema);
     	    // print($name);
@@ -41,7 +40,7 @@
     
 	    //insert reservation into db
     	    $db->exec("INSERT INTO reservations
-    	      (cinema, movie, reservationid, email, name, seats) VALUES ('" . $cinema . "','" . $movie . "'," . $reservationId . ",'" . $email . "','" . $name . "','" . $seats . "')");
+    	      (cinema, movie, reservationid, email, name, seats) VALUES ('" . $cinema . "','" . $movie . "','" . $reservationId . "','" . $email . "','" . $name . "','" . $seats . "')");
 
 	    //print reservatioid for the user
 	    print($reservationId);

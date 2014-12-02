@@ -23,11 +23,12 @@
 		  
 	          <?php
 		    //connect to database
-		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
-
+		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','masterkey');
+			$cinema_name = $_REQUEST["cinema_name"];
+			$movie_name=$_REQUEST["movie_name"];
 		    //get reservated seats and add them to js
-		    $query = "SELECT * FROM reservations";
-		    $result = $db->query($query);
+			$query = "SELECT * FROM reservations WHERE cinema = '".$cinema_name."' AND movie = '".$movie_name."' ";
+			$result = $db->query($query);
 		    if($result){
 		        foreach($result as $row){
 		            print(
