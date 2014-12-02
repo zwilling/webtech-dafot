@@ -33,9 +33,12 @@
 		            print(
 		              "//this will be prcessed in setReservedSeatsFromDb in scripts.js
 		               if( typeof mapCinemaReservations.get(\"".$row['cinema']."\")=='undefined'){
-		                   mapCinemaReservations.set(\"".$row['cinema']."\",[]);
+		                   mapCinemaReservations.set(\"".$row['cinema']."\",new Map());
 		               }\n
-		               mapCinemaReservations.get(\"".$row['cinema']."\").push(".$row['seats'].");\n"
+		               if( typeof mapCinemaReservations.get(\"".$row['cinema']."\").get(\"".$row['movie']."\")=='undefined'){
+		                   mapCinemaReservations.get(\"".$row['cinema']."\").set(\"".$row['movie']."\",[]);
+		               }\n
+		               mapCinemaReservations.get(\"".$row['cinema']."\").get(\"".$row['movie']."\").push(".$row['seats'].");\n"
 
 		            );
 		        }
@@ -77,6 +80,13 @@
 		  cinemaInput.name = 'cinema';
 		  cinemaInput.value = selectedCinema;
 		  document.forms["contacts"].appendChild(cinemaInput);
+		  
+		  //add movie as hidden field to the form
+		  var movieInput = document.createElement('input');
+		  movieInput.type = 'hidden';
+		  movieInput.name = 'movie';
+		  movieInput.value = selectedMovie;
+		  document.forms["contacts"].appendChild(movieInput);
 		</script>
             </section>
             <!-- ENDS Contacts -->

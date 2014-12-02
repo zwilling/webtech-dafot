@@ -27,6 +27,7 @@
     	    $name = $_REQUEST['name'];
     	    $email = $_REQUEST['usermail']; 
     	    $cinema = $_REQUEST['cinema'];
+    	    $movie = $_REQUEST['movie'];
 	    $seats = $_REQUEST['seats'];
     
 	    //determine reservation id
@@ -40,7 +41,7 @@
     
 	    //insert reservation into db
     	    $db->exec("INSERT INTO reservations
-    	      (cinema, reservationid, email, name, seats) VALUES ('" . $cinema . "'," . $reservationId . ",'" . $email . "','" . $name . "','" . $seats . "')");
+    	      (cinema, movie, reservationid, email, name, seats) VALUES ('" . $cinema . "','" . $movie . "'," . $reservationId . ",'" . $email . "','" . $name . "','" . $seats . "')");
 
 	    //print reservatioid for the user
 	    print($reservationId);

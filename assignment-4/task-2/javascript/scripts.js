@@ -113,7 +113,7 @@ function setReservedSeatsFromDb(){
 	alert("no cinema selected");
 	return;
     }
-    var reserved = mapCinemaReservations.get(selectedCinema);
+    var reserved = mapCinemaReservations.get(selectedCinema).get(selectedMovie);
     for (var i = 0; i < reserved.length; i++){
         var reservation = reserved[i];
     	for(var j = 0; j < reservation.length; j++){
@@ -335,6 +335,7 @@ function chooseMovie(e) {
     var data = e.dataset;
     if (data) {
         localStorage.setItem('chosen_movie', data['name']);
+	selectedMovie = data['name'];
     }
     resetMovies();
     setSelected(e);
