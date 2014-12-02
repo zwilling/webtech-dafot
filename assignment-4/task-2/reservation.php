@@ -23,7 +23,7 @@
 		  
 	          <?php
 		    //connect to database
-		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','masterkey');
+		    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
 			$cinema_name = $_REQUEST["cinema_name"];
 			$movie_name=$_REQUEST["movie_name"];
 		    //get reservated seats and add them to js

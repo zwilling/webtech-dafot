@@ -20,7 +20,7 @@
 	<!-- connect to SQL database and insert new reservation-->
 	<?php
     	    //connect
-    	    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','masterkey');
+    	    $db = new PDO('mysql:host=localhost;dbname=cinemareservation','root','');
 
     	    //insert reservation:
     	    //get variables from form

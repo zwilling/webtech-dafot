@@ -21,6 +21,7 @@ We used XAMPP for this task. Here are the steps to setup the site:
 	    DocumentRoot "/home/zwilling/webtech-dafot/assignment-4/task-2"
 	    <Directory "/home/zwilling/webtech-dafot/assignment-4/task-2">
       In Linux you also have to change the user and group to your user and group if you have the solution files in your home folder
-6. Restart XAMPP
-7. Open localhost in your browser
+6. We use the default SQL user 'root' with password ''. If you configured it differently, you can change it in reservation.php and do-reservation.php.
+7. Restart XAMPP
+8. Open localhost in your browser
       
