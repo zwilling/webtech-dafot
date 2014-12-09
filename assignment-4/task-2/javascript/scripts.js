@@ -124,7 +124,7 @@ function setReservedSeatsFromDb(){
 	alert("no cinema selected");
 	return;
     }
-    var reserved = mapCinemaReservations.get(selectedCinema).get(selectedMovie);
+    var reserved = mapCinemaReservations;
     for (var i = 0; i < reserved.length; i++){
         var reservation = reserved[i];
     	for(var j = 0; j < reservation.length; j++){

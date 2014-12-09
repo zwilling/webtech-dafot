@@ -19,7 +19,7 @@
 	        <!-- get reservation info from MySQL to js -->
 		<script>
 		  //create map from cinema to list of reservated seats
-		  mapCinemaReservations = new Map();
+		  mapCinemaReservations = [];
 		  
 	          <?php
 		    //connect to database
@@ -33,14 +33,7 @@
 		        foreach($result as $row){
 		            print(
 		              "//this will be prcessed in setReservedSeatsFromDb in scripts.js
-		               if( typeof mapCinemaReservations.get(\"".$row['cinema']."\")=='undefined'){
-		                   mapCinemaReservations.set(\"".$row['cinema']."\",new Map());
-		               }\n
-		               if( typeof mapCinemaReservations.get(\"".$row['cinema']."\").get(\"".$row['movie']."\")=='undefined'){
-		                   mapCinemaReservations.get(\"".$row['cinema']."\").set(\"".$row['movie']."\",[]);
-		               }\n
-		               mapCinemaReservations.get(\"".$row['cinema']."\").get(\"".$row['movie']."\").push(".$row['seats'].");\n"
-
+		               mapCinemaReservations.push(".$row['seats'].");\n"
 		            );
 		        }
 		    }

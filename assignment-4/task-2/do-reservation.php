@@ -31,16 +31,12 @@
 	    $seats = $_REQUEST['seats'];
     
 	    //determine reservation id
-			$reservationId = uniqid();
-
-    	    // print($cinema);
-    	    // print($name);
-    	    // print($email);
-    	    // print($reservationId);
+	    $reservationId = uniqid();
     
 	    //insert reservation into db
     	    $db->exec("INSERT INTO reservations
-    	      (cinema, movie, reservationid, email, name, seats) VALUES ('" . $cinema . "','" . $movie . "','" . $reservationId . "','" . $email . "','" . $name . "','" . $seats . "')");
+    	      (cinema, movie, reservationid, email, name, seats) VALUES ('" . $cinema . "','". $movie . "','"
+	      . $reservationId . "','" . $email . "','" . $name . "','" . $seats . "')");
 
 	    //print reservatioid for the user
 	    print($reservationId);
