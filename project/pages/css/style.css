@@ -15,9 +15,14 @@
 }
 */
 
-.bgimg {
-    background-image: url(../images/coding.jpg);
-    background-repeat: no-repeat;
+.bgimgheader {
+    background-image: url(../images/header.jpg);
+    background-size: auto;
+    background-position: center;
+}
+
+.bgimgfooter {
+    background-image: url(../images/footer.jpg);
     background-size: auto;
     background-position: center;
 }
@@ -30,23 +35,26 @@
 .menu li{
   display: inline;
   float: left;
-  padding: 0 10px 0 0;
+  padding: 0 20px 0 0;
 }
 
+.menu img{
+  position: relative;
+  bottom: 13px;
+}
 
-
-a { 
-  color: #adadad; 
+.menu a { 
+  color: #fff; 
   font-size: 25px; 
   text-decoration: none; 
   font-family: 'Open Sans Condensed', sans-serif; 
 }
 
-a:hover { 
+/*a:hover { 
   color: #484848; 
   text-decoration: none; 
 }
-
+*/
 
 h1 { 
   color: #111; 
@@ -83,15 +91,11 @@ mark {
     padding: 0px;
 }
 
+.center-x{ text-align:center;}
+
 #footer p {
-  color: #f2f2f2; 
-  background: #191919; 
-  font-size: 25px; 
-  font-weight: 700; 
-  float: left; 
-  text-align: center;
-  padding: 5px; 
-  margin: 0 300px 10px; 
+  color: #fff; 
+  font-size: 15px; 
   font-family: 'Open Sans Condensed', sans-serif;
 } 
 
@@ -187,5 +191,5 @@ mark {
 .login-help {
   width: 100%;
   text-align: center;
-  font-size: 5px;
+  font-size: 20px;
 }
