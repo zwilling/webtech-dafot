@@ -186,6 +186,8 @@ mark {
 }
 
 
+/* Courses Lists*/
+
 /* Input Search */
 
 #wrap{
@@ -245,4 +247,26 @@ input[type=submit]
     width: 80%;
     margin: 10px 30% 10px 11%;
   }
+}
+
+
+/* Course Page*/
+
+.course li{
+  list-style-type:none;
+  display: inline;
+}
+
+.course ul{
+  position: relative;
+  left: 20px;
+}
+
+#list-chapters li{
+  position: relative;
+  left: 0px;
+}
+
+.verticalLine {
+    border-left: thin solid #252525;
 }
