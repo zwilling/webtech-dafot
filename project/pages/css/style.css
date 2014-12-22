@@ -262,9 +262,30 @@ input[type=submit]
   left: 20px;
 }
 
+.course-menu ul{
+  position: relative;
+  left: 0px;
+}
+
+.course-menu li{
+  list-style-type:none;
+  display: inline;
+  padding: 0 5px 0 0;
+
+}
+
 #list-chapters li{
   position: relative;
   left: 0px;
+}
+
+#list-chapters a{
+  color: #333333;
+}
+
+#list-chapters a:hover { 
+  color: #2e61e2; 
+  text-decoration: none; 
 }
 
 .verticalLine {
