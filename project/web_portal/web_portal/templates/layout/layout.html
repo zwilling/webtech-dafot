@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block styles %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</head>
+<body id="webportal">
+    <div id="webportal-center">
+        <div id="webportal-header">
+
+        </div>
+        <div id="webportal-pcontent">
+            {% block main %}
+            <div id="webportal-content-body">
+                <div id="webportal-content-main">
+                {% block content %}{% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+            <br class="clear"/>
+        </div>
+        <div id="webportal-footer">
+            <div class="footer-content">
+
+            </div>
+        </div>
+        {% block scripts_bottom %}{% endblock %}
+    </div>
+</body>
+</html>
