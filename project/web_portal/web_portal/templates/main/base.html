@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}CODE{% endblock %}</title>
+    {% load staticfiles %}
+    {% block styles %}
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/animate.min.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/openmind_template.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/style.css" %}" rel="stylesheet" media="screen">
+        <link href="{% static "css/color-niceblue.css" %}" rel="stylesheet" media="screen">
+    {% endblock %}
+    {% block scripts %}
+        <script type="text/javascript" src="{% static "js/jquery.js"%} "></script>
+        <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    {% endblock %}
+</head>
+
+<body id="webportal">
+    <div class="boxed">
+        {% block header %}
+            <header id="header" class="hidden-xs">
+                <div class="container">
+                    <div id="header-title">
+                        <h1 class="animated fadeInDown"><a href="#">CO<span>DE</span></a></h1>
+                    </div>
+                    <div id="social-header" class="hidden-xs">
+                        <a href="" class="social-icon soc-twitter animated fadeInDown animation-delay-1"><i class="fa fa-twitter"></i></a>
+                        <a href="" class="social-icon soc-google-plus animated fadeInDown animation-delay-2"><i class="fa fa-google-plus"></i></a>
+                        <a href="" class="social-icon soc-facebook animated fadeInDown animation-delay-3"><i class="fa fa-facebook"></i></a>
+                        <a href="" class="social-icon soc-instagram animated fadeInDown animation-delay-4"><i class="fa fa-instagram"></i></a>
+                        <a href="" class="social-icon soc-vk animated fadeInDown animation-delay-5"><i class="fa fa-vk"></i></a>
+                        <a href="" class="social-icon soc-linkedin animated fadeInDown animation-delay-6"><i class="fa fa-linkedin"></i></a>
+                        <a href="" class="social-icon soc-github animated fadeInDown animation-delay-7"><i class="fa fa-github"></i></a>
+                    </div>
+                </div>
+            </header>
+        {% endblock %}
+        {% block navigation %}
+            <nav class="navbar navbar-static-top navbar-mind" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand visible-xs" href="http://razonartificial.com/themes/openmind/wordpress/index.html"><span></span></a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-mind-collapse">
+                            <span class="sr-only"></span>
+                            <i class="fa fa-bars fa-inverse"></i>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-mind-collapse">
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li class="menu-item"><a title="Home" href="">Home</a>
+                            </li>
+                            <li class="menu-item"><a title="Courses" href="">Courses</a>
+                            </li>
+                            <li class="menu-item"><a title="About" href="">About</a>
+                            </li>
+                        </ul>
+                        <!-- Login Form -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+                                <div class="dropdown-menu dropdown-login animated fadeInUp">
+                                    <form role="form" name="loginform" id="loginform" action="" method="post">
+                                        <h4 class="section-title">Login Form</h4>
+
+                                        <div class="form-group">
+                                            <div class="input-group login-input">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <input type="text" class="form-control" placeholder="Username" name="log" id="user_login">
+                                            </div>
+                                            <br>
+                                            <div class="input-group login-input">
+                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                <input type="password" class="form-control" placeholder="Password" name="pwd" id="user_pass">
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="rememberme" id="rememberme" value="forever" tabindex="90"> Remember me
+                                                </label>
+                                            </div>
+                                            <span><a href="
+                                            {% url "registration_register" %}" class="not_underlined">Not
+                                                registered
+                                                yet?</a></span>
+                                            <button type="submit" class="btn btn-primary pull-right" name="wp-submit" id="wp-submit">Login</button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <!-- dropdown -->
+                        </ul>
+                        <!-- nav nabvar-nav -->
+                    </div>
+                    <!-- navbar-collapse -->
+                </div>
+                <!-- container -->
+            </nav>
+        {% endblock %}
+        <div id="webportal-content">
+            {% block content %}{% endblock %}
+        </div>
+        {% block footer %}
+            <aside id="footer-widgets">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="footer-widget-title">Sitemap</h3>
+                            <ul id="menu-footer" class="list-unstyled three_cols">
+                                <li class="menu-item"><a href="">Home</a>
+                                </li>
+                                <li class="menu-item"><a href="">Courses</a>
+                                </li>
+                                <li class="menu-item"><a href="">My Courses</a>
+                                </li>
+                                <li class="menu-item"><a href="">About us</a>
+                                </li>
+                                <li class="menu-item"><a href="">FAQ</a>
+                                </li>
+                                <li class="menu-item"><a href="">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="footer-widget">
+                                <h3 class="footer-widget-title">Authors</h3>
+                                <div class="row">
+                                    <p class="author">Dev Sharma</p>
+                                    <p class="author">Anton Okolnychyi</p>
+                                    <p class="author">Frederik Zwilling</p>
+                                    <p class="author">Oleksandr Zastupailo</p>
+                                    <p class="author">Tatiana Vert</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="footer-widget-title">Subscribe</h3>
+                        <p>Please subscribe to our mailing list to be always in touch with the latest news about the Code. You can always unsubscribe later.</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Email Adress">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button">Subscribe</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <footer id="footer">
+                <p>&copy; 2015 <a href="#">DAFOT</a>, RWTH. All rights reserved.</p>
+            </footer>
+        {% endblock %}
+        {% block scripts_bottom %}{% endblock %}
+    </div>
+</body>
+</html>

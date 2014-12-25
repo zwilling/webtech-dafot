@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'webportaldb',
         'USER': 'postgres',
-        'PASSWORD': 'masterkey',
+        'PASSWORD': 'zastupaylo',
         'HOST': '',
         'PORT': '',
     }
@@ -120,7 +120,12 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    PROJECT_PATH + '/static/',
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window;

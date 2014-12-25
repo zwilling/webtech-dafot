@@ -1,0 +1,13 @@
+.boxed {
+    background-color: #fff;
+}
+.author {
+	padding-left: 15px;
+	margin-bottom: 0px;
+}
+.author::first-letter {
+	color: #53d5ff;
+}
+.not_underlined:hover {
+	text-decoration: none
+}
