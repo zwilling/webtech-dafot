@@ -11,3 +11,23 @@
 .not_underlined:hover {
 	text-decoration: none
 }
+
+.ast_required {
+    color: red;
+}
+
+.ui-form label.label {
+    color: #616161;
+    font-weight: normal;
+	font-size: 1.2em;
+}
+
+.ui-form table td.label {
+    vertical-align: top;
+}
+
+.ui-form table td.field {
+}
+
+.ui-form table td.error {
+}

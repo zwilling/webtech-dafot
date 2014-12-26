@@ -1,0 +1,25 @@
+{% for hidden in form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+<div class="ui-form">
+    {% load error_message %}
+    {% show_single_error form_error %}
+    <table style="width:100%">
+        <tbody>
+            {% for field in form.visible_fields %}
+                <tr>
+                    <td class="label">
+                        <label class="label">
+                            {{ field.label_tag }}
+                            {% if field.field.required %}
+                                <span class="ast_required">*</span>
+                            {% endif %}:
+                        </label>
+                    </td>
+                    <td class="field">{{ field }}</td>
+                    <td class="error">{% show_single_error field.errors %}</td>
+                </tr>
+             {% endfor %}
+        </tbody>
+    </table>
+</div>

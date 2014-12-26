@@ -1,4 +1,4 @@
-{% extends "registration/base.html" %}
+{% extends "main/base.html" %}
 
 {% block title %}Sign up{% endblock %}
 
@@ -12,35 +12,33 @@
   
   <form method="post" action="" class="wide">
 	{% csrf_token %}
-    <p>
-      <label for="id_username">Username:</label>
-      {% if form.username.errors %}
-        <p class="errors">{{ form.username.errors.as_text }}</p>
-      {% endif %}
-      {{ form.username }}
-    </p>
-    <p>
-      <label for="id_email">Email address:</label>
-      {% if form.email.errors %}
-        <p class="errors">{{ form.email.errors.as_text }}</p>
-      {% endif %}
-      {{ form.email }}
-    </p>
-    <p>
-      <label for="id_password1">Password:</label>
-      {% if form.password1.errors %}
-        <p class="errors">{{ form.password1.errors.as_text }}</p>
-      {% endif %}
-      {{ form.password1 }}
-    </p>
-    <p>
-      <label for="id_password2">Password (type again to catch typos):</label>
-      {% if form.password2.errors %}
-        <p class="errors">{{ form.password2.errors.as_text }}</p>
-      {% endif %}
-      {{ form.password2 }}
-    </p>
-    <p class="submit"><input type="submit" value="Register &rarr;"></p>
+    <div class="ui-form">
+    {% load error_message %}
+    {% show_single_error form_error %}
+    <table>
+        <tbody>
+        {% for field in form.visible_fields %}
+            <tr>
+                <td class="label" style="width: 30%">
+                    <label class="label">
+                        {{field.label_tag}}
+                        {% if field.field.required %}
+                            <span class="ast_required">*</span>
+                        {% endif %}
+                        {%if field.name == 'username' %}
+                            (use only Latin letters, <br/>numbers and @/./+/-/_ characters)
+                        {% endif %}
+                        :
+                    </label>
+                </td>
+                <td  style="width: 50%"> {{field}} </td>
+                <td  style="width: 20%">{% show_single_error field.errors %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <p class="submit"><input type="submit" value="Register"></p>
   </form>
   
 {% endblock %}

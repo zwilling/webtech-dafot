@@ -68,6 +68,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'web_portal.core.form_messages',
+    'web_portal.core.ui_forms',
     'registration',
 )
 
@@ -94,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'webportaldb',
         'USER': 'postgres',
-        'PASSWORD': 'zastupaylo',
+        'PASSWORD': 'masterkey',
         'HOST': '',
         'PORT': '',
     }
