@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'web_portal.core.form_messages',
     'web_portal.core.ui_forms',
+    'web_portal.core.courses',
     'registration',
 )
 
