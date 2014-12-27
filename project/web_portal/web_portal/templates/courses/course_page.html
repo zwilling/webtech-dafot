@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+{% block title %}
+   Course page
+{% endblock %}
+
+{% block content %}
+	<h1>Course page</h1>
+    <div class="ui-form">
+    <table>
+        <tbody>
+            <tr>
+                <td class="label">
+                    <label class="label">Course name:</label>
+                </td>
+                <td>
+                    {{course.name}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    <label class="label">Course description:</label>
+                </td>
+                <td>
+                    {{course.description}}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label class="label">Organizer:</label>
+                </td>
+                <td>
+                    {{course.organizer.first_name}} {{course.organizer.last_name}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    {% if organizer %}
+	<br/>
+	<input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
+	<br/>
+	{% endif %}
+{% endblock %}

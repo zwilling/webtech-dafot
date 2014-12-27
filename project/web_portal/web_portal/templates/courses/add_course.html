@@ -1,0 +1,63 @@
+{% extends "main/base.html" %}
+{% block title %}
+   {% if edit %}
+    Edit course
+   {% else %}
+    Add course
+   {% endif %}
+{% endblock %}
+
+{% block content %}
+ 	<h1>
+   {% if edit %}
+    Edit course
+   {% else %}
+    Add course
+   {% endif %}
+ 	</h1>
+    <form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+	{% endfor %}
+	<div class="ui-form">
+	    {% load error_message %}
+	    {% show_single_error form_error %}
+	    <table>
+	        <tbody>
+	            {% for field in form.visible_fields %}
+	                <tr>
+	                    <td class="label" style="width: 30%">
+	                        <label class="label">
+	                            {{ field.label_tag }}
+	                            {% if field.field.required %}
+	                                <span class="ast_required">*</span>
+	                            {% endif %}:
+	                        </label>
+	                    </td>
+	                    <td style="width: 60%">
+	                    	{{ field }}
+	                    </td>
+	                    <td  style="width: 10%">{% show_single_error field.errors %}</td>
+	                </tr>
+	             {% endfor %}
+	        </tbody>
+	    </table>
+	</div>
+    <br/>
+   <div class="btns">
+        {% if edit %}
+        <input type="submit" name="submit" value="Save">
+        {% else %}
+        <input type="submit" name="submit" value="Add">
+        {% endif %}
+        <br/>
+        <a href="{% url "course_list" %}">Go to courses</a>
+    </div>
+    </form>
+
+    {% if edit %}
+    <br/>
+    <input type="button" name="delete_course" value="Delete course" onclick="location.href='{% url "delete_course" pk=course.id %}'">
+    {% endif %}
+
+{% endblock %}

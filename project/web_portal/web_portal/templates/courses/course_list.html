@@ -1,0 +1,65 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Courses
+{% endblock %}
+
+{% block content %}
+ <h1>Courses</h1>
+	<form method="post">{% csrf_token %}
+	<div class="ui-form">
+	<table>
+		<tbody>
+			<tr>
+				<td class="label" >
+					<label class="label">
+						{{form.name.label_tag}}
+					</label>
+				</td>
+				<td> {{form.name}} </td>
+				<td> <input type="submit" name="filter" id="filter" value="Filter"/></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<br/>
+	{% if not courses %}
+	<p> There is no course yet.</p>
+	{% else %}
+    <table class="list">
+		<thead>
+			<tr>
+                <th>Course name</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for course in courses %}
+		    <tr class="{% cycle 'even' 'odd' %}">
+				<td><a href="{% url "course_page" course.id %}">{{course.name}}</a></td>
+                <td>{{course.description}}</td>
+			</tr>
+		    {% endfor %}
+		</tbody>
+	</table>
+	{% if is_paginated %}
+		<div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/courses?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/courses?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+	</form>
+	{% endif %}
+	{% if user.is_authenticated and user.is_active %}
+	<input class="input" type="button" onclick="location.href='{% url "add_course" %}'" value="Add course"/>
+	<br/>
+	{% endif %}
+{% endblock %}
