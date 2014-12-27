@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    {% block content-title %}
+        <header class="wrap-title">
+            <div class="container">
+                <h1 class="page-title">{{ title }}</h1>
+                {% if author %}
+                <ol class="breadcrumb">
+                    <li class="current_item"><span>{{ author }}</span></li>
+                </ol>
+                {% endif %}
+            </div>
+        </header>
+    {% endblock %}
+    {% block page-content %}{% endblock %}
+{%  endblock %}

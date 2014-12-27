@@ -96,7 +96,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'webportaldb',
-        'USER': 'postgres',
+        'USER': 'code_admin',
         'PASSWORD': 'masterkey',
         'HOST': '',
         'PORT': '',
