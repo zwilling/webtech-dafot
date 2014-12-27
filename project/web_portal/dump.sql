@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_group (
@@ -39,10 +39,10 @@ CREATE TABLE auth_group (
 );
 
 
-ALTER TABLE public.auth_group OWNER TO postgres;
+ALTER TABLE public.auth_group OWNER TO code_admin;
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_group_id_seq
@@ -53,17 +53,17 @@ CREATE SEQUENCE auth_group_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_group_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
 
 
 --
--- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_group_permissions (
@@ -73,10 +73,10 @@ CREATE TABLE auth_group_permissions (
 );
 
 
-ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+ALTER TABLE public.auth_group_permissions OWNER TO code_admin;
 
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_group_permissions_id_seq
@@ -87,17 +87,17 @@ CREATE SEQUENCE auth_group_permissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
 
 
 --
--- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_permission (
@@ -108,10 +108,10 @@ CREATE TABLE auth_permission (
 );
 
 
-ALTER TABLE public.auth_permission OWNER TO postgres;
+ALTER TABLE public.auth_permission OWNER TO code_admin;
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_permission_id_seq
@@ -122,17 +122,17 @@ CREATE SEQUENCE auth_permission_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_permission_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
 
 
 --
--- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_user (
@@ -150,10 +150,10 @@ CREATE TABLE auth_user (
 );
 
 
-ALTER TABLE public.auth_user OWNER TO postgres;
+ALTER TABLE public.auth_user OWNER TO code_admin;
 
 --
--- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_user_groups (
@@ -163,10 +163,10 @@ CREATE TABLE auth_user_groups (
 );
 
 
-ALTER TABLE public.auth_user_groups OWNER TO postgres;
+ALTER TABLE public.auth_user_groups OWNER TO code_admin;
 
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_user_groups_id_seq
@@ -177,17 +177,17 @@ CREATE SEQUENCE auth_user_groups_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
 
 
 --
--- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_user_id_seq
@@ -198,17 +198,17 @@ CREATE SEQUENCE auth_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_user_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
 
 
 --
--- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE auth_user_user_permissions (
@@ -218,10 +218,10 @@ CREATE TABLE auth_user_user_permissions (
 );
 
 
-ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+ALTER TABLE public.auth_user_user_permissions OWNER TO code_admin;
 
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE auth_user_user_permissions_id_seq
@@ -232,17 +232,17 @@ CREATE SEQUENCE auth_user_user_permissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO code_admin;
 
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
 
 
 --
--- Name: courses_assignment; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_assignment; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE courses_assignment (
@@ -255,10 +255,10 @@ CREATE TABLE courses_assignment (
 );
 
 
-ALTER TABLE public.courses_assignment OWNER TO postgres;
+ALTER TABLE public.courses_assignment OWNER TO code_admin;
 
 --
--- Name: courses_assignment_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: courses_assignment_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE courses_assignment_id_seq
@@ -269,17 +269,17 @@ CREATE SEQUENCE courses_assignment_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_assignment_id_seq OWNER TO postgres;
+ALTER TABLE public.courses_assignment_id_seq OWNER TO code_admin;
 
 --
--- Name: courses_assignment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: courses_assignment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE courses_assignment_id_seq OWNED BY courses_assignment.id;
 
 
 --
--- Name: courses_attendee; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_attendee; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE courses_attendee (
@@ -289,10 +289,10 @@ CREATE TABLE courses_attendee (
 );
 
 
-ALTER TABLE public.courses_attendee OWNER TO postgres;
+ALTER TABLE public.courses_attendee OWNER TO code_admin;
 
 --
--- Name: courses_attendee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: courses_attendee_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE courses_attendee_id_seq
@@ -303,17 +303,17 @@ CREATE SEQUENCE courses_attendee_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_attendee_id_seq OWNER TO postgres;
+ALTER TABLE public.courses_attendee_id_seq OWNER TO code_admin;
 
 --
--- Name: courses_attendee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: courses_attendee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE courses_attendee_id_seq OWNED BY courses_attendee.id;
 
 
 --
--- Name: courses_course; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_course; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE courses_course (
@@ -324,10 +324,10 @@ CREATE TABLE courses_course (
 );
 
 
-ALTER TABLE public.courses_course OWNER TO postgres;
+ALTER TABLE public.courses_course OWNER TO code_admin;
 
 --
--- Name: courses_course_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: courses_course_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE courses_course_id_seq
@@ -338,17 +338,17 @@ CREATE SEQUENCE courses_course_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_course_id_seq OWNER TO postgres;
+ALTER TABLE public.courses_course_id_seq OWNER TO code_admin;
 
 --
--- Name: courses_course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: courses_course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE courses_course_id_seq OWNED BY courses_course.id;
 
 
 --
--- Name: courses_solution; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_solution; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE courses_solution (
@@ -360,10 +360,10 @@ CREATE TABLE courses_solution (
 );
 
 
-ALTER TABLE public.courses_solution OWNER TO postgres;
+ALTER TABLE public.courses_solution OWNER TO code_admin;
 
 --
--- Name: courses_solution_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: courses_solution_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE courses_solution_id_seq
@@ -374,17 +374,17 @@ CREATE SEQUENCE courses_solution_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_solution_id_seq OWNER TO postgres;
+ALTER TABLE public.courses_solution_id_seq OWNER TO code_admin;
 
 --
--- Name: courses_solution_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: courses_solution_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE courses_solution_id_seq OWNED BY courses_solution.id;
 
 
 --
--- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE django_admin_log (
@@ -400,10 +400,10 @@ CREATE TABLE django_admin_log (
 );
 
 
-ALTER TABLE public.django_admin_log OWNER TO postgres;
+ALTER TABLE public.django_admin_log OWNER TO code_admin;
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE django_admin_log_id_seq
@@ -414,17 +414,17 @@ CREATE SEQUENCE django_admin_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+ALTER TABLE public.django_admin_log_id_seq OWNER TO code_admin;
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
 
 
 --
--- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE django_content_type (
@@ -435,10 +435,10 @@ CREATE TABLE django_content_type (
 );
 
 
-ALTER TABLE public.django_content_type OWNER TO postgres;
+ALTER TABLE public.django_content_type OWNER TO code_admin;
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE django_content_type_id_seq
@@ -449,17 +449,17 @@ CREATE SEQUENCE django_content_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+ALTER TABLE public.django_content_type_id_seq OWNER TO code_admin;
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
 
 
 --
--- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE django_migrations (
@@ -470,10 +470,10 @@ CREATE TABLE django_migrations (
 );
 
 
-ALTER TABLE public.django_migrations OWNER TO postgres;
+ALTER TABLE public.django_migrations OWNER TO code_admin;
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE django_migrations_id_seq
@@ -484,17 +484,17 @@ CREATE SEQUENCE django_migrations_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+ALTER TABLE public.django_migrations_id_seq OWNER TO code_admin;
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
 
 
 --
--- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_session; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE django_session (
@@ -504,10 +504,10 @@ CREATE TABLE django_session (
 );
 
 
-ALTER TABLE public.django_session OWNER TO postgres;
+ALTER TABLE public.django_session OWNER TO code_admin;
 
 --
--- Name: django_site; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_site; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE django_site (
@@ -517,10 +517,10 @@ CREATE TABLE django_site (
 );
 
 
-ALTER TABLE public.django_site OWNER TO postgres;
+ALTER TABLE public.django_site OWNER TO code_admin;
 
 --
--- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE django_site_id_seq
@@ -531,17 +531,17 @@ CREATE SEQUENCE django_site_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.django_site_id_seq OWNER TO postgres;
+ALTER TABLE public.django_site_id_seq OWNER TO code_admin;
 
 --
--- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
 
 
 --
--- Name: registration_registrationprofile; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: registration_registrationprofile; Type: TABLE; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE TABLE registration_registrationprofile (
@@ -551,10 +551,10 @@ CREATE TABLE registration_registrationprofile (
 );
 
 
-ALTER TABLE public.registration_registrationprofile OWNER TO postgres;
+ALTER TABLE public.registration_registrationprofile OWNER TO code_admin;
 
 --
--- Name: registration_registrationprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: registration_registrationprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: code_admin
 --
 
 CREATE SEQUENCE registration_registrationprofile_id_seq
@@ -565,122 +565,122 @@ CREATE SEQUENCE registration_registrationprofile_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.registration_registrationprofile_id_seq OWNER TO postgres;
+ALTER TABLE public.registration_registrationprofile_id_seq OWNER TO code_admin;
 
 --
--- Name: registration_registrationprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: registration_registrationprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: code_admin
 --
 
 ALTER SEQUENCE registration_registrationprofile_id_seq OWNED BY registration_registrationprofile.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_assignment ALTER COLUMN id SET DEFAULT nextval('courses_assignment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_attendee ALTER COLUMN id SET DEFAULT nextval('courses_attendee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_course ALTER COLUMN id SET DEFAULT nextval('courses_course_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_solution ALTER COLUMN id SET DEFAULT nextval('courses_solution_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY registration_registrationprofile ALTER COLUMN id SET DEFAULT nextval('registration_registrationprofile_id_seq'::regclass);
 
 
 --
--- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_group (id, name) FROM stdin;
@@ -688,14 +688,14 @@ COPY auth_group (id, name) FROM stdin;
 
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
 
 
 --
--- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
@@ -703,14 +703,14 @@ COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
 
 
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
 
 
 --
--- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
@@ -754,14 +754,14 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_permission_id_seq', 36, true);
 
 
 --
--- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
@@ -775,7 +775,7 @@ COPY auth_user (id, password, last_login, is_superuser, username, first_name, la
 
 
 --
--- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_user_groups (id, user_id, group_id) FROM stdin;
@@ -783,21 +783,21 @@ COPY auth_user_groups (id, user_id, group_id) FROM stdin;
 
 
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
 
 
 --
--- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_user_id_seq', 6, true);
 
 
 --
--- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
@@ -805,14 +805,14 @@ COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 
 
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 
 
 --
--- Data for Name: courses_assignment; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: courses_assignment; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY courses_assignment (id, name, description, template_code, verification_code, course_id) FROM stdin;
@@ -820,14 +820,14 @@ COPY courses_assignment (id, name, description, template_code, verification_code
 
 
 --
--- Name: courses_assignment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: courses_assignment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('courses_assignment_id_seq', 1, false);
 
 
 --
--- Data for Name: courses_attendee; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: courses_attendee; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY courses_attendee (id, user_id, course_id) FROM stdin;
@@ -835,14 +835,14 @@ COPY courses_attendee (id, user_id, course_id) FROM stdin;
 
 
 --
--- Name: courses_attendee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: courses_attendee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('courses_attendee_id_seq', 1, false);
 
 
 --
--- Data for Name: courses_course; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: courses_course; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY courses_course (id, name, description, organizer_id) FROM stdin;
@@ -858,14 +858,14 @@ COPY courses_course (id, name, description, organizer_id) FROM stdin;
 
 
 --
--- Name: courses_course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: courses_course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('courses_course_id_seq', 8, true);
 
 
 --
--- Data for Name: courses_solution; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: courses_solution; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY courses_solution (id, code, exceptions, grade, assignment_id) FROM stdin;
@@ -873,14 +873,14 @@ COPY courses_solution (id, code, exceptions, grade, assignment_id) FROM stdin;
 
 
 --
--- Name: courses_solution_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: courses_solution_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('courses_solution_id_seq', 1, false);
 
 
 --
--- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
@@ -888,14 +888,14 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
 
 
 --
--- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY django_content_type (id, name, app_label, model) FROM stdin;
@@ -915,14 +915,14 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('django_content_type_id_seq', 12, true);
 
 
 --
--- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY django_migrations (id, app, name, applied) FROM stdin;
@@ -935,14 +935,14 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('django_migrations_id_seq', 5, true);
 
 
 --
--- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
@@ -952,7 +952,7 @@ lxdlcdq4kw9fbkm747jztsg5oilimdqi	ZDVmZmJmYjM2NTcwYTc4NzFlYzNjZDcxOGM1MTY5OGViY2U
 
 
 --
--- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY django_site (id, domain, name) FROM stdin;
@@ -961,14 +961,14 @@ COPY django_site (id, domain, name) FROM stdin;
 
 
 --
--- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('django_site_id_seq', 1, true);
 
 
 --
--- Data for Name: registration_registrationprofile; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: registration_registrationprofile; Type: TABLE DATA; Schema: public; Owner: code_admin
 --
 
 COPY registration_registrationprofile (id, user_id, activation_key) FROM stdin;
@@ -981,14 +981,14 @@ COPY registration_registrationprofile (id, user_id, activation_key) FROM stdin;
 
 
 --
--- Name: registration_registrationprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: registration_registrationprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: code_admin
 --
 
 SELECT pg_catalog.setval('registration_registrationprofile_id_seq', 5, true);
 
 
 --
--- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group
@@ -996,7 +996,7 @@ ALTER TABLE ONLY auth_group
 
 
 --
--- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1004,7 +1004,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1012,7 +1012,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_group
@@ -1020,7 +1020,7 @@ ALTER TABLE ONLY auth_group
 
 
 --
--- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_permission
@@ -1028,7 +1028,7 @@ ALTER TABLE ONLY auth_permission
 
 
 --
--- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_permission
@@ -1036,7 +1036,7 @@ ALTER TABLE ONLY auth_permission
 
 
 --
--- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1044,7 +1044,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1052,7 +1052,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user
@@ -1060,7 +1060,7 @@ ALTER TABLE ONLY auth_user
 
 
 --
--- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1068,7 +1068,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1076,7 +1076,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY auth_user
@@ -1084,7 +1084,7 @@ ALTER TABLE ONLY auth_user
 
 
 --
--- Name: courses_assignment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_assignment_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY courses_assignment
@@ -1092,7 +1092,7 @@ ALTER TABLE ONLY courses_assignment
 
 
 --
--- Name: courses_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_attendee_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY courses_attendee
@@ -1100,7 +1100,7 @@ ALTER TABLE ONLY courses_attendee
 
 
 --
--- Name: courses_attendee_user_id_course_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_attendee_user_id_course_id_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY courses_attendee
@@ -1108,7 +1108,7 @@ ALTER TABLE ONLY courses_attendee
 
 
 --
--- Name: courses_course_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_course_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY courses_course
@@ -1116,7 +1116,7 @@ ALTER TABLE ONLY courses_course
 
 
 --
--- Name: courses_solution_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_solution_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY courses_solution
@@ -1124,7 +1124,7 @@ ALTER TABLE ONLY courses_solution
 
 
 --
--- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_admin_log
@@ -1132,7 +1132,7 @@ ALTER TABLE ONLY django_admin_log
 
 
 --
--- Name: django_content_type_app_label_45f3b1d93ec8c61c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_content_type_app_label_45f3b1d93ec8c61c_uniq; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_content_type
@@ -1140,7 +1140,7 @@ ALTER TABLE ONLY django_content_type
 
 
 --
--- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_content_type
@@ -1148,7 +1148,7 @@ ALTER TABLE ONLY django_content_type
 
 
 --
--- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_migrations
@@ -1156,7 +1156,7 @@ ALTER TABLE ONLY django_migrations
 
 
 --
--- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_session
@@ -1164,7 +1164,7 @@ ALTER TABLE ONLY django_session
 
 
 --
--- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY django_site
@@ -1172,7 +1172,7 @@ ALTER TABLE ONLY django_site
 
 
 --
--- Name: registration_registrationprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: registration_registrationprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY registration_registrationprofile
@@ -1180,7 +1180,7 @@ ALTER TABLE ONLY registration_registrationprofile
 
 
 --
--- Name: registration_registrationprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: registration_registrationprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 ALTER TABLE ONLY registration_registrationprofile
@@ -1188,112 +1188,112 @@ ALTER TABLE ONLY registration_registrationprofile
 
 
 --
--- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
 
 
 --
--- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
 
 
 --
--- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
 
 
 --
--- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
 
 
 --
--- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
 
 
 --
--- Name: courses_assignment_course_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_assignment_course_id; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX courses_assignment_course_id ON courses_assignment USING btree (course_id);
 
 
 --
--- Name: courses_attendee_course_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_attendee_course_id; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX courses_attendee_course_id ON courses_attendee USING btree (course_id);
 
 
 --
--- Name: courses_attendee_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_attendee_user_id; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX courses_attendee_user_id ON courses_attendee USING btree (user_id);
 
 
 --
--- Name: courses_course_organizer_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_course_organizer_id; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX courses_course_organizer_id ON courses_course USING btree (organizer_id);
 
 
 --
--- Name: courses_solution_assignment_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: courses_solution_assignment_id; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX courses_solution_assignment_id ON courses_solution USING btree (assignment_id);
 
 
 --
--- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
 
 
 --
--- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
 
 
 --
--- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: code_admin; Tablespace: 
 --
 
 CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
 
 
 --
--- Name: auth_content_type_id_508cf46651277a81_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_content_type_id_508cf46651277a81_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_permission
@@ -1301,7 +1301,7 @@ ALTER TABLE ONLY auth_permission
 
 
 --
--- Name: auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1309,7 +1309,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_group_permissions
@@ -1317,7 +1317,7 @@ ALTER TABLE ONLY auth_group_permissions
 
 
 --
--- Name: auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1325,7 +1325,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1333,7 +1333,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_groups
@@ -1341,7 +1341,7 @@ ALTER TABLE ONLY auth_user_groups
 
 
 --
--- Name: auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY auth_user_user_permissions
@@ -1349,7 +1349,7 @@ ALTER TABLE ONLY auth_user_user_permissions
 
 
 --
--- Name: courses_assignment_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: courses_assignment_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_assignment
@@ -1357,7 +1357,7 @@ ALTER TABLE ONLY courses_assignment
 
 
 --
--- Name: courses_attendee_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: courses_attendee_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_attendee
@@ -1365,7 +1365,7 @@ ALTER TABLE ONLY courses_attendee
 
 
 --
--- Name: courses_attendee_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: courses_attendee_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_attendee
@@ -1373,7 +1373,7 @@ ALTER TABLE ONLY courses_attendee
 
 
 --
--- Name: courses_course_organizer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: courses_course_organizer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_course
@@ -1381,7 +1381,7 @@ ALTER TABLE ONLY courses_course
 
 
 --
--- Name: courses_solution_assignment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: courses_solution_assignment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY courses_solution
@@ -1389,7 +1389,7 @@ ALTER TABLE ONLY courses_solution
 
 
 --
--- Name: djan_content_type_id_697914295151027a_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: djan_content_type_id_697914295151027a_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_admin_log
@@ -1397,7 +1397,7 @@ ALTER TABLE ONLY django_admin_log
 
 
 --
--- Name: django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY django_admin_log
@@ -1405,7 +1405,7 @@ ALTER TABLE ONLY django_admin_log
 
 
 --
--- Name: registration_registrationprofile_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: registration_registrationprofile_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: code_admin
 --
 
 ALTER TABLE ONLY registration_registrationprofile
@@ -1413,16 +1413,16 @@ ALTER TABLE ONLY registration_registrationprofile
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Name: public; Type: ACL; Schema: -; Owner: code_admin
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
+REVOKE ALL ON SCHEMA public FROM code_admin;
+GRANT ALL ON SCHEMA public TO code_admin;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
--- PostgreSQL database dump complete
+-- code_adminQL database dump complete
 --
 
