@@ -10,6 +10,7 @@ from forms import CourseForm, CourseSearchForm
 from django.http import Http404
 from django.shortcuts import redirect, get_object_or_404, render
 
+
 class CourseList(ListView, FormMixin):
     model = Course
     template_name = 'courses/course_list.html'
@@ -36,12 +37,13 @@ class CourseList(ListView, FormMixin):
             return Course.objects.filter(name__icontains=self.form.cleaned_data['name'])
         return Course.objects.all()
 
+
 class AddCourse(CreateView):
     model = Course
     form_class = CourseForm
     template_name = 'courses/add_course.html'
 
-    @method_decorator(login_required(login_url = '/accounts/login/'))
+    @method_decorator(login_required(login_url='/accounts/login/'))
     def dispatch(self, *args, **kwargs):
         return super(AddCourse, self).dispatch(*args, **kwargs)
 
@@ -55,10 +57,11 @@ class AddCourse(CreateView):
         return reverse("course_list")
 
     def form_valid(self, form):
-        obj = form.save(commit = False)
+        obj = form.save(commit=False)
         obj.organizer = self.request.user
         obj.save()
         return CreateView.form_valid(self, form)
+
 
 class CourseDetailView(DetailView):
     model = Course

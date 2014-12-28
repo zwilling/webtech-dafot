@@ -1,6 +1,7 @@
 from forms import AppUserForm
 from registration.signals import user_registered
 
+
 def user_created(sender, user, request, **kwargs):
     """
     Called via signals when user registers. Creates different profiles and
@@ -12,5 +13,6 @@ def user_created(sender, user, request, **kwargs):
     user.last_name = form.data['last_name']
     user.save()
 
-#register for signals from django-registration to call your function after any registration is processed:
+# register for signals from django-registration to call your function after
+# any registration is processed:
 user_registered.connect(user_created)

@@ -4,6 +4,6 @@ from forms import AppUserForm
 import views
 
 urlpatterns = patterns('',
-    url(r'^accounts/register/$', RegistrationView.as_view(form_class= AppUserForm)),
+    url(r'^accounts/register/$', RegistrationView.as_view(form_class=AppUserForm)),
     (r'^accounts/', include('registration.urls')),
 )
