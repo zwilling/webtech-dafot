@@ -92,14 +92,25 @@ WSGI_APPLICATION = 'web_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'webportaldb',
+#        'USER': 'code_admin',
+#        'PASSWORD': 'masterkey',
+#        'HOST': '',
+#        'PORT': '',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'webportaldb',
-        'USER': 'code_admin',
-        'PASSWORD': 'masterkey',
-        'HOST': '',
-        'PORT': '',
+        'NAME': 'dd60tg9iilfm18',
+        'USER': 'itfefpsmnokpay',
+        'PASSWORD': 'ALM4HcI37eW4H34gcRMt50Spaj',
+        'HOST': 'ec2-54-235-99-22.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

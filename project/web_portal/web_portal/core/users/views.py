@@ -8,8 +8,8 @@ def user_created(sender, user, request, **kwargs):
     """
     form = AppUserForm(request.POST)
     # Update first and last name for user
-    user.first_name=form.data['first_name']
-    user.last_name=form.data['last_name']
+    user.first_name = form.data['first_name']
+    user.last_name = form.data['last_name']
     user.save()
 
 #register for signals from django-registration to call your function after any registration is processed:

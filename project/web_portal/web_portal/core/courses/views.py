@@ -15,7 +15,7 @@ class CourseList(ListView, FormMixin):
     template_name = 'courses/course_list.html'
     context_object_name = "courses"
     form_class = CourseSearchForm
-    paginate_by = 5
+    paginate_by = 2
 
     def dispatch(self, *args, **kwargs):
         return super(CourseList, self).dispatch(*args, **kwargs)
