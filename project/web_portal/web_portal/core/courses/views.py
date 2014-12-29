@@ -1,80 +1,93 @@
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormMixin
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from django.contrib.auth.models import User
-from models import Course, Assignment, Solution, Attendee
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from forms import CourseForm, CourseSearchForm
 from django.http import Http404
-from django.shortcuts import redirect, get_object_or_404, render
+from django.shortcuts import redirect, render
+import requests
+import urlparse
+import json
+from collections import namedtuple
+from web_portal.settings import SERVER_URL
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
+def get_page_and_params(request, key = 'page'):
+    p = urlparse.parse_qsl(request.META['QUERY_STRING'])
+    dic = dict(p)
+    if dic.has_key(key):
+        page = dic[key]
+        del dic[key]
+    else:
+        page = 1
+    return (page, dic)
 
-class CourseList(ListView, FormMixin):
-    model = Course
-    template_name = 'courses/course_list.html'
-    context_object_name = "courses"
-    form_class = CourseSearchForm
-    paginate_by = 2
+def _json_object_hook(d):
+    return namedtuple('X', d.keys())(*d.values())
 
-    def dispatch(self, *args, **kwargs):
-        return super(CourseList, self).dispatch(*args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        self.form = self.get_form(form_class)
-
-        self.object_list = self.get_queryset()
-        context = self.get_context_data(object_list=self.object_list, form=self.form)
-        return self.render_to_response(context)
-
-    def post(self, request, *args, **kwargs):
-        return self.get(request, *args, **kwargs)
-
-    def get_queryset(self):
-        if self.form.is_valid():
-            return Course.objects.filter(name__icontains=self.form.cleaned_data['name'])
-        return Course.objects.all()
-
-
-class AddCourse(CreateView):
-    model = Course
-    form_class = CourseForm
-    template_name = 'courses/add_course.html'
-
-    @method_decorator(login_required(login_url='/accounts/login/'))
-    def dispatch(self, *args, **kwargs):
-        return super(AddCourse, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(AddCourse, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-        context['edit'] = False
-        return context
-
-    def get_success_url(self):
-        return reverse("course_list")
-
-    def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.organizer = self.request.user
-        obj.save()
-        return CreateView.form_valid(self, form)
-
-
-class CourseDetailView(DetailView):
-    model = Course
-    template_name = 'courses/course_page.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CourseDetailView, self).get_context_data(**kwargs)
-        user = self.request.user
-        if user.is_authenticated() and user.is_active and self.object.organizer == user:
-            context['organizer'] = user
+def course_list(request):
+    page, dic = get_page_and_params(request)
+    if request.method == "GET":
+        form = CourseSearchForm()
+        r = requests.get(SERVER_URL+'/courses/', headers=GET_JSON_HEADER)
+    if request.method == "POST":
+        form = CourseSearchForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            params = {'name': name}
+            r = requests.get(SERVER_URL+'/courses/', params=params, headers=GET_JSON_HEADER)
         else:
-            context['organizer'] = None
-        return context
+            return render(request, 'courses/course_list.html',
+                          {'form': form, })
+    json_resp = r.json(object_hook=_json_object_hook)
+    courses = json_resp.course
+    paginator = None
+    if request.method == "GET":
+        paginator = Paginator(courses, 5)
+        try:
+            courses = paginator.page(page)
+        except PageNotAnInteger:
+            courses = paginator.page(1)
+        except EmptyPage:
+            courses = paginator.page(paginator.num_pages)
+    return render(request, 'courses/course_list.html',
+                  {'courses':courses, 'form':form, 'paginator': paginator,})
+
+@login_required(login_url='/accounts/login/')
+def add_course(request):
+    form = CourseForm()
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            courseOrganizer = {'id': request.user.id}
+            params = {'name': name, 'description': description, 'courseOrganizer': courseOrganizer}
+            r = requests.post(SERVER_URL+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER)
+            if r.status_code == requests.codes.created:
+                location = r.headers['location']
+                new_course_id = location.split('/')[-1]
+                return redirect('/courses/{0}/'.format(new_course_id))
+            else:
+                raise Http404()
+    return render(request, 'courses/add_course.html',
+                              {'form':form, 'edit':False})
+
+def course_page(request, pk):
+    try:
+        pk = int(pk)
+    except ValueError:
+        raise Http404()
+    r = requests.get(SERVER_URL+'/courses/{0}/'.format(pk), headers=GET_JSON_HEADER)
+    if r.status_code != requests.codes.ok:
+        raise Http404()
+    course = r.json(object_hook=_json_object_hook)
+    user = request.user
+    if user.is_authenticated() and user.is_active and course.courseOrganizer.id == user.id:
+        organizer = user
+    else:
+        organizer = course.courseOrganizer
+    return render(request, 'courses/course_page.html',
+                  {'course': course, 'organizer': organizer})
 
 def edit_course(request, id):
     pass
@@ -82,6 +95,5 @@ def edit_course(request, id):
 def delete_course(request, id):
     pass
 
-course_list = CourseList.as_view()
-add_course = AddCourse.as_view()
-course_page = CourseDetailView.as_view()
+POST_JSON_HEADER = {'content-type': 'application/json'}
+GET_JSON_HEADER = {'accept': 'application/json'}

@@ -150,3 +150,5 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+SERVER_URL = 'http://frozen-taiga-5587.herokuapp.com'

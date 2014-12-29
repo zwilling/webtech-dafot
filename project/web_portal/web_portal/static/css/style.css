@@ -31,3 +31,18 @@
 
 .ui-form table td.error {
 }
+
+.div-error {
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+.div-error ul {
+    list-style-type: none;
+    margin: 0 5px;
+    padding: 0;
+}
