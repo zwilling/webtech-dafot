@@ -291,3 +291,13 @@ input[type=submit]
 .verticalLine {
     border-left: thin solid #252525;
 }
+
+/* Student Overview*/
+
+
+.stud a { 
+  color: #fff; 
+  font-size: 20px; 
+  text-decoration: none; 
+  font-family: 'Open Sans Condensed', sans-serif; 
+}
