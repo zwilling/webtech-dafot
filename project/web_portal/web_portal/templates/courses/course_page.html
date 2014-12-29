@@ -39,6 +39,10 @@
     {% if organizer %}
 	<br/>
 	<input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
+    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the course?')) return false;
+            else location.href='{% url "delete_course" course.id %}'" value="Delete course"/>
 	<br/>
 	{% endif %}
+    <br/>
+    <a href="{% url "course_list" %}">Go to courses</a>
 {% endblock %}

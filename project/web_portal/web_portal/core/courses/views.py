@@ -85,15 +85,28 @@ def course_page(request, pk):
     if user.is_authenticated() and user.is_active and course.courseOrganizer.id == user.id:
         organizer = user
     else:
-        organizer = course.courseOrganizer
+        organizer = None
     return render(request, 'courses/course_page.html',
                   {'course': course, 'organizer': organizer})
 
 def edit_course(request, id):
     pass
 
-def delete_course(request, id):
-    pass
+@login_required(login_url='/accounts/login/')
+def delete_course(request, pk):
+    try:
+        pk = int(pk)
+    except ValueError:
+        raise Http404()
+    r = requests.get(SERVER_URL+'/courses/{0}/'.format(pk), headers=GET_JSON_HEADER)
+    if r.status_code == requests.codes.ok:
+        course = r.json(object_hook=_json_object_hook)
+        user = request.user
+        if course.courseOrganizer.id == user.id:
+            r = requests.delete(SERVER_URL+'/courses/{0}/'.format(pk))
+            if r.status_code == requests.codes.no_content:
+                return redirect('/courses/')
+    raise Http404()
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
 GET_JSON_HEADER = {'accept': 'application/json'}
