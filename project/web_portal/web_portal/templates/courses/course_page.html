@@ -36,9 +36,22 @@
         </tbody>
     </table>
     </div>
+    {% if assignments %}
+    <h2>Assignments</h2>
+    <ol type="1">
+        {% for assignment in assignments %}
+        <li>
+			<a href="{% url "assignment_page" course.id assignment.id %}">{{assignment.name}}</a>
+		</li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+
     {% if organizer %}
 	<br/>
 	<input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
+    <input class="input" type="button" onclick="location.href='{% url "add_assignment" course.id %}'" value="Add assignment"/>
+    <br/><br/>
     <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the course?')) return false;
             else location.href='{% url "delete_course" course.id %}'" value="Delete course"/>
 	<br/>

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from web_portal.core.courses.views import course_list, add_course, edit_course,\
-    delete_course, course_page
+    delete_course, course_page, add_assignment, assignment_page
 
 urlpatterns = patterns('',
     url(r'^courses/$', course_list, name='course_list'),
@@ -8,4 +8,7 @@ urlpatterns = patterns('',
     url(r'^courses/(?P<pk>\d+)/$', course_page, name='course_page'),
     url(r'^courses/(?P<pk>\d+)/edit/$', edit_course, name='edit_course'),
     url(r'^courses/(?P<pk>\d+)/delete$', delete_course, name='delete_course'),
+
+    url(r'^courses/(?P<pk>\d+)/assignments/add/$', add_assignment, name='add_assignment'),
+    url(r'^courses/(?P<pk>\d+)/assignments/(?P<apk>\d+)/$', assignment_page, name='assignment_page'),
 )

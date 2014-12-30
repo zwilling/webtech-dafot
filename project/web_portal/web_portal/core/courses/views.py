@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
-from forms import CourseForm, CourseSearchForm
+from forms import CourseForm, CourseSearchForm, AssignmentForm
 from django.http import Http404
 from django.shortcuts import redirect, render
 import requests
@@ -86,8 +86,11 @@ def course_page(request, pk):
         organizer = user
     else:
         organizer = None
+    r = requests.get(SERVER_URL+'/courses/{0}/assignments/'.format(pk), headers=GET_JSON_HEADER)
+    json_resp = r.json(object_hook=_json_object_hook)
+    assignments = json_resp.assignment
     return render(request, 'courses/course_page.html',
-                  {'course': course, 'organizer': organizer})
+                  {'course': course, 'assignments': assignments, 'organizer': organizer})
 
 def edit_course(request, id):
     pass
@@ -107,6 +110,44 @@ def delete_course(request, pk):
             if r.status_code == requests.codes.no_content:
                 return redirect('/courses/')
     raise Http404()
+
+@login_required(login_url='/accounts/login/')
+def add_assignment(request, pk):
+    try:
+        #course id
+        pk = int(pk)
+    except ValueError:
+        raise Http404()
+    #TODO delete this when authentication will work
+    r = requests.get(SERVER_URL+'/courses/{0}/'.format(pk), headers=GET_JSON_HEADER)
+    if r.status_code == requests.codes.ok:
+        course = r.json(object_hook=_json_object_hook)
+        user = request.user
+        if course.courseOrganizer.id == user.id:
+            form = AssignmentForm()
+            if request.method == 'POST':
+                form = AssignmentForm(request.POST)
+                if form.is_valid():
+                    name = form.cleaned_data['name']
+                    description = form.cleaned_data['description']
+                    template_code = form.cleaned_data['template_code']
+                    verification_code = form.cleaned_data['verification_code']
+                    params = {'name': name, 'description': description, 'templateCode': template_code,
+                              'verificationCode': verification_code}
+                    r = requests.post(SERVER_URL+'/courses/{0}/assignments'.format(pk),
+                                      data=json.dumps(params), headers=POST_JSON_HEADER)
+                    if r.status_code == requests.codes.created:
+                        location = r.headers['location']
+                        new_assignment_id = location.split('/')[-1]
+                        return redirect('/courses/{0}/'.format(pk))
+                    else:
+                        raise Http404()
+            return render(request, 'courses/add_assignment.html',
+                              {'form':form, 'course_id': pk,'edit':False})
+    raise Http404()
+
+def assignment_page(request, pk, apk):
+    return render(request, "main/index.html")
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
 GET_JSON_HEADER = {'accept': 'application/json'}
