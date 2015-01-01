@@ -1,9 +1,10 @@
-from django.conf.urls import patterns, url, include
-from registration.backends.default.views import RegistrationView
-from forms import AppUserForm
-import views
+from django.conf.urls import patterns, include
+from .forms import AppUserForm
+from .views import CustomRegistrationView
 
 urlpatterns = patterns('',
-    url(r'^accounts/register/$', RegistrationView.as_view(form_class=AppUserForm)),
-    (r'^accounts/', include('registration.urls')),
+                       (r'^accounts/register/$',
+                        CustomRegistrationView.as_view(form_class=AppUserForm)),
+                       (r'^accounts/',
+                        include('registration.backends.default.urls')),
 )

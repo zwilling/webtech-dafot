@@ -1,5 +1,14 @@
-from forms import AppUserForm
 from registration.signals import user_registered
+from registration.backends.default.views import RegistrationView
+from .forms import AppUserForm
+
+
+class CustomRegistrationView(RegistrationView):
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomRegistrationView, self).get_context_data(**kwargs)
+        context.update({'title': 'Registration'})
+        return context
 
 
 def user_created(sender, user, request, **kwargs):
@@ -16,3 +25,5 @@ def user_created(sender, user, request, **kwargs):
 # register for signals from django-registration to call your function after
 # any registration is processed:
 user_registered.connect(user_created)
+
+

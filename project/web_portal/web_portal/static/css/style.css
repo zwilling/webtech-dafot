@@ -46,3 +46,25 @@
     margin: 0 5px;
     padding: 0;
 }
+
+.form-group > label {
+    color: #000000;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.panel-errors {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-window-shadow: none;
+}
+
+.errors {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.div-error {
+    margin-bottom: 10px;
+}
