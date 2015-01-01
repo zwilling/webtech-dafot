@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'web_portal.core.courses',
     'registration',
     'macros',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'web_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #        'NAME': 'webportaldb',
@@ -102,7 +103,7 @@ WSGI_APPLICATION = 'web_portal.wsgi.application'
 #        'HOST': '',
 #        'PORT': '',
 #    }
-#}
+# }
 
 DATABASES = {
     'default': {
