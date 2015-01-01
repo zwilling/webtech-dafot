@@ -7,7 +7,8 @@ class CustomRegistrationView(RegistrationView):
 
     def get_context_data(self, **kwargs):
         context = super(CustomRegistrationView, self).get_context_data(**kwargs)
-        context.update({'title': 'Registration'})
+        if 'title' in self.kwargs:
+            context.update({'title': self.kwargs.get('title')})
         return context
 
 
