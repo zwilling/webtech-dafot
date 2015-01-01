@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'web_portal.core.ui_forms',
     'web_portal.core.courses',
     'registration',
+    'macros',
 )
 
 MIDDLEWARE_CLASSES = (
