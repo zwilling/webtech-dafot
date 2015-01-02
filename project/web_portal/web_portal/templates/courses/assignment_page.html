@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+{% block title %}
+   Assignment page
+{% endblock %}
+
+{% block content %}
+	<h1>Assignment page</h1>
+    <div class="ui-form">
+    <table>
+        <tbody>
+            <tr>
+                <td class="label">
+                    <label class="label">Assignment name:</label>
+                </td>
+                <td>
+                    {{assignment.name}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    <label class="label">Assignment description:</label>
+                </td>
+                <td>
+                    {{assignment.description}}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label class="label">Language:</label>
+                </td>
+                <td>
+                    {{assignment.language}}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label class="label">Template Code:</label>
+                </td>
+                <td>
+                    {{assignment.templateCode}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <br/>
+    <a href="{% url "course_page" course_id %}">Go to course</a>
+{% endblock %}

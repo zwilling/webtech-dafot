@@ -1,6 +1,11 @@
 from django import forms
 from django.forms import Textarea
 
+LANGUAGE_CHOICES = (
+    ('python', u'Python'),
+    ('java', u'Java'),
+    )
+
 class CourseForm(forms.Form):
     name = forms.CharField(max_length=255, required=True,
                             label=u'Course name')
@@ -29,3 +34,4 @@ class AssignmentForm(forms.Form):
                                     label=u'Template code')
     verification_code = forms.CharField(required=True, widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}),
                                     label=u'Verification code')
+    language = forms.ChoiceField(label=u'Language', required=True, choices=[[r[0], r[1]] for r in LANGUAGE_CHOICES])
