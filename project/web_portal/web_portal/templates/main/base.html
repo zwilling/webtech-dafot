@@ -28,7 +28,7 @@
             <header id="header" class="hidden-xs">
                 <div class="container">
                     <div id="header-title">
-                        <h1 class="animated fadeInDown"><a href="#">CO<span>DE</span></a></h1>
+                        <h1 class="animated fadeInDown"><a href="/">CO<span>DE</span></a></h1>
                     </div>
                     <div id="social-header" class="hidden-xs">
                         <a href="" class="social-icon soc-twitter animated fadeInDown animation-delay-1"><i class="fa fa-twitter"></i></a>
@@ -41,8 +41,6 @@
                     </div>
                 </div>
             </header>
-        {% endblock %}
-        {% block navigation %}
             <nav class="navbar navbar-static-top navbar-mind" role="navigation">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -56,7 +54,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-mind-collapse">
                         <ul id="menu-mainmenu" class="nav navbar-nav">
-                            <li class="menu-item"><a title="Home" href="">Home</a>
+                            <li class="menu-item"><a title="Home" href="/">Home</a>
                             </li>
                             <li class="menu-item"><a title="Courses" href="/courses/">Courses</a>
                             </li>
@@ -65,38 +63,9 @@
                         </ul>
                         <!-- Login Form -->
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                                <div class="dropdown-menu dropdown-login animated fadeInUp">
-                                    <form role="form" name="loginform" id="loginform" action="" method="post">{% csrf_token %}
-                                        <h4 class="section-title">Login Form</h4>
-
-                                        <div class="form-group">
-                                            <div class="input-group login-input">
-                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                <input type="text" class="form-control" placeholder="Username" name="log" id="user_login">
-                                            </div>
-                                            <br>
-                                            <div class="input-group login-input">
-                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                                <input type="password" class="form-control" placeholder="Password" name="pwd" id="user_pass">
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="rememberme" id="rememberme" value="forever" tabindex="90"> Remember me
-                                                </label>
-                                            </div>
-                                            <span><a href="
-                                            {% url "registration_register" %}" class="not_underlined">Not
-                                                registered
-                                                yet?</a></span>
-                                            <button type="submit" class="btn btn-primary pull-right" name="wp-submit" id="wp-submit">Login</button>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </form>
-                                </div>
+                            <li class="menu-item">
+                                <a href="{%  url 'auth_login' %}" title="Login">Login</a>
                             </li>
-                            <!-- dropdown -->
                         </ul>
                         <!-- nav nabvar-nav -->
                     </div>
@@ -109,6 +78,7 @@
             {% block content %}{% endblock %}
         </div>
         {% block footer %}
+            <div class="footer">
             <aside id="footer-widgets">
                 <div class="container">
                     <div class="row">
@@ -153,8 +123,10 @@
                 </div>
             </aside>
             <footer id="footer">
-                <p>&copy; 2015 <a href="#">DAFOT</a>, RWTH. All rights reserved.</p>
+                <p>&copy; 2015 <a href="https://www3.elearning.rwth-aachen.de/ws14/14ws-14118/collaboration/Lists/WikiList1/Group%20DAFOT.aspx">DAFOT</a>, RWTH. All rights
+                    reserved.</p>
             </footer>
+            </div>
         {% endblock %}
         {% block scripts_bottom %}{% endblock %}
     </div>
