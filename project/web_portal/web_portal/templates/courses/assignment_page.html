@@ -44,7 +44,27 @@
         </tbody>
     </table>
     </div>
-
+    {% if organizer %}
+	<br/>
+    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the assignment?'))
+            return false; else location.href='{% url "delete_assignment" course.id assignment.id%}'"
+            value="Delete assignment"/>
+    {% else %}
+        {% if attendee %}
+            {% if solutions %}
+                <h2>Solutions</h2>
+                <ol type="1">
+                {% for solution in solutions %}
+                    <li>
+                        <a href="{% url "solution_page" course.id assignment.id solution.id%}">Solution {{forloop.counter}}</a>
+                    </li>
+                {% endfor %}
+                </ol>
+            {% endif %}
+            <input class="input" type="button" onclick="location.href='{% url "add_solution" course.id assignment.id%}'"
+                value="Add solution"/>
+        {% endif %}
+	{% endif %}
     <br/>
-    <a href="{% url "course_page" course_id %}">Go to course</a>
+    <a href="{% url "course_page" course.id %}">Go to course</a>
 {% endblock %}

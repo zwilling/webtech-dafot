@@ -36,6 +36,9 @@
         </tbody>
     </table>
     </div>
+    {% if not_attendee %}
+        <input class="input" type="button" onclick="location.href='{% url "attend_course" course.id %}'" value="Join the course"/>
+    {% endif %}
     {% if assignments %}
     <h2>Assignments</h2>
     <ol type="1">
@@ -48,14 +51,23 @@
     {% endif %}
 
     {% if organizer %}
-	<br/>
-	<input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
-    <input class="input" type="button" onclick="location.href='{% url "add_assignment" course.id %}'" value="Add assignment"/>
-    <br/><br/>
-    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the course?')) return false;
-            else location.href='{% url "delete_course" course.id %}'" value="Delete course"/>
-	<br/>
-	{% endif %}
+        {% if attendees %}
+        <h2>Attendees</h2>
+        <ol type="1">
+            {% for attendee in attendees %}
+            <li>
+    			<a href="{% url "attendee_page" course.id user.id %}">{{attendee.firstName}} {{attendee.lastName}}</a>
+		    </li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+        <input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
+        <input class="input" type="button" onclick="location.href='{% url "add_assignment" course.id %}'" value="Add assignment"/>
+        <br/><br/>
+        <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the course?')) return false;
+                else location.href='{% url "delete_course" course.id %}'" value="Delete course"/>
+        <br/>
+    {% endif %}
     <br/>
     <a href="{% url "course_list" %}">Go to courses</a>
 {% endblock %}

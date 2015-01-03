@@ -1,0 +1,60 @@
+{% extends "main/base.html" %}
+{% block title %}
+   Solution page
+{% endblock %}
+
+{% block content %}
+	<h1>Solution page</h1>
+    <div class="ui-form">
+    <table>
+        <tbody>
+            <tr>
+                <td class="label">
+                    <label class="label">Assignment name:</label>
+                </td>
+                <td>
+                    {{solution.assignment.name}}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label class="label">Language:</label>
+                </td>
+                <td>
+                    {{solution.assignment.language}}
+                </td>
+            </tr>
+            {% if solution.grade %}
+            <tr>
+                <td class="label">
+                    <label class="label">Grade:</label>
+                </td>
+                <td>
+                    {{solution.grade}}
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="label">
+                    <label class="label">Code:</label>
+                </td>
+                <td>
+                    {{solution.code}}
+                </td>
+            </tr>
+            {% if solution.exceptions %}
+            <tr>
+                <td class="label">
+                    <label class="label">Exception:</label>
+                </td>
+                <td>
+                    {{solution.exceptions}}
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    </div>
+    <br/>
+    <a href="{% url "assignment_page" course_id solution.assignment.id %}">Go to assignment</a>
+{% endblock %}
