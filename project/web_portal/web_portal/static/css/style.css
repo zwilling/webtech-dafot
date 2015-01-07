@@ -80,3 +80,26 @@
 .error {
     color: #ff0000;
 }
+.panel-header {
+    position: relative;
+}
+.line-clamp {
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 5; /* number of lines to show */
+   line-height: 1.6em;        /* fallback */
+   max-height: 110px;       /* fallback */
+}
+.btn-info {
+    background-color: #008cba;
+    border-color: #00708c;
+}
+.btn-info:hover {
+    background-color: #00708c;
+    border-color: #00708c;
+}
+.margin-top-10 {
+    margin-top: 10px;
+}

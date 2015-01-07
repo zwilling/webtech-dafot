@@ -43,7 +43,7 @@ def course_list(request):
     courses = json_resp.course
     paginator = None
     if request.method == "GET":
-        paginator = Paginator(courses, 5)
+        paginator = Paginator(courses, 4)
         try:
             courses = paginator.page(page)
         except PageNotAnInteger:
@@ -60,7 +60,7 @@ def add_course(request):
         form = CourseForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
+            description = '<![CDATA[{}]]>'.format(form.cleaned_data['description'])
             params = {'name': name, 'description': description}
             r = requests.post(SERVER_URL+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER,
                               auth=(request.user.username, request.user.password))
@@ -138,7 +138,7 @@ def add_assignment(request, pk):
         form = AssignmentForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
+            description = '<![CDATA[{}]]>'.format(form.cleaned_data['description'])
             template_code = form.cleaned_data['template_code']
             verification_code = form.cleaned_data['verification_code']
             language = form.cleaned_data['language']
