@@ -56,5 +56,9 @@
     </table>
     </div>
     <br/>
+    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the solution?'))
+            return false; else location.href='{% url "delete_solution" course_id solution.assignment.id solution.id%}'"
+            value="Delete solution"/>
+    <br/>
     <a href="{% url "assignment_page" course_id solution.assignment.id %}">Go to assignment</a>
 {% endblock %}

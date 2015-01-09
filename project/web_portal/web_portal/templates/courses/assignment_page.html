@@ -45,10 +45,32 @@
     </table>
     </div>
     {% if organizer %}
-	<br/>
-    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the assignment?'))
-            return false; else location.href='{% url "delete_assignment" course.id assignment.id%}'"
-            value="Delete assignment"/>
+        <table>
+            <thead>
+			<tr>
+				<th>Attendee</th>
+				<th>Solutions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for key,value in items %}
+		    <tr class="{% cycle 'even' 'odd' %}">
+		    	<td></td>
+				<td>
+					<p>
+					{% for editor in value %}
+					<a href="/user/{{editor.id}}/">{{editor.last_name}} {{editor.first_name}} {{editor.middlename}}</a> </br>
+					{% endfor %}
+					</p>
+				</td>
+			</tr>
+		    {% endfor %}
+		</tbody>
+        </table>
+        <br/>
+        <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the assignment?'))
+                return false; else location.href='{% url "delete_assignment" course.id assignment.id%}'"
+                value="Delete assignment"/>
     {% else %}
         {% if attendee %}
             {% if solutions %}

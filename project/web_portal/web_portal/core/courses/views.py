@@ -10,7 +10,6 @@ import json
 from collections import namedtuple
 from web_portal.settings import SERVER_URL
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db import connection
 
 def get_page_and_params(request, key = 'page'):
     p = urlparse.parse_qsl(request.META['QUERY_STRING'])
@@ -95,7 +94,7 @@ def course_page(request, pk):
     if not organizer and (user.id not in attendees_id or not user.is_authenticated()):
         not_attendee = True
     assignments = None
-    if user.is_authenticated() and user.is_active:
+    if not not_attendee or organizer:
         r = requests.get(SERVER_URL+'/courses/{0}/assignments/'.format(pk), headers=GET_JSON_HEADER,
                          auth=(user.username, user.password))
         json_resp = r.json(object_hook=_json_object_hook)
@@ -105,9 +104,34 @@ def course_page(request, pk):
                    'not_attendee': not_attendee, 'attendees': attendees})
 
 @login_required(login_url='/accounts/login/')
-def edit_course(request, id):
-    #TODO
-    pass
+def edit_course(request, pk):
+    try:
+        pk = int(pk)
+    except ValueError:
+        raise Http404()
+    r = requests.get(SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    if r.status_code != requests.codes.ok:
+        raise Http404()
+    course = r.json(object_hook=_json_object_hook)
+    user = request.user
+    if course.courseOrganizer.id != user.id:
+        raise Http404()
+    data = {'name': course.name, 'description': course.description}
+    form = CourseForm(data)
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            params = {'name': name, 'description': description}
+            r = requests.put(SERVER_URL+'/courses/{0}'.format(pk), data=json.dumps(params), headers=POST_JSON_HEADER,
+                              auth=(user.username, user.password))
+            if r.status_code == requests.codes.no_content:
+                return redirect('/courses/{0}/'.format(pk))
+            else:
+                raise Http404()
+    return render(request, 'courses/add_course.html',
+                  {'form': form, 'edit': True})
 
 @login_required(login_url='/accounts/login/')
 def delete_course(request, pk):
@@ -179,13 +203,13 @@ def assignment_page(request, pk, apk):
     else:
         organizer = None
     attendee = None
-    solutions = None
+    r = requests.get(SERVER_URL+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk), headers=GET_JSON_HEADER,
+                     auth=(user.username, user.password))
+    json_resp = r.json(object_hook=_json_object_hook)
+    solutions = json_resp.solution
     if not organizer and (user.id in attendees_id):
         attendee = request.user
-        r = requests.get(SERVER_URL+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk), headers=GET_JSON_HEADER,
-                         auth=(user.username, user.password))
-        json_resp = r.json(object_hook=_json_object_hook)
-        solutions = json_resp.solution
+
     r = requests.get(SERVER_URL+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
                      auth=(request.user.username, request.user.password))
     if r.status_code != requests.codes.ok:
@@ -222,11 +246,12 @@ def attend_course(request, pk):
         pk = int(pk)
     except ValueError:
         raise Http404()
-    #TODO: change this
-    cursor = connection.cursor()
-    sql = 'insert into attendee(course_id, user_id) values ({0}, {1})'.format(pk, request.user.id)
-    cursor.execute(sql)
-    return redirect('/courses/{0}/'.format(pk))
+    r = requests.post(SERVER_URL+'/courses/{0}/attendees'.format(pk), headers=POST_JSON_HEADER,
+                              auth=(request.user.username, request.user.password))
+    if r.status_code == requests.codes.created:
+        return redirect('/courses/{0}/'.format(pk))
+    else:
+        raise Http404()
 
 @login_required(login_url='/accounts/login/')
 def attendee_page(request, pk, apk):
@@ -299,6 +324,23 @@ def solution_page(request, pk, apk, spk):
     return render(request, 'courses/solution_page.html',
                   {'solution': solution, 'course_id': pk})
 
+@login_required(login_url='/accounts/login/')
+def delete_solution(request, pk, apk, spk):
+    try:
+        #course id
+        pk = int(pk)
+        #assignment id
+        apk = int(apk)
+        #solution id
+        spk = int(spk)
+    except ValueError:
+        raise Http404()
+    user = request.user
+    r = requests.delete(SERVER_URL+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
+                        auth=(user.username, user.password))
+    if r.status_code == requests.codes.no_content:
+        return redirect('/courses/{0}/asignment/{1}/'.format(pk, apk))
+    raise Http404()
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
 GET_JSON_HEADER = {'accept': 'application/json'}
