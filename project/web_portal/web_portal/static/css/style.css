@@ -131,6 +131,12 @@
 .btn-wide {
     display: block;
 }
+.btn-no-action {
+    cursor: default;
+}
+.btn-no-action:hover {
+    background-color: #0b9a00;
+}
 .attendee:nth-child(odd):hover > td, .attendee:nth-child(even):hover > td {
     cursor: pointer;
     color: #ffffff;
