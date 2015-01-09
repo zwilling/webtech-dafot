@@ -1,67 +1,67 @@
 {% extends "main/base.html" %}
 {% block title %}
-    Courses
+    Courses - Code
 {% endblock %}
 
 {% block content %}
- <h1>Courses</h1>
-	<form method="post">{% csrf_token %}
-	<div class="ui-form">
-	<table>
-		<tbody>
-			<tr>
-				<td class="label" >
-					<label class="label">
-						{{form.name.label_tag}}:
-					</label>
-				</td>
-				<td> {{form.name}} </td>
-				<td> <input type="submit" name="filter" id="filter" value="Filter"/></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-	<br/>
-	{% if not courses %}
-	<p> There is no course yet.</p>
+    <header class="wrap-title">
+        <div class="container">
+            <h1 class="page-title">Courses</h1>
+            {% if user.is_authenticated and user.is_active %}
+                <a class="btn btn-success pull-right animated fadeInDown animation-delay-1" href="{% url "add_course" %}">Add course</a>
+				<br/>
+				{% endif %}
+        </div>
+    </header>
+    {% if not courses %}
+		<p class="message">Sorry, there are no courses yet.</p>
 	{% else %}
-    <table class="list">
-		<thead>
-			<tr>
-                <th>Course name</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for course in courses %}
-		    <tr class="{% cycle 'even' 'odd' %}">
-				<td><a href="{% url "course_page" course.id %}">{{course.name}}</a></td>
-                <td>{{course.description}}</td>
-			</tr>
-		    {% endfor %}
-		</tbody>
-	</table>
-	{% if paginator %}
-	<div class="pagination">
-    <span class="page-links">
-        {% if courses.has_previous %}
-            <a href="/courses?page={{ courses.previous_page_number }}">previous</a>
-        {% endif %}
+    <div class="container">
+		<div class="row">
+            {% for course in courses %}
+                <div class="col-md-6">
+					<section>
+						<div class="panel panel-default  animated fadeInDown animation-delay-{{ forloop.counter|add:"3" }}">
+							<div class="panel-body">
+                                <div class="panel-header">
+									<h3 class="section-title">{{ course.name }}
+                                        <br/>
+										<small class="pull-left margin-top-10"
+                                                >{{ course.courseOrganizer.firstName }} {{ course.courseOrganizer.lastName }}</small>
+										<div class="clearfix"></div>
+									</h3>
+                                </div>
+								<div class="clearfix"></div>
+								<p class="module line-clamp no-margin-top"
+                                        >{% autoescape off %}{{ course.description }}{% endautoescape %}</p>
+								<div class="clearfix"></div>
+								<hr />
+								<a class="btn btn-info pull-right" href="{% url "course_page" course.id %}">Course Details</a>
+							</div>
+						</div>
+					</section>
+				</div>
+            {% endfor %}
+        </div>
+		{% if paginator %}
+        <div class="text-center">
+            <ul class="pagination pagination-centered">
+				{% if courses.has_previous %}
+					<li><a href="?page=1"><<</a></li>
+					<li><a href="?page={{ courses.previous_page_number }}"><</a></li>
+				{% endif %}
 
-        <span class="page-current">
-            Page {{ courses.number }} of {{ courses.paginator.num_pages }}.
-        </span>
+				{% for i in paginator.page_range %}
+					<li {% if courses.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+				{% endfor %}
 
-        {% if courses.has_next %}
-            <a href="/courses?page={{ courses.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+				{% if courses.has_next %}
+					<li><a href="?page={{ courses.next_page_number }}">></a></li>
+					<li><a href="?page={{ courses.paginator.num_pages }}">>></a></li>
+				{% endif %}
+			</ul>
+        </div>
+    	{% endif %}
 	</div>
-	{% endif %}
-	</form>
-	{% endif %}
-	{% if user.is_authenticated and user.is_active %}
-	<input class="input" type="button" onclick="location.href='{% url "add_course" %}'" value="Add course"/>
-	<br/>
-	{% endif %}
+    {% endif %}
 {% endblock %}
