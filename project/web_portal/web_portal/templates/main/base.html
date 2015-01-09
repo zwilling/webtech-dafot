@@ -9,6 +9,8 @@
     <title>{% block title %}CODE{% endblock %}</title>
     {% load staticfiles %}
     {% block styles %}
+        <link href="{% static "images/favicon.png" %}" rel="shortcut icon"
+              type="image/png" />
         <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
         <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" media="screen">
         <link href="{% static "css/animate.min.css" %}" rel="stylesheet" media="screen">
@@ -22,6 +24,7 @@
     {% endblock %}
 </head>
 
+{% block body %}
 <body id="webportal">
     <div class="boxed">
         {% block header %}
@@ -31,13 +34,13 @@
                         <h1 class="animated fadeInDown"><a href="/">CO<span>DE</span></a></h1>
                     </div>
                     <div id="social-header" class="hidden-xs">
-                        <a href="" class="social-icon soc-twitter animated fadeInDown animation-delay-1"><i class="fa fa-twitter"></i></a>
-                        <a href="" class="social-icon soc-google-plus animated fadeInDown animation-delay-2"><i class="fa fa-google-plus"></i></a>
-                        <a href="" class="social-icon soc-facebook animated fadeInDown animation-delay-3"><i class="fa fa-facebook"></i></a>
-                        <a href="" class="social-icon soc-instagram animated fadeInDown animation-delay-4"><i class="fa fa-instagram"></i></a>
-                        <a href="" class="social-icon soc-vk animated fadeInDown animation-delay-5"><i class="fa fa-vk"></i></a>
-                        <a href="" class="social-icon soc-linkedin animated fadeInDown animation-delay-6"><i class="fa fa-linkedin"></i></a>
-                        <a href="" class="social-icon soc-github animated fadeInDown animation-delay-7"><i class="fa fa-github"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-twitter animated fadeInDown animation-delay-1"><i class="fa fa-twitter"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-google-plus animated fadeInDown animation-delay-2"><i class="fa fa-google-plus"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-facebook animated fadeInDown animation-delay-3"><i class="fa fa-facebook"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-skype animated fadeInDown animation-delay-4"><i class="fa fa-skype"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-vk animated fadeInDown animation-delay-5"><i class="fa fa-vk"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-linkedin animated fadeInDown animation-delay-6"><i class="fa fa-linkedin"></i></a>
+                        <a href="{% url "coming" %}" class="social-icon soc-github animated fadeInDown animation-delay-7"><i class="fa fa-github"></i></a>
                     </div>
                 </div>
             </header>
@@ -131,4 +134,5 @@
         {% block scripts_bottom %}{% endblock %}
     </div>
 </body>
+{% endblock %}
 </html>

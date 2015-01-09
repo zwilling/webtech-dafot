@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Coming soon - CODE{% endblock %}
+
+{% block body %}
+    <body class="coming">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-push-6">
+                    <section class="coming-logo">
+                        <h1><i class="fa fa-refresh fa-spin"></i>Co<span>DE</span></h1>
+                        <p>Code team is working hard on advertising our
+                            product and creating public pages on the
+                            popular web resources. We will be very grateful
+                            if you help us and tell your friend about the Code.
+                        </p>
+                    </section>
+                </div>
+                <div class="col-md-6 col-md-pull-6">
+                    <section class="coming-info">
+                        <h2>Coming Soon</h2>
+                        <p>Please subscribe to our mailing list to be always
+                            in touch with the latest news about the Code.
+                            We will notify you about all the new features
+                            we've implemented.</p>
+                        <div class="input-group coming-subs">
+                            <input type="text" class="form-control" placeholder="Email Adress">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Subscribe</button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
+                    </section>
+                </div>
+            </div>
+            <section class="coming-footer">
+                <div class="row">
+                    <footer id="footer">
+                        <p>&copy; 2015 <a href="https://www3.elearning.rwth-aachen.de/ws14/14ws-14118/collaboration/Lists/WikiList1/Group%20DAFOT.aspx">DAFOT</a>, RWTH. All rights reserved.</p>
+                    </footer>
+                </div>
+            </section>
+        </div>
+    </body>
+{% endblock %}

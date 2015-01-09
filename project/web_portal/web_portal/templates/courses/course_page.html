@@ -1,73 +1,107 @@
 {% extends "main/base.html" %}
 {% block title %}
-   Course page
+   {{course.name}} - Code
 {% endblock %}
 
 {% block content %}
-	<h1>Course page</h1>
-    <div class="ui-form">
-    <table>
-        <tbody>
-            <tr>
-                <td class="label">
-                    <label class="label">Course name:</label>
-                </td>
-                <td>
-                    {{course.name}}
-                </td>
-            </tr>
+    <div class="container margin-top-30">
+        <div class="row">
+            <div class="col-md-9 col-sm-8">
+                {% if not organizer %}
+                    <section id="components">
+                        <article class="component-element" id="navs">
+                            <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
+                            <div class="content">{% autoescape off %}{{ course.description }}{% endautoescape %}</div>
+                        </article>
+                    </section>
+                {% else %}
+                    <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="example-navs">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#description"data-toggle="tab">Course Description</a>
+                                </li>
+                                <li>
+                                    <a href="#attendees" data-toggle="tab">Course attendees</a>
+                                </li>
+                            </ul>
 
-            <tr>
-                <td class="label">
-                    <label class="label">Course description:</label>
-                </td>
-                <td>
-                    {{course.description}}
-                </td>
-            </tr>
-            <tr>
-                <td class="label">
-                    <label class="label">Organizer:</label>
-                </td>
-                <td>
-                    {{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="description">
+                                    {% autoescape off %}{{ course.description }}{% endautoescape %}
+                                </div>
+                                <div class="tab-pane" id="attendees">
+                                {% if not attendees %}
+                                    <p>Sorry, no users registered to the course yet</p>
+                                {% else %}
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>№</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        {% for attendee in attendees %}
+                                            <tr class="attendee" onclick="document.location = '{% url 'attendee_solutions' course.id attendee.id %}';">
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ attendee.firstName }}</td>
+                                                <td>{{ attendee.lastName }}</td>
+                                                <td>{{ attendee.email }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <section>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
+                        <div class="panel-body">
+                            <div class="author-panel">
+                                <h4 class="section-title">Author</h4>
+                                <div class="text-center animated fadeInDown animation-delay-1">
+                                    <h4 class="caption-title">{{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}</h4>
+                                    <img src="http://razonartificial.com/themes/openmind/wordpress/wp-content/uploads/2014/05/t3.jpg" alt="t2" width="180" height="220" class="imageborder">
+                                    <div class="author-info margin-top-10">
+                                        <i class="fa fa-envelope"></i>
+                                        <span class="margin-left-5">{{ course.courseOrganizer.email }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if organizer %}
+                                <div class="course-delete">
+                                    <hr/>
+                                    <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
+                                </div>
+                            {% elif user.is_authenticated and not not_attendee %}
+                                <div class="course-delete">
+                                    <hr/>
+                                    <a class="btn btn-sucess btn-wide
+                                    animated fadeInDown animation-delay-2"
+                                       href="" onclick="return false;
+                                       ">You are already registered for
+                                        this course.</a>
+                                </div>
+<a href="page.html" onclick="return false">page link</a>
+                            {% else %}
+                                <div class="course-register">
+                                    <hr/>
+                                    <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "attend_course" course.id %}">Register for a course</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
-    {% if not_attendee %}
-        <input class="input" type="button" onclick="location.href='{% url "attend_course" course.id %}'" value="Join the course"/>
-    {% endif %}
-    {% if assignments %}
-    <h2>Assignments</h2>
-    <ol type="1">
-        {% for assignment in assignments %}
-        <li>
-			<a href="{% url "assignment_page" course.id assignment.id %}">{{assignment.name}}</a>
-		</li>
-        {% endfor %}
-    </ol>
-    {% endif %}
-
-    {% if organizer %}
-        {% if attendees %}
-        <h2>Attendees</h2>
-        <ol type="1">
-            {% for attendee in attendees %}
-            <li>
-    			<a href="{% url "attendee_page" course.id user.id %}">{{attendee.firstName}} {{attendee.lastName}}</a>
-		    </li>
-            {% endfor %}
-        </ol>
-        {% endif %}
-        <input class="input" type="button" onclick="location.href='{% url "edit_course" course.id %}'" value="Edit course"/>
-        <input class="input" type="button" onclick="location.href='{% url "add_assignment" course.id %}'" value="Add assignment"/>
-        <br/><br/>
-        <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the course?')) return false;
-                else location.href='{% url "delete_course" course.id %}'" value="Delete course"/>
-        <br/>
-    {% endif %}
-    <br/>
-    <a href="{% url "course_list" %}">Go to courses</a>
 {% endblock %}
