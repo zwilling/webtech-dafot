@@ -142,3 +142,11 @@
     color: #ffffff;
     background-color: #008cba;
 }
+.logged-user {
+    display: block;
+    padding: 15px;
+    border-right: thin solid #ffffff;
+}
+/*.navbar-collapse {*/
+    /*padding-right: 15px !important;*/
+/*}*/
