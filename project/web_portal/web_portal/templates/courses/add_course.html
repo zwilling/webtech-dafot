@@ -55,9 +55,4 @@
     </div>
     </form>
 
-    {% if edit %}
-    <br/>
-    <input type="button" name="delete_course" value="Delete course" onclick="location.href='{% url "delete_course" pk=course.id %}'">
-    {% endif %}
-
 {% endblock %}
