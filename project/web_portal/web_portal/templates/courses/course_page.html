@@ -3,6 +3,37 @@
    {{course.name}} - Code
 {% endblock %}
 
+{% load macros %}
+{% macro author_panel %}
+    <div class="author-panel">
+        <h4 class="section-title">Author</h4>
+        <div class="text-center animated fadeInDown animation-delay-1">
+            <h4 class="caption-title">{{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}</h4>
+            <img src="http://razonartificial.com/themes/openmind/wordpress/wp-content/uploads/2014/05/t3.jpg" alt="t2" width="180" height="220" class="imageborder">
+            <div class="author-info margin-top-10">
+                <i class="fa fa-envelope"></i>
+                <span class="margin-left-5">{{ course.courseOrganizer.email }}</span>
+            </div>
+        </div>
+    </div>
+    {% if organizer %}
+        <div class="course-delete">
+            <hr/>
+            <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
+        </div>
+    {% elif user.is_authenticated and not not_attendee %}
+        <div class="course-delete">
+            <hr/>
+            <a class="btn btn-success btn-wide btn-no-action animated fadeInDown animation-delay-2" href="" onclick="return false;">You are registered for this course.</a>
+        </div>
+    {% else %}
+        <div class="course-register">
+            <hr/>
+            <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "attend_course" course.id %}">Register for a course</a>
+        </div>
+    {% endif %}
+{% endmacro %}
+
 {% block content %}
     <div class="container margin-top-30">
         <div class="row">
@@ -18,7 +49,7 @@
                     <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane active" id="example-navs">
+                        <div class="tab-pane active" id="organizer-navs">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active">
@@ -66,32 +97,43 @@
                 <section>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
-                        <div class="panel-body">
-                            <div class="author-panel">
-                                <h4 class="section-title">Author</h4>
-                                <div class="text-center animated fadeInDown animation-delay-1">
-                                    <h4 class="caption-title">{{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}</h4>
-                                    <img src="http://razonartificial.com/themes/openmind/wordpress/wp-content/uploads/2014/05/t3.jpg" alt="t2" width="180" height="220" class="imageborder">
-                                    <div class="author-info margin-top-10">
-                                        <i class="fa fa-envelope"></i>
-                                        <span class="margin-left-5">{{ course.courseOrganizer.email }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {% if organizer %}
-                                <div class="course-delete">
-                                    <hr/>
-                                    <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
-                                </div>
-                            {% elif user.is_authenticated and not not_attendee %}
-                                <div class="course-delete">
-                                    <hr/>
-                                    <a class="btn btn-success btn-wide btn-no-action animated fadeInDown animation-delay-2" href="" onclick="return false;">You are registered for this course.</a>
-                                </div>
+                            {% if not_attendee %}
+                                <div class="panel-body">
+                                {% usemacro author_panel %}
                             {% else %}
-                                <div class="course-register">
-                                    <hr/>
-                                    <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "attend_course" course.id %}">Register for a course</a>
+                                <div class="panel-body support-panel">
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a href="#author"data-toggle="tab">Author</a>
+                                            </li>
+                                            <li>
+                                                <a href="#assignments" data-toggle="tab">Assignments</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content small-panel">
+                                            <div class="tab-pane padding-15 active" id="author">
+                                                {% usemacro author_panel %}
+                                            </div>
+                                            {% if assignments %}
+                                                <div class="tab-pane" id="assignments">
+                                                    <div class="list-group">
+                                                        {% for assignment in assignments %}
+                                                            <a href="{% url "assignment_page" course.id assignment.id %}" class="list-group-item animated fadeInDown animation-delay-{{ forloop.counter }}">
+                                                                <h4 class="list-group-item-heading"><i class="fa fa-caret-right"></i>{{ assignment.name }}</h4>
+                                                            </a>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="tab-pane padding-15" id="assignments">
+                                                    <h4>No assignments were added yet.</h4>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
