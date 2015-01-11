@@ -153,7 +153,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-SERVER_URL = 'http://frozen-taiga-5587.herokuapp.com'
+SERVER_URL = 'http://codeservice.herokuapp.com'
+REST_API = SERVER_URL + '/rest'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',

@@ -30,13 +30,13 @@ def course_list(request):
     page, dic = get_page_and_params(request)
     if request.method == "GET":
         form = CourseSearchForm()
-        r = requests.get(settings.SERVER_URL+'/courses/', headers=GET_JSON_HEADER)
+        r = requests.get(settings.REST_API+'/courses/', headers=GET_JSON_HEADER)
     if request.method == "POST":
         form = CourseSearchForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             params = {'name': name}
-            r = requests.get(settings.SERVER_URL+'/courses/', params=params, headers=GET_JSON_HEADER)
+            r = requests.get(settings.REST_API+'/courses/', params=params, headers=GET_JSON_HEADER)
         else:
             return render(request, 'courses/course_list.html',
                           {'form': form, })
@@ -64,7 +64,7 @@ def add_course(request):
             name = form.cleaned_data['name']
             description = '<![CDATA[{}]]>'.format(form.cleaned_data['description'])
             params = {'name': name, 'description': description}
-            r = requests.post(settings.SERVER_URL+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER,
+            r = requests.post(settings.REST_API+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER,
                               auth=(request.user.username, request.user.password))
             if r.status_code == requests.codes.created:
                 location = r.headers['location']
@@ -81,7 +81,7 @@ def course_page(request, pk):
         pk = int(pk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
     if r.status_code != requests.codes.ok:
         raise Http404()
     course = r.json(object_hook=_json_object_hook)
@@ -98,7 +98,7 @@ def course_page(request, pk):
         not_attendee = True
     assignments = None
     if not not_attendee or organizer:
-        r = requests.get(settings.SERVER_URL+'/courses/{0}/assignments/'.format(pk), headers=GET_JSON_HEADER,
+        r = requests.get(settings.REST_API+'/courses/{0}/assignments/'.format(pk), headers=GET_JSON_HEADER,
                          auth=(user.username, user.password))
         json_resp = r.json(object_hook=_json_object_hook)
         assignments = json_resp.assignment
@@ -113,7 +113,7 @@ def edit_course(request, pk):
         pk = int(pk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
     if r.status_code != requests.codes.ok:
         raise Http404()
     course = r.json(object_hook=_json_object_hook)
@@ -128,7 +128,7 @@ def edit_course(request, pk):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             params = {'name': name, 'description': description}
-            r = requests.put(settings.SERVER_URL+'/courses/{0}'.format(pk), data=json.dumps(params), headers=POST_JSON_HEADER,
+            r = requests.put(settings.REST_API+'/courses/{0}'.format(pk), data=json.dumps(params), headers=POST_JSON_HEADER,
                               auth=(user.username, user.password))
             if r.status_code == requests.codes.no_content:
                 return redirect('/courses/{0}/'.format(pk))
@@ -144,12 +144,12 @@ def delete_course(request, pk):
         pk = int(pk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
     if r.status_code == requests.codes.ok:
         course = r.json(object_hook=_json_object_hook)
         user = request.user
         if course.courseOrganizer.id == user.id:
-            r = requests.delete(settings.SERVER_URL+'/courses/{0}/'.format(pk), auth=(user.username, user.password))
+            r = requests.delete(settings.REST_API+'/courses/{0}/'.format(pk), auth=(user.username, user.password))
             if r.status_code == requests.codes.no_content:
                 return redirect('/courses/')
     raise Http404()
@@ -174,7 +174,7 @@ def add_assignment(request, pk):
             language = form.cleaned_data['language']
             params = {'name': name, 'description': description, 'templateCode': template_code,
                       'verificationCode': verification_code, 'language': language}
-            r = requests.post(settings.SERVER_URL+'/courses/{0}/assignments'.format(pk),
+            r = requests.post(settings.REST_API+'/courses/{0}/assignments'.format(pk),
                               data=json.dumps(params), headers=POST_JSON_HEADER,
                               auth=(user.username, user.password))
             print(r.request.__dict__)
@@ -197,7 +197,7 @@ def assignment_page(request, pk, apk):
         apk = int(apk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
     if r.status_code != requests.codes.ok:
         raise Http404()
     course = r.json(object_hook=_json_object_hook)
@@ -210,14 +210,14 @@ def assignment_page(request, pk, apk):
     else:
         organizer = None
     attendee = None
-    r = requests.get(settings.SERVER_URL+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk), headers=GET_JSON_HEADER,
+    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk), headers=GET_JSON_HEADER,
                      auth=(user.username, user.password))
     json_resp = r.json(object_hook=_json_object_hook)
     solutions = json_resp.solution
     if not organizer and (user.id in attendees_id):
         attendee = request.user
 
-    r = requests.get(settings.SERVER_URL+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
+    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
                      auth=(request.user.username, request.user.password))
     if r.status_code != requests.codes.ok:
         raise Http404()
@@ -236,12 +236,12 @@ def delete_assignment(request, pk, apk):
         apk = int(apk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
+    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
                      auth=(request.user.username, request.user.password))
     if r.status_code != requests.codes.ok:
         raise Http404()
     user = request.user
-    r = requests.delete(settings.SERVER_URL+'/courses/{0}/assignments/{1}'.format(pk, apk),
+    r = requests.delete(settings.REST_API+'/courses/{0}/assignments/{1}'.format(pk, apk),
                         auth=(user.username, user.password))
     if r.status_code == requests.codes.no_content:
         return redirect('/courses/{0}/'.format(pk))
@@ -255,7 +255,7 @@ def attend_course(request, pk):
         pk = int(pk)
     except ValueError:
         raise Http404()
-    r = requests.post(settings.SERVER_URL+'/courses/{0}/attendees'.format(pk), headers=POST_JSON_HEADER,
+    r = requests.post(settings.REST_API+'/courses/{0}/attendees'.format(pk), headers=POST_JSON_HEADER,
                               auth=(request.user.username, request.user.password))
     if r.status_code == requests.codes.created:
         return redirect('/courses/{0}/'.format(pk))
@@ -285,7 +285,7 @@ def add_solution(request, pk, apk):
         apk = int(apk)
     except ValueError:
         raise Http404()
-    r = requests.get(settings.SERVER_URL+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
+    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
     if r.status_code != requests.codes.ok:
         raise Http404()
     course = r.json(object_hook=_json_object_hook)
@@ -303,7 +303,7 @@ def add_solution(request, pk, apk):
         if form.is_valid():
             code = form.cleaned_data['code']
             params = {'code': code}
-            r = requests.post(settings.SERVER_URL+'/courses/{0}/assignments/{1}/solutions'.format(pk, apk),
+            r = requests.post(settings.REST_API+'/courses/{0}/assignments/{1}/solutions'.format(pk, apk),
                               data=json.dumps(params), headers=POST_JSON_HEADER,
                               auth=(user.username, user.password))
             if r.status_code == requests.codes.created:
@@ -328,7 +328,7 @@ def solution_page(request, pk, apk, spk):
     except ValueError:
         raise Http404()
     user = request.user
-    r = requests.get(settings.SERVER_URL+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
+    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
                      headers=GET_JSON_HEADER, auth=(user.username, user.password))
     if r.status_code != requests.codes.ok:
         raise Http404()
@@ -349,7 +349,7 @@ def delete_solution(request, pk, apk, spk):
     except ValueError:
         raise Http404()
     user = request.user
-    r = requests.delete(settings.SERVER_URL+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
+    r = requests.delete(settings.REST_API+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
                         auth=(user.username, user.password))
     if r.status_code == requests.codes.no_content:
         return redirect('/courses/{0}/asignment/{1}/'.format(pk, apk))
