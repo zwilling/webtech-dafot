@@ -59,5 +59,4 @@ class AssignmentForm(SiteForm):
 
 class SolutionForm(SiteForm):
     code = forms.CharField(required=True, label=u'Code',
-                           widget=forms.Textarea(
-                               attrs={'cols': 60, 'rows': 10}))
+                           widget=forms.Textarea())

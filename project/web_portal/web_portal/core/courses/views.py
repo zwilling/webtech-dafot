@@ -3,11 +3,13 @@ import requests
 import urlparse
 from collections import namedtuple
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404
+from django.http import Http404, HttpResponse
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
-from django.conf import settings
+from django.views.decorators.http import require_POST
 
 from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm
 
@@ -190,41 +192,37 @@ def add_assignment(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def assignment_page(request, pk, apk):
-    try:
-        #course id
-        pk = int(pk)
-        #assignment id
-        apk = int(apk)
-    except ValueError:
-        raise Http404()
-    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
-    if r.status_code != requests.codes.ok:
-        raise Http404()
-    course = r.json(object_hook=_json_object_hook)
-    user = request.user
-    attendees = course.courseAttendees
-    attendees_id = [attendee.user.id for attendee in attendees]
-    attendees = [attendee.user for attendee in attendees]
-    if course.courseOrganizer.id == user.id:
-        organizer = user
-    else:
-        organizer = None
-    attendee = None
-    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk), headers=GET_JSON_HEADER,
-                     auth=(user.username, user.password))
-    json_resp = r.json(object_hook=_json_object_hook)
-    solutions = json_resp.solution
-    if not organizer and (user.id in attendees_id):
-        attendee = request.user
-
-    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}'.format(pk, apk), headers=GET_JSON_HEADER,
+    # TODO add organizer check if editing of assignment is necessary
+    pk = int(pk)  # course id
+    apk = int(apk)  # assignment id
+    url = '{0}/courses/{1}/assignments/{2}/solutions/'.format(settings.REST_API, pk, apk)
+    r = requests.get(url,
+                     headers=GET_JSON_HEADER,
                      auth=(request.user.username, request.user.password))
     if r.status_code != requests.codes.ok:
-        raise Http404()
-    assignment = r.json(object_hook=_json_object_hook)
-    return render(request, 'courses/assignment_page.html',
-                  {'assignment': assignment, 'course': course, 'organizer': organizer,
-                   'attendee': attendee, 'solutions': solutions})
+        if r.status_code == requests.codes.forbidden:
+            raise PermissionDenied
+        else:
+            raise Http404
+    response = r.json(object_hook=_json_object_hook)
+    solutions = response.solution
+    url = '{0}/courses/{1}/assignments/'.format(settings.REST_API, pk, apk)
+    r = requests.get(url,
+                     headers=GET_JSON_HEADER,
+                     auth=(request.user.username, request.user.password))
+    if r.status_code != requests.codes.ok:
+        if r.status_code == requests.codes.forbidden:
+            raise PermissionDenied
+        else:
+            raise Http404
+    response = r.json(object_hook=_json_object_hook)
+    assignments = response.assignment
+    for item in assignments:
+        if item.id == apk:
+            assignment = item
+    return render(request, 'courses/assignment_page.html', {
+        'assignments': assignments, 'assignment': assignment,
+        'solutions': solutions, 'course_id': pk})
 
 
 @login_required(login_url='/accounts/login/')
@@ -276,45 +274,29 @@ def attendee_solutions(request, pk, apk):
     return render(request, 'main/coming.html')
 
 
+@require_POST
 @login_required(login_url='/accounts/login/')
 def add_solution(request, pk, apk):
     try:
-        #course id
-        pk = int(pk)
-        #assignment id
-        apk = int(apk)
+        pk = int(pk)  # course id
+        apk = int(apk)  # assignment id
     except ValueError:
         raise Http404()
-    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
-    if r.status_code != requests.codes.ok:
-        raise Http404()
-    course = r.json(object_hook=_json_object_hook)
-    user = request.user
-    attendees = course.courseAttendees
-    attendees_id = [attendee.user.id for attendee in attendees]
-    if course.courseOrganizer.id == user.id or (user.id not in attendees_id):
-        raise Http404()
-
-    form = SolutionForm
-    if request.method == 'POST':
-        if request.POST.has_key('cancel'):
-            return redirect('/courses/{0}/assignments/{1}/'.format(pk, apk))
+    if request.method == 'POST' and request.is_ajax():
         form = SolutionForm(request.POST)
         if form.is_valid():
-            code = form.cleaned_data['code']
-            params = {'code': code}
+            params = {'code': form.cleaned_data['code']}
             r = requests.post(settings.REST_API+'/courses/{0}/assignments/{1}/solutions'.format(pk, apk),
                               data=json.dumps(params), headers=POST_JSON_HEADER,
-                              auth=(user.username, user.password))
+                              auth=(request.user.username, request.user.password))
             if r.status_code == requests.codes.created:
                 location = r.headers['location']
-                new_solution_id = location.split('/')[-1]
-                return redirect('/courses/{0}/assignments/{1}/'.format(pk, apk))
+                return HttpResponse(json.dumps({'url': location}),
+                                    content_type="application/json")
             else:
                 raise Http404()
-    return render(request, 'main/form.html',
-                      {'form': form, 'title': 'Add Solution'})
-
+    else:
+        raise Http404()
 
 @login_required(login_url='/accounts/login/')
 def solution_page(request, pk, apk, spk):

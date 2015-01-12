@@ -140,6 +140,10 @@
 .btn-no-action:hover {
     background-color: #0b9a00;
 }
+.btn-alone {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 .attendee:nth-child(odd):hover > td, .attendee:nth-child(even):hover > td {
     cursor: pointer;
     color: #ffffff;
@@ -165,4 +169,13 @@
 }
 h4 .fa-caret-right {
     padding-right: 15px;
+}
+.badge {
+    font-size: 10px;
+    margin-top: 3px;
+}
+.language {
+    font-size: 14px;
+    color: #ffffff !important;
+    background-color: #bf0000 !important;
 }

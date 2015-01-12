@@ -1,92 +1,150 @@
 {% extends "main/base.html" %}
+
 {% block title %}
-   Assignment page
+   {{ assignment.name }} - Code
+{% endblock %}
+
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static "css/codemirror.css" %}" rel="stylesheet">
+    <link href="{% static "css/eclipse.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/codemirror.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/active-line.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/clike.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/python.js"%} "></script>
 {% endblock %}
 
 {% block content %}
-	<h1>Assignment page</h1>
-    <div class="ui-form">
-    <table>
-        <tbody>
-            <tr>
-                <td class="label">
-                    <label class="label">Assignment name:</label>
-                </td>
-                <td>
-                    {{assignment.name}}
-                </td>
-            </tr>
-
-            <tr>
-                <td class="label">
-                    <label class="label">Assignment description:</label>
-                </td>
-                <td>
-                    {{assignment.description}}
-                </td>
-            </tr>
-            <tr>
-                <td class="label">
-                    <label class="label">Language:</label>
-                </td>
-                <td>
-                    {{assignment.language}}
-                </td>
-            </tr>
-            <tr>
-                <td class="label">
-                    <label class="label">Template Code:</label>
-                </td>
-                <td>
-                    {{assignment.templateCode}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container margin-top-30">
+        <div class="row">
+            <div class="col-md-9 col-sm-8">
+                <section id="components">
+                    <article class="component-element" id="navs">
+                        <h2 class="underline-title no-margin-top">{{ assignment.name }}</h2>
+                        <div class="content">{% autoescape off %}{{ assignment.description }}{% endautoescape %}</div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Please put your code here
+                                <span class="badge language pull-right">{{ assignment.language }}</span>
+                            </div>
+                            <form id="solution" action="{% url "add_solution" course_id assignment.id %}" name="solution"
+                                  method="post">
+                                {% csrf_token %}
+                                <div class="panel-body">
+                                    <textarea id="code" name="code">{{ assignment.templateCode }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
+                            </form>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <div class="col-md-3">
+                <section>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
+                        <div class="panel-body support-panel">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#assignments" data-toggle="tab">Assignments</a>
+                                        </li>
+                                        <li>
+                                            <a href="#solutions" data-toggle="tab">Solutions</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content small-panel">
+                                        {% if assignments %}
+                                            <div class="tab-pane active" id="assignments">
+                                                <div class="list-group">
+                                                    {% for item in assignments %}
+                                                        <a href="{% url "assignment_page" course_id item.id %}" class="list-group-item animated fadeInDown animation-delay-{{ forloop.counter }} {% if assignment.id == item.id %}active{% endif %}">
+                                                            <h4 class="list-group-item-heading"><i class="fa fa-caret-right"></i>{{ item.name }}</h4>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="tab-pane padding-15 active" id="assignments">
+                                                <h4>No assignments were added yet.</h4>
+                                            </div>
+                                        {% endif %}
+                                        {% if solutions %}
+                                            <div class="tab-pane" id="solutions">
+                                                <div class="list-group">
+                                                    {% for solution in solutions %}
+                                                        <a href="{% url "solution_page" course_id assignment.id solution.id %}" class="list-group-item animated fadeInDown animation-delay-{{ forloop.counter }}">
+                                                            <span
+                                                                    class="badge pull-right">{{ solution.solutionState }}</span>
+                                                            <h4 class="list-group-item-heading"><i class="fa fa-caret-right"></i>Solution {{ forloop.counter }}</h4>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="tab-pane padding-15" id="solutions">
+                                                <h4>No solutions were added yet.</h4>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
-    {% if organizer %}
-        <table>
-            <thead>
-			<tr>
-				<th>Attendee</th>
-				<th>Solutions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for key,value in items %}
-		    <tr class="{% cycle 'even' 'odd' %}">
-		    	<td></td>
-				<td>
-					<p>
-					{% for editor in value %}
-					<a href="/user/{{editor.id}}/">{{editor.last_name}} {{editor.first_name}} {{editor.middlename}}</a> </br>
-					{% endfor %}
-					</p>
-				</td>
-			</tr>
-		    {% endfor %}
-		</tbody>
-        </table>
-        <br/>
-        <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the assignment?'))
-                return false; else location.href='{% url "delete_assignment" course.id assignment.id%}'"
-                value="Delete assignment"/>
-    {% else %}
-        {% if attendee %}
-            {% if solutions %}
-                <h2>Solutions</h2>
-                <ol type="1">
-                {% for solution in solutions %}
-                    <li>
-                        <a href="{% url "solution_page" course.id assignment.id solution.id%}">Solution {{forloop.counter}}</a>
-                    </li>
-                {% endfor %}
-                </ol>
-            {% endif %}
-            <input class="input" type="button" onclick="location.href='{% url "add_solution" course.id assignment.id%}'"
-                value="Add solution"/>
+{% endblock %}
+
+{% block scripts_bottom %}
+<script>
+(function ($) {
+
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        {% if assignment.language == 'java' %}
+            mode: "text/x-java",
+        {% elif assignment.language == 'python' %}
+            mode: "python",
         {% endif %}
-	{% endif %}
-    <br/>
-    <a href="{% url "course_page" course.id %}">Go to course</a>
+        styleActiveLine: true,
+        lineNumbers: true,
+        lineWrapping: true,
+        theme: 'eclipse'
+    });
+
+{#    $("#solution").ajaxSubmit({#}
+{#        url: '{% url "add_solution" course_id assignment.id %}',#}
+{#        type: 'post'#}
+{#    });#}
+    $("#solution").submit(function(e)
+    {
+        var postData = $(this).serializeArray();
+        var formURL = $(this).attr("action");
+        $.ajax(
+        {
+            url : formURL,
+            type: "POST",
+            data : postData,
+            success:function(data)
+            {
+                alert('success');
+                //data: return data from server
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert('fail')
+                //if fails
+            }
+        });
+        e.preventDefault();
+    });
+}(jQuery));
+</script>
 {% endblock %}
