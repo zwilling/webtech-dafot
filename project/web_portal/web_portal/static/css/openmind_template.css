@@ -288,13 +288,6 @@ blockquote.pull-right {
 .panel-footer~.panel-body {
     border-color: #f00 !important
 }
-.panel .list-group {
-    background-color: #f7f7f7;
-    border: solid 1px #00708c
-}
-.panel .list-group .list-group-item {
-    background-color: #f7f7f7
-}
 .panel-default>.panel-body {
     border-color: #ddd
 }
@@ -464,7 +457,6 @@ blockquote.pull-right {
     }
 }
 .nav-tabs+.tab-content {
-    padding: 15px;
     border-left: solid 1px #ddd;
     border-right: solid 1px #ddd;
     border-bottom: solid 1px #ddd;

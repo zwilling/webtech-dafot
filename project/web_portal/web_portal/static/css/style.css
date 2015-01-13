@@ -100,11 +100,14 @@
     background-color: #00708c;
     border-color: #00708c;
 }
-.margin-top-10 {
-    margin-top: 10px;
+.padding-15 {
+    padding: 15px;
 }
 .margin-top-30 {
     margin-top: 30px;
+}
+.margin-top-10 {
+    margin-top: 10px;
 }
 .margin-left-5 {
     margin-left: 5px;
@@ -137,8 +140,42 @@
 .btn-no-action:hover {
     background-color: #0b9a00;
 }
+.btn-alone {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 .attendee:nth-child(odd):hover > td, .attendee:nth-child(even):hover > td {
     cursor: pointer;
     color: #ffffff;
     background-color: #008cba;
+}
+.logged-user {
+    display: block;
+    padding: 15px;
+    border-right: thin solid #ffffff;
+}
+.support-panel {
+    padding: 1px 0px 0px 0px;
+}
+.small-panel {
+    background-color: #ffffff;
+}
+.list-group {
+    margin-bottom: 0px;
+}
+.list-group-item {
+    border: none;
+    border-bottom: solid 2px #dddddd;
+}
+h4 .fa-caret-right {
+    padding-right: 15px;
+}
+.badge {
+    font-size: 10px;
+    margin-top: 3px;
+}
+.language {
+    font-size: 14px;
+    color: #ffffff !important;
+    background-color: #bf0000 !important;
 }

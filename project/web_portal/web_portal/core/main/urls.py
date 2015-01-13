@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from web_portal.core.main.views import coming, index
+
+from .views import coming, index
 
 urlpatterns = patterns('',
     url(r'^$', index, name='index'),
