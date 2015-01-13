@@ -13,6 +13,7 @@ import os
 from os import path
 import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 PROJECT_PATH = path.realpath(path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -74,6 +75,7 @@ INSTALLED_APPS = (
     'registration',
     'macros',
     'widget_tweaks',
+    'web_portal.core.users'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -143,6 +145,15 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = path.join(PROJECT_PATH, 'media')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window;
 

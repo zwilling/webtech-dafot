@@ -11,6 +11,8 @@
         </label>
         {% if "password" in field.name %}
             <input type="password" class="form-control" id="{{ field.name }}" name="{{ field.name }}">
+        {% elif "avatar" in field.name %}
+            {{field}}
         {% else %}
             <input type="text" class="form-control" id="{{ field.name }}" name="{{ field.name }}">
         {% endif %}
@@ -26,7 +28,7 @@
                 <div class="panel panel-primary animated fadeInDown">
                     <div class="panel-heading">Register Form</div>
                     <div class="panel-body">
-                        <form method="post"  action="" class="wide">
+                        <form method="post"  action="" class="wide" enctype="multipart/form-data">
                             {% csrf_token %}
                             {% load error_message %}
                             {% for field in form.visible_fields %}
