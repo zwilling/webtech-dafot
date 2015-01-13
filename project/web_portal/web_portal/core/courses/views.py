@@ -12,6 +12,9 @@ from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm
+import os
+from web_portal.core.users.models import UserProfile
+from web_portal.settings import MEDIA_URL
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
 GET_JSON_HEADER = {'accept': 'application/json'}
@@ -104,9 +107,12 @@ def course_page(request, pk):
                          auth=(user.username, user.password))
         json_resp = r.json(object_hook=_json_object_hook)
         assignments = json_resp.assignment
+    avatar = UserProfile.objects.get(user__id=course.courseOrganizer.id).avatar
+    organizer_avatar_url = avatar.url
     return render(request, 'courses/course_page.html',
                   {'course': course, 'assignments': assignments, 'organizer': organizer,
-                   'not_attendee': not_attendee, 'attendees': attendees})
+                   'not_attendee': not_attendee, 'attendees': attendees,
+                   'organizer_avatar_url': organizer_avatar_url})
 
 
 @login_required(login_url='/accounts/login/')
