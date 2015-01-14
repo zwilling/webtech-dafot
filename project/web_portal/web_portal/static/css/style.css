@@ -179,3 +179,6 @@ h4 .fa-caret-right {
     color: #ffffff !important;
     background-color: #bf0000 !important;
 }
+.buttons div {
+    padding-bottom: 10px;
+}

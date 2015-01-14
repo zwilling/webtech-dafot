@@ -1,64 +1,103 @@
 {% extends "main/base.html" %}
+
 {% block title %}
-   Solution page
+   Solution - {{ assignment.name }} - Code
+{% endblock %}
+
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static "css/prism.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/prism.js"%} "></script>
 {% endblock %}
 
 {% block content %}
-	<h1>Solution page</h1>
-    <div class="ui-form">
-    <table>
-        <tbody>
-            <tr>
-                <td class="label">
-                    <label class="label">Assignment name:</label>
-                </td>
-                <td>
-                    {{solution.assignment.name}}
-                </td>
-            </tr>
-            <tr>
-                <td class="label">
-                    <label class="label">Language:</label>
-                </td>
-                <td>
-                    {{solution.assignment.language}}
-                </td>
-            </tr>
-            {% if solution.grade %}
-            <tr>
-                <td class="label">
-                    <label class="label">Grade:</label>
-                </td>
-                <td>
-                    {{solution.grade}}
-                </td>
-            </tr>
-            {% endif %}
-            <tr>
-                <td class="label">
-                    <label class="label">Code:</label>
-                </td>
-                <td>
-                    {{solution.code}}
-                </td>
-            </tr>
-            {% if solution.exceptions %}
-            <tr>
-                <td class="label">
-                    <label class="label">Exception:</label>
-                </td>
-                <td>
-                    {{solution.exceptions}}
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
+    <div class="container margin-top-30">
+        <div class="row">
+            <div class="col-md-9 col-sm-8">
+                <section id="components">
+                    <article class="component-element" id="navs">
+                        <h2 class="underline-title no-margin-top">{{ assignment.name }} solution</h2>
+                        <div class="content">{% autoescape off %}{{ assignment.description }}{% endautoescape %}</div>
+                        <h4>
+                            You have submitted the following code
+                            <span class="badge language pull-right">{{ assignment.language }}</span>
+                        </h4>
+                        <pre class="language-{% if assignment.language == 'java' %}clike{% else %}{{ assignment.language }}{% endif %}"><code>{{ curr_solution.code }}</code></pre>
+                        {% if curr_solution.solutionState == 'SUCCESS' %}
+                            <div class="alert alert-success">
+                                <strong>Well done!</strong> You successfully completed this assignment.
+                            </div>
+                        {% elif curr_solution.solutionState == 'IN_VERIFICATION' %}
+                            <div class="alert alert-warning">
+                                <strong>In verification.</strong> Please check the result later.
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <strong>Failed!</strong> Your solution is partially or completely wrong.
+                            </div>
+                        {% endif %}
+                    </article>
+                </section>
+            </div>
+            <div class="col-md-3">
+                <section>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
+                        <div class="panel-body support-panel">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#assignments" data-toggle="tab">Assignments</a>
+                                        </li>
+                                        <li>
+                                            <a href="#solutions" data-toggle="tab">Solutions</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content small-panel">
+                                        {% if assignments %}
+                                            <div class="tab-pane active" id="assignments">
+                                                <div class="list-group">
+                                                    {% for item in assignments %}
+                                                        <a href="{% url "assignment_page" course_id item.id %}" class="list-group-item animated fadeInDown animation-delay-{{ forloop.counter }} {% if assignment.id == item.id %}active{% endif %}">
+                                                            <h4 class="list-group-item-heading"><i class="fa fa-caret-right"></i>{{ item.name }}</h4>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="tab-pane padding-15 active" id="assignments">
+                                                <h4>No assignments were added yet.</h4>
+                                            </div>
+                                        {% endif %}
+                                        {% if solutions %}
+                                            <div class="tab-pane" id="solutions">
+                                                <div class="list-group">
+                                                    {% for item in solutions %}
+                                                        <a href="{% url "solution_page" course_id assignment.id item.id %}" class="list-group-item animated fadeInDown animation-delay-{{ forloop.counter }} {% if curr_solution.id == item.id %}active{% endif %}">
+                                                            <span class="badge pull-right">{{ item.solutionState }}</span>
+                                                            <h4 class="list-group-item-heading"><i class="fa fa-caret-right"></i>Solution {{ forloop.counter }}</h4>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="tab-pane padding-15" id="solutions">
+                                                <h4>No solutions were added yet.</h4>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
-    <br/>
-    <input class="input" type="button" onclick="if(!confirm('Are you sure you want to delete the solution?'))
-            return false; else location.href='{% url "delete_solution" course_id solution.assignment.id solution.id%}'"
-            value="Delete solution"/>
-    <br/>
-    <a href="{% url "assignment_page" course_id solution.assignment.id %}">Go to assignment</a>
 {% endblock %}
