@@ -38,7 +38,11 @@
                                 <div class="panel-body">
                                     <textarea id="code" name="code">{{ assignment.templateCode }}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
+                                <button type="submit" id="newAssignmentBtn" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
+                                <button type="button" id="processingBtn" class="btn btn-success btn-alone pull-right" style="display: none">
+                                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                    Processing...
+                                </button>
                             </form>
                         </div>
                     </article>
@@ -107,6 +111,14 @@
 <script>
 (function ($) {
 
+     $(document).ajaxStart(function () {
+        var processingBtn = $("#processingBtn");
+        var submitBtn = $("#newAssignmentBtn");
+        processingBtn.show();
+        submitBtn.hide();
+        animate(processingBtn, 'pulse ');
+    });
+
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         {% if assignment.language == 'java' %}
             mode: "text/x-java",
@@ -119,32 +131,34 @@
         theme: 'eclipse'
     });
 
-{#    $("#solution").ajaxSubmit({#}
-{#        url: '{% url "add_solution" course_id assignment.id %}',#}
-{#        type: 'post'#}
-{#    });#}
     $("#solution").submit(function(e)
     {
         var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
         $.ajax(
         {
-            url : formURL,
             type: "POST",
+            url : formURL,
             data : postData,
             success:function(data)
             {
-                alert('success');
-                //data: return data from server
+                var url = window.location.href;
+                var arr = url.split("/");
+                window.location.href = arr[0] + "//" + arr[2] + data['url']
             },
-            error: function(jqXHR, textStatus, errorThrown)
+            error: function()
             {
-                alert('fail')
-                //if fails
+                alert('Something went wrong :(')
             }
         });
         e.preventDefault();
     });
+
+    function animate(element, animation) {
+        element.addClass(animation + 'animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass(animation + 'animated');
+        });
+    }
 }(jQuery));
 </script>
 {% endblock %}

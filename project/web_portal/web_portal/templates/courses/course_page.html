@@ -9,29 +9,32 @@
         <h4 class="section-title">Author</h4>
         <div class="text-center animated fadeInDown animation-delay-1">
             <h4 class="caption-title">{{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}</h4>
-            <img src="{{organizer_avatar_url}}" alt="t2" width="180" class="imageborder">
+            <img src="{{organizer_img}}" alt="t2" width="180" class="imageborder">
             <div class="author-info margin-top-10">
                 <i class="fa fa-envelope"></i>
                 <span class="margin-left-5">{{ course.courseOrganizer.email }}</span>
             </div>
         </div>
     </div>
-    {% if organizer %}
-        <div class="course-delete">
-            <hr/>
-            <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
-        </div>
-    {% elif user.is_authenticated and not not_attendee %}
-        <div class="course-delete">
-            <hr/>
-            <a class="btn btn-success btn-wide btn-no-action animated fadeInDown animation-delay-2" href="" onclick="return false;">You are registered for this course.</a>
-        </div>
-    {% else %}
-        <div class="course-register">
-            <hr/>
-            <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "attend_course" course.id %}">Register for a course</a>
-        </div>
-    {% endif %}
+    <div class="buttons">
+        <hr/>
+        {% if organizer %}
+            <div id="add-assignment">
+                <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "add_assignment" course.id %}">Add new assignment</a>
+            </div>
+            <div id="course-delete">
+                <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
+            </div>
+        {% elif user.is_authenticated and not not_attendee %}
+            <div id="course-registered">
+                <a class="btn btn-success btn-wide btn-no-action animated fadeInDown animation-delay-2" href="" onclick="return false;">You are registered for this course.</a>
+            </div>
+        {% else %}
+            <div id="course-register">
+                <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "attend_course" course.id %}">Register for a course</a>
+            </div>
+        {% endif %}
+    </div>
 {% endmacro %}
 
 {% block content %}
@@ -61,7 +64,7 @@
                             </ul>
 
                             <!-- Tab panes -->
-                            <div class="tab-content">
+                            <div class="tab-content padding-15">
                                 <div class="tab-pane active" id="description">
                                     {% autoescape off %}{{ course.description }}{% endautoescape %}
                                 </div>

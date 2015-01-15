@@ -12,9 +12,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
 from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm
-import os
-from web_portal.core.users.models import UserProfile
-from web_portal.settings import MEDIA_URL
+from ..users.models import UserProfile
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
 GET_JSON_HEADER = {'accept': 'application/json'}
@@ -60,25 +58,23 @@ def course_list(request):
                   {'courses': courses, 'form': form, 'paginator': paginator})
 
 
+@require_POST
 @login_required(login_url='/accounts/login/')
 def add_course(request):
-    form = CourseForm()
-    if request.method == 'POST':
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            description = '<![CDATA[{}]]>'.format(form.cleaned_data['description'])
-            params = {'name': name, 'description': description}
-            r = requests.post(settings.REST_API+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER,
-                              auth=(request.user.username, request.user.password))
-            if r.status_code == requests.codes.created:
-                location = r.headers['location']
-                new_course_id = location.split('/')[-1]
-                return redirect('/courses/{0}/'.format(new_course_id))
-            else:
-                raise Http404()
-    return render(request, 'courses/add_course.html',
-                  {'form': form, 'edit': False})
+    form = CourseForm(request.POST)
+    if form.is_valid():
+        name = form.cleaned_data['name']
+        description = form.cleaned_data['description']
+        params = {'name': name, 'description': description}
+        r = requests.post(settings.REST_API+'/courses/', data=json.dumps(params), headers=POST_JSON_HEADER,
+                          auth=(request.user.username, request.user.password))
+        if r.status_code == requests.codes.created:
+            location = r.headers['location']
+            new_course_id = location.split('/')[-1]
+            return HttpResponse(json.dumps({
+                'url': '/courses/{0}/'.format(new_course_id)}),
+                content_type="application/json")
+    raise Http404()
 
 
 def course_page(request, pk):
@@ -108,11 +104,11 @@ def course_page(request, pk):
         json_resp = r.json(object_hook=_json_object_hook)
         assignments = json_resp.assignment
     avatar = UserProfile.objects.get(user__id=course.courseOrganizer.id).avatar
-    organizer_avatar_url = avatar.url
+    organizer_img = avatar.url
     return render(request, 'courses/course_page.html',
                   {'course': course, 'assignments': assignments, 'organizer': organizer,
                    'not_attendee': not_attendee, 'attendees': attendees,
-                   'organizer_avatar_url': organizer_avatar_url})
+                   'organizer_img': organizer_img})
 
 
 @login_required(login_url='/accounts/login/')
@@ -165,18 +161,14 @@ def delete_course(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def add_assignment(request, pk):
-    try:
-        #course id
-        pk = int(pk)
-    except ValueError:
-        raise Http404()
+    pk = int(pk)  # course id
     user = request.user
     form = AssignmentForm()
     if request.method == 'POST':
         form = AssignmentForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            description = '<![CDATA[{}]]>'.format(form.cleaned_data['description'])
+            description = form.cleaned_data['description']
             template_code = form.cleaned_data['template_code']
             verification_code = form.cleaned_data['verification_code']
             language = form.cleaned_data['language']
@@ -209,7 +201,7 @@ def assignment_page(request, pk, apk):
         if r.status_code == requests.codes.forbidden:
             raise PermissionDenied
         else:
-            raise Http404
+            raise Http404()
     response = r.json(object_hook=_json_object_hook)
     solutions = response.solution
     url = '{0}/courses/{1}/assignments/'.format(settings.REST_API, pk, apk)
@@ -220,7 +212,7 @@ def assignment_page(request, pk, apk):
         if r.status_code == requests.codes.forbidden:
             raise PermissionDenied
         else:
-            raise Http404
+            raise Http404()
     response = r.json(object_hook=_json_object_hook)
     assignments = response.assignment
     for item in assignments:
@@ -283,12 +275,9 @@ def attendee_solutions(request, pk, apk):
 @require_POST
 @login_required(login_url='/accounts/login/')
 def add_solution(request, pk, apk):
-    try:
-        pk = int(pk)  # course id
-        apk = int(apk)  # assignment id
-    except ValueError:
-        raise Http404()
-    if request.method == 'POST' and request.is_ajax():
+    pk = int(pk)  # course id
+    apk = int(apk)  # assignment id
+    if request.is_ajax():
         form = SolutionForm(request.POST)
         if form.is_valid():
             params = {'code': form.cleaned_data['code']}
@@ -297,32 +286,50 @@ def add_solution(request, pk, apk):
                               auth=(request.user.username, request.user.password))
             if r.status_code == requests.codes.created:
                 location = r.headers['location']
-                return HttpResponse(json.dumps({'url': location}),
+                new_solution_id = location.split('/')[-1]
+                url = '/courses/{0}/assignments/{1}/solutions/{2}'.format(
+                    pk, apk, new_solution_id)
+                return HttpResponse(json.dumps({'url': url}),
                                     content_type="application/json")
-            else:
-                raise Http404()
-    else:
-        raise Http404()
+    raise Http404()
+
 
 @login_required(login_url='/accounts/login/')
 def solution_page(request, pk, apk, spk):
-    try:
-        #course id
-        pk = int(pk)
-        #assignment id
-        apk = int(apk)
-        #solution id
-        spk = int(spk)
-    except ValueError:
-        raise Http404()
-    user = request.user
-    r = requests.get(settings.REST_API+'/courses/{0}/assignments/{1}/solutions/{2}'.format(pk, apk, spk),
-                     headers=GET_JSON_HEADER, auth=(user.username, user.password))
+    pk = int(pk)  # course id
+    apk = int(apk)  # assignment id
+    spk = int(spk)  # solution id
+    url = '{0}/courses/{1}/assignments/'.format(settings.REST_API, pk, apk)
+    r = requests.get(url,
+                     headers=GET_JSON_HEADER,
+                     auth=(request.user.username, request.user.password))
     if r.status_code != requests.codes.ok:
-        raise Http404()
-    solution = r.json(object_hook=_json_object_hook)
+        if r.status_code == requests.codes.forbidden:
+            raise PermissionDenied
+        else:
+            raise Http404()
+    response = r.json(object_hook=_json_object_hook)
+    assignments = response.assignment
+    for item in assignments:
+        if item.id == apk:
+            assignment = item
+    url = settings.REST_API+'/courses/{0}/assignments/{1}/solutions/'.format(pk, apk)
+    r = requests.get(url, headers=GET_JSON_HEADER,
+                     auth=(request.user.username, request.user.password))
+    if r.status_code != requests.codes.ok:
+        if r.status_code == requests.codes.forbidden:
+            raise PermissionDenied
+        else:
+            raise Http404()
+    response = r.json(object_hook=_json_object_hook)
+    solutions = response.solution
+    for item in solutions:
+        if item.id == spk:
+            solution = item
     return render(request, 'courses/solution_page.html',
-                  {'solution': solution, 'course_id': pk})
+                  {'assignments': assignments, 'assignment': assignment,
+                   'curr_solution': solution, 'solutions': solutions,
+                   'course_id': pk})
 
 
 @login_required(login_url='/accounts/login/')
