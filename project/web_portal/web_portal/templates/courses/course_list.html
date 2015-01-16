@@ -28,7 +28,7 @@
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter course name">
                         </div>
                         <div class="form-group">
-                            <label for="description">Course name<span class="ast_required">*</span></label>
+                            <label for="description">Course description<span class="ast_required">*</span></label>
                             <textarea class="form-control" id="description" rows="5" name="description" placeholder="Enter course description"></textarea>
                         </div>
                     </form>
@@ -128,21 +128,19 @@
             });
 
             function animate(element, animation) {
-                element.addClass(animation + 'animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                    $(this).removeClass(animation + 'animated');
+                element.addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                    $(this).removeClass(animation + ' animated');
                 });
             }
 
             function checkField (field){
                 if( !field.val() ) {
-                    field.parent('.form-group').addClass('has-error has-feedback');
-                    field.addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-                        $(this).removeClass('shake animated');
-                    });
+                    field.addClass('invalid-field');
+                    animate(field, 'shake');
                     return false;
                 }
                 else {
-                    field.parent('.form-group').removeClass('has-error has-feedback');
+                    field.removeClass('invalid-field');
                     return true;
                 }
             }

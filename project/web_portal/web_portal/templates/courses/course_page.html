@@ -3,6 +3,23 @@
    {{course.name}} - Code
 {% endblock %}
 
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static "css/codemirror.css" %}" rel="stylesheet">
+    <link href="{% static "css/eclipse.css" %}" rel="stylesheet">
+    <link href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/code_mirror/codemirror.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/clike.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/python.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/placeholder.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-ui.min.js"%} "></script>
+{% endblock %}
+
 {% load macros %}
 {% macro author_panel %}
     <div class="author-panel">
@@ -20,7 +37,7 @@
         <hr/>
         {% if organizer %}
             <div id="add-assignment">
-                <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" href="{% url "add_assignment" course.id %}">Add new assignment</a>
+                <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" data-toggle="modal" data-target="#newAssignmentModal">Add new assignment</a>
             </div>
             <div id="course-delete">
                 <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
@@ -65,7 +82,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content padding-15">
-                                <div class="tab-pane active" id="description">
+                                <div class="tab-pane active" id="code-description">
                                     {% autoescape off %}{{ course.description }}{% endautoescape %}
                                 </div>
                                 <div class="tab-pane" id="attendees">
@@ -145,4 +162,192 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="newAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="newAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newAssignmentModalLabel">Create new course</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newAssignmentForm" action="{% url "add_assignment" course.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Assignment name<span class="ast_required">*</span></label>
+                            <div class="input-group form-inline" style="width:100%">
+                                <div class="form-group" style="width:80%">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter assignment name">
+                                </div>
+                                <div class="form-group" style="width:20%">
+                                    <select id="language" class="form-control" name="language">
+                                        {% for value, label in languages %}
+                                            <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Assignment description<span class="ast_required">*</span></label>
+                            <textarea class="form-control" id="description" rows="5" name="description" placeholder="Enter assignment description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="template_code">Template code<span class="ast_required">*</span></label>
+                            <div class="panel-bordered">
+                                <textarea class="form-control" id="template_code" name="template_code" placeholder="Enter template code for attendee of the course"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="verification_code">Verification code<span class="ast_required">*</span></label>
+                            <div class="panel-bordered">
+                                <textarea class="form-control" id="verification_code" name="verification_code" placeholder="Enter verification code. It will be visible only for you"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtn" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="newAssignmentBtn" class="btn btn-primary">Confirm</button>
+                    <button type="button" id="processingBtn" class="btn btn-primary" style="display: none">
+                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        Processing...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts_bottom %}
+    <script>
+        (function($) {
+            $(document).ready(function () {
+                $(document)
+                        .ajaxStart(function () {
+                            var processingBtn = $("#processingBtn");
+                            var submitBtn = $("#newAssignmentBtn");
+                            processingBtn.show();
+                            submitBtn.hide();
+                            animate(processingBtn, 'pulse ');
+                        })
+                        .on( 'hidden.bs.modal', '.modal', function() {
+                            $(document.body).removeClass( 'modal-scrollbar' );
+                        })
+                        .on( 'show.bs.modal', '.modal', function() {
+                            if ( $(window).height() < $(document).height() ) {
+                                $(document.body).addClass( 'modal-scrollbar' );
+                            }
+                        });
+            });
+
+            $('#language').on( "change", function () {
+                var mode = getMode();
+                console.log(mode);
+                template_code_editor.setOption("mode", mode);
+                verification_code_editor.setOption("mode", mode);
+            });
+
+            function getMode(){
+                var el = document.getElementById("language");
+                var language = el.options[el.selectedIndex].value;
+                if (language == 'java') {
+                    var mode = "text/x-java";
+                }
+                else {
+                    var mode = "python";
+                }
+                return mode;
+            }
+
+            function createEditor(el) {
+                var editor = CodeMirror.fromTextArea(el, {
+                    height: "200px",
+                    mode: getMode(el),
+                    styleActiveLine: true,
+                    lineWrapping: true,
+                    placeholder: "Enter your code here",
+                    theme: 'eclipse'
+                });
+                editor.setSize('auto', 150)
+                return editor
+            }
+
+            var template_code = document.getElementById('template_code');
+            var verification_code = document.getElementById('verification_code');
+            template_code_editor = createEditor(template_code);
+            verification_code_editor = createEditor(verification_code);
+
+            $('.CodeMirror').resizable({
+                resize: function() {
+                  $(this).width();
+                  $(this).height();
+                }
+            });
+
+            function animate(element, animation) {
+                element.addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                    $(this).removeClass(animation + ' animated');
+                });
+            }
+
+            function checkField (field){
+                if( !field.val() ) {
+                    field.addClass('invalid-field');
+                    animate(field, 'shake')
+                    return false;
+                }
+                else {
+                    field.removeClass('invalid-field');
+                    return true;
+                }
+            }
+
+            function checkTextarea(field){
+                if( !field.val() ) {
+                    var code_mirror = field.siblings('.CodeMirror');
+                    code_mirror.addClass('invalid-field');
+                    animate(code_mirror, 'shake')
+                    return false;
+                }
+                else {
+                    field.siblings('.CodeMirror').removeClass('invalid-field');
+                    return true;
+                }
+            }
+
+            function formIsValid(){
+                template_code_editor.save();
+                verification_code_editor.save();
+                var name_is_valid = checkField($('#name')),
+                    description_is_valid = checkField($('#description')),
+                    tcode_is_valid = checkTextarea($('#template_code')),
+                    vcode_is_valid = checkTextarea($('#verification_code'));
+                return  name_is_valid && description_is_valid &&
+                        tcode_is_valid && vcode_is_valid
+            }
+
+            $('#newAssignmentBtn').on('click', function(){
+                if(formIsValid()) {
+                    var form = $('#newAssignmentForm');
+                    $.ajax(
+                    {
+                        type: "POST",
+                        url : form.attr("action"),
+                        data : form.serializeArray(),
+                        success:function(data)
+                        {
+                            var url = window.location.href;
+                            var arr = url.split("/");
+                            window.location.href = arr[0] + "//" + arr[2] + data['url']
+                        },
+                        error: function(){
+                            alert('Something went wrong :(')
+                        }
+                    });
+                }
+            });
+
+        })(window.jQuery);
+    </script>
 {% endblock %}

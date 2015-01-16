@@ -13,10 +13,10 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static "js/codemirror.js"%} "></script>
-    <script type="text/javascript" src="{% static "js/active-line.js"%} "></script>
-    <script type="text/javascript" src="{% static "js/clike.js"%} "></script>
-    <script type="text/javascript" src="{% static "js/python.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/codemirror.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/active-line.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/clike.js"%} "></script>
+    <script type="text/javascript" src="{% static "js/code_mirror/python.js"%} "></script>
 {% endblock %}
 
 {% block content %}
@@ -133,6 +133,7 @@
 
     $("#solution").submit(function(e)
     {
+        editor.save();
         var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
         $.ajax(

@@ -11,7 +11,8 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm
+from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm,\
+    LANGUAGES
 from ..users.models import UserProfile
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
@@ -71,8 +72,8 @@ def add_course(request):
         if r.status_code == requests.codes.created:
             location = r.headers['location']
             new_course_id = location.split('/')[-1]
-            return HttpResponse(json.dumps({
-                'url': '/courses/{0}/'.format(new_course_id)}),
+            return HttpResponse(
+                json.dumps({'url': '/courses/{0}/'.format(new_course_id)}),
                 content_type="application/json")
     raise Http404()
 
@@ -106,9 +107,13 @@ def course_page(request, pk):
     avatar = UserProfile.objects.get(user__id=course.courseOrganizer.id).avatar
     organizer_img = avatar.url
     return render(request, 'courses/course_page.html',
-                  {'course': course, 'assignments': assignments, 'organizer': organizer,
-                   'not_attendee': not_attendee, 'attendees': attendees,
-                   'organizer_img': organizer_img})
+                  {'course': course,
+                   'assignments': assignments,
+                   'organizer': organizer,
+                   'not_attendee': not_attendee,
+                   'attendees': attendees,
+                   'organizer_img': organizer_img,
+                   'languages': [[l[0], l[1]] for l in LANGUAGES]})
 
 
 @login_required(login_url='/accounts/login/')
@@ -159,33 +164,29 @@ def delete_course(request, pk):
     raise Http404()
 
 
+@require_POST
 @login_required(login_url='/accounts/login/')
 def add_assignment(request, pk):
     pk = int(pk)  # course id
-    user = request.user
-    form = AssignmentForm()
-    if request.method == 'POST':
+    if request.is_ajax():
         form = AssignmentForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            template_code = form.cleaned_data['template_code']
-            verification_code = form.cleaned_data['verification_code']
-            language = form.cleaned_data['language']
-            params = {'name': name, 'description': description, 'templateCode': template_code,
-                      'verificationCode': verification_code, 'language': language}
+            params = {'name': form.cleaned_data['name'],
+                      'description': form.cleaned_data['description'],
+                      'language': form.cleaned_data['language'],
+                      'templateCode': form.cleaned_data['template_code'],
+                      'verificationCode': form.cleaned_data['verification_code'],
+                      }
             r = requests.post(settings.REST_API+'/courses/{0}/assignments'.format(pk),
-                              data=json.dumps(params), headers=POST_JSON_HEADER,
-                              auth=(user.username, user.password))
-            print(r.request.__dict__)
+                              data=json.dumps(params),
+                              headers=POST_JSON_HEADER,
+                              auth=(request.user.username, request.user.password))
             if r.status_code == requests.codes.created:
                 location = r.headers['location']
-                new_assignment_id = location.split('/')[-1]
-                return redirect('/courses/{0}/'.format(pk))
-            else:
-                raise Http404()
-    return render(request, 'courses/add_assignment.html',
-                      {'form': form, 'course_id': pk,'edit': False})
+                url = location.replace(settings.SERVER_URL, '')
+                return HttpResponse(json.dumps({'url': url}),
+                                    content_type="application/json")
+    raise Http404()
 
 
 @login_required(login_url='/accounts/login/')
