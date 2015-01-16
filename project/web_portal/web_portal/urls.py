@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include
 from django.contrib import admin
+from django.conf import settings
 
 # handler400 = 'web_portal.core.errors.views.bad_request'
 # handler403 = 'web_portal.core.errors.views.permission_denied'
