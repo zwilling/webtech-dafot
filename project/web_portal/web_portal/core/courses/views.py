@@ -194,17 +194,7 @@ def assignment_page(request, pk, apk):
     # TODO add organizer check if editing of assignment is necessary
     pk = int(pk)  # course id
     apk = int(apk)  # assignment id
-    url = '{0}/courses/{1}/assignments/{2}/solutions/'.format(settings.REST_API, pk, apk)
-    r = requests.get(url,
-                     headers=GET_JSON_HEADER,
-                     auth=(request.user.username, request.user.password))
-    if r.status_code != requests.codes.ok:
-        if r.status_code == requests.codes.forbidden:
-            raise PermissionDenied
-        else:
-            raise Http404()
-    response = r.json(object_hook=_json_object_hook)
-    solutions = response.solution
+
     url = '{0}/courses/{1}/assignments/'.format(settings.REST_API, pk, apk)
     r = requests.get(url,
                      headers=GET_JSON_HEADER,
@@ -219,9 +209,34 @@ def assignment_page(request, pk, apk):
     for item in assignments:
         if item.id == apk:
             assignment = item
+            break
+    else:
+        raise PermissionDenied
+    if response.course.courseOrganizer.id == request.user.id:
+        organizer = True
+    else:
+        organizer = False
+    if not organizer:
+        url = '{0}/courses/{1}/assignments/{2}/solutions/'.format(settings.REST_API, pk, apk)
+        r = requests.get(url,
+                         headers=GET_JSON_HEADER,
+                         auth=(request.user.username, request.user.password))
+        if r.status_code != requests.codes.ok:
+            if r.status_code == requests.codes.forbidden:
+                raise PermissionDenied
+            else:
+                raise Http404()
+        response = r.json(object_hook=_json_object_hook)
+        solutions = response.solution
+    else:
+        solutions = None
+
     return render(request, 'courses/assignment_page.html', {
-        'assignments': assignments, 'assignment': assignment,
-        'solutions': solutions, 'course_id': pk})
+        'assignments': assignments,
+        'assignment': assignment,
+        'solutions': solutions,
+        'organizer': organizer,
+        'course_id': pk})
 
 
 @login_required(login_url='/accounts/login/')
@@ -327,6 +342,9 @@ def solution_page(request, pk, apk, spk):
     for item in solutions:
         if item.id == spk:
             solution = item
+            break
+    else:
+        raise PermissionDenied
     return render(request, 'courses/solution_page.html',
                   {'assignments': assignments, 'assignment': assignment,
                    'curr_solution': solution, 'solutions': solutions,

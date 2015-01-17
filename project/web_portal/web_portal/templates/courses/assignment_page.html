@@ -38,11 +38,13 @@
                                 <div class="panel-body">
                                     <textarea id="code" name="code">{{ assignment.templateCode }}</textarea>
                                 </div>
-                                <button type="submit" id="newAssignmentBtn" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
-                                <button type="button" id="processingBtn" class="btn btn-success btn-alone pull-right" style="display: none">
-                                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
-                                    Processing...
-                                </button>
+                                {% if not organizer %}
+                                    <button type="submit" id="newSolutionBtn" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
+                                    <button type="button" id="processingBtn" class="btn btn-success btn-alone pull-right" style="display: none">
+                                        <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                        Processing...
+                                    </button>
+                                {% endif %}
                             </form>
                         </div>
                     </article>
@@ -93,7 +95,11 @@
                                             </div>
                                         {% else %}
                                             <div class="tab-pane padding-15" id="solutions">
-                                                <h4>No solutions were added yet.</h4>
+                                                {% if organizer %}
+                                                    <h4>Course organizer can't upload solutions.</h4>
+                                                {% else %}
+                                                    <h4>No solutions were added yet.</h4>
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     </div>
@@ -113,7 +119,7 @@
 
      $(document).ajaxStart(function () {
         var processingBtn = $("#processingBtn");
-        var submitBtn = $("#newAssignmentBtn");
+        var submitBtn = $("#newSolutionBtn");
         processingBtn.show();
         submitBtn.hide();
         animate(processingBtn, 'pulse ');

@@ -9,7 +9,7 @@ from .views import CustomRegistrationView
 
 urlpatterns = patterns('',
     url(r'^accounts/register/$', CustomRegistrationView.as_view(
-        form_class=AppUserForm), {'title': 'Registration'}),
+        form_class=AppUserForm), {'title': 'Registration'}, name='register'),
     url(r'^accounts/login/$', auth_views.login,
         {'template_name': 'registration/login.html'}, name='auth_login'),
     url(r'^accounts/logout/$', auth_views.logout,

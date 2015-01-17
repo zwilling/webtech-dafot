@@ -1112,6 +1112,9 @@ a.social-icon:hover {
 .soc-github {
     background-color: #000
 }
+.soc-vk {
+    background-color: #00acee
+}
 .navbar-mind .navbar-brand {
     color: #fff;
     text-transform: lowercase;
