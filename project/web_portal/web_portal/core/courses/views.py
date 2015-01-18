@@ -11,8 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .forms import CourseForm, CourseSearchForm, AssignmentForm, SolutionForm,\
-    LANGUAGES
+from .forms import CourseForm, AssignmentForm, SolutionForm, LANGUAGES
 from ..users.models import UserProfile
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
@@ -33,17 +32,7 @@ def _json_object_hook(d):
 def course_list(request):
     page, dic = get_page_and_params(request)
     if request.method == "GET":
-        form = CourseSearchForm()
         r = requests.get(settings.REST_API+'/courses/', headers=GET_JSON_HEADER)
-    if request.method == "POST":
-        form = CourseSearchForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            params = {'name': name}
-            r = requests.get(settings.REST_API+'/courses/', params=params, headers=GET_JSON_HEADER)
-        else:
-            return render(request, 'courses/course_list.html',
-                          {'form': form, })
     json_resp = r.json(object_hook=_json_object_hook)
     courses = json_resp.course
     paginator = None
@@ -56,7 +45,7 @@ def course_list(request):
         except EmptyPage:
             courses = paginator.page(paginator.num_pages)
     return render(request, 'courses/course_list.html',
-                  {'courses': courses, 'form': form, 'paginator': paginator})
+                  {'courses': courses, 'paginator': paginator})
 
 
 @require_POST

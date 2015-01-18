@@ -1,23 +1,9 @@
-"""
-Django settings for web_portal project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 from os import path
-import dj_database_url
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+BASE_DIR = path.dirname(path.dirname(__file__))
 
 PROJECT_PATH = path.realpath(path.dirname(__file__))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '51s13)ne_+7%%y0npc-lw9u*e58q9o#&^%g7c60udrw*qd2611'
@@ -59,7 +45,6 @@ TEMPLATE_LOADERS = (
 )
 
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,12 +55,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'web_portal.core.form_messages',
-    'web_portal.core.ui_forms',
     'web_portal.core.courses',
+    'web_portal.core.users',
     'registration',
     'macros',
     'widget_tweaks',
-    'web_portal.core.users'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,19 +78,6 @@ WSGI_APPLICATION = 'web_portal.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'webportaldb',
-#        'USER': 'code_admin',
-#        'PASSWORD': 'masterkey',
-#        'HOST': '',
-#        'PORT': '',
-#    }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -118,9 +89,11 @@ DATABASES = {
     }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
+)
 
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -133,7 +106,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
@@ -147,26 +119,18 @@ STATICFILES_FINDERS = (
 )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = path.join(PROJECT_PATH, 'media')
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+# URL that handles the media served from MEDIA_ROOT.
 MEDIA_URL = '/media/'
 
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window;
+# Activation period for new user
+ACCOUNT_ACTIVATION_DAYS = 7
 
 TEMPLATE_DIRS = (
     PROJECT_PATH + '/templates/',
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
 )
 
+# External Web Service information
 SERVER_URL = 'http://codeservice.herokuapp.com'
 REST_API = SERVER_URL + '/rest'
-
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.UnsaltedMD5PasswordHasher',
-)
