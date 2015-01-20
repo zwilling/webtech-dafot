@@ -4,16 +4,20 @@ from ..users.models import UserProfile
 
 def get_courses(**kwargs):
     url = '/courses/'
-    response = process_request('GET', url)
+    response = process_request('GET', url, **kwargs)
     return response.course
 
 
-def get_course(course_id):
-    url = '/course/{}'.format(course_id)
+def get_course(course_id, **kwargs):
+    url = '/courses/{}/'.format(course_id)
+    response = process_request('GET', url, **kwargs)
+    return response
 
 
-def get_assignments(course_id):
+def get_assignments(course_id, **kwargs):
     url = '/courses/{}/assignments/'.format(course_id)
+    response = process_request('GET', url, **kwargs)
+    return response.assignment
 
 
 def get_assignment(course_id, assignment_id):

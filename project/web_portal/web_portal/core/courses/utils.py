@@ -21,6 +21,16 @@ def json_object_hook(response):
     return namedtuple('JSONResponse', response.keys())(*response.values())
 
 
+def user_is_attendee(user, attendees):
+    """Check whether current user is in the attendees list."""
+    return any(user.id == attendee.id for attendee in attendees)
+
+
+def user_is_organizer(user, organizer):
+    """Check whether current user is organizer of the course."""
+    return user.id == organizer.id
+
+
 def clean_solution(solution):
     """Remove `assignment` and `attendee` attributes from solution
 

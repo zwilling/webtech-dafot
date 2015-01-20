@@ -8,7 +8,7 @@ from .views import course_list, course_page, assignment_page, solution_page, \
 
 urlpatterns = patterns('',
     url(r'^courses/$', course_list, name='course_list'),
-    url(r'^courses/(?P<pk>\d+)/$', course_page, name='course_page'),
+    url(r'^courses/(?P<course_id>\d+)/$', course_page, name='course_page'),
     url(r'^courses/(?P<pk>\d+)/assignments/(?P<apk>\d+)/$', assignment_page, name='assignment_page'),
     url(r'^courses/(?P<pk>\d+)/assignments/(?P<apk>\d+)/solutions/(?P<spk>\d+)/$', solution_page, name='solution_page'),
 

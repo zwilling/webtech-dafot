@@ -20,7 +20,11 @@
             <div class="col-md-9 col-sm-8">
                 <section id="components">
                     <article class="component-element" id="navs">
+                    {% if solutions_per_assignment %}
                         <h2 class="underline-title no-margin-top">Solutions of {{attendee.firstName}} {{attendee.lastName}}</h2>
+                    {% else %}
+                        <h2 class="underline-title no-margin-top">Sorry</h2>
+                    {% endif %}
                         {% if solutions_per_assignment %}
                             <h4 class="support-message">Please choose assignment and solution you want to check:</h4>
                             <div class="panel-group" id="assignments">
@@ -81,6 +85,7 @@
                     </article>
                 </section>
             </div>
+        {% if solutions_per_assignment %}
             <div class="col-md-3">
                 <section>
                     <div class="panel panel-primary">
@@ -101,6 +106,7 @@
                     </div>
                 </section>
             </div>
+        {% endif %}
         </div>
     </div>
 {% endblock %}

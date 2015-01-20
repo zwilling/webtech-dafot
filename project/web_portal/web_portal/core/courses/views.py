@@ -13,7 +13,7 @@ from django.views.decorators.http import require_POST, require_GET
 
 import api
 from .forms import CourseForm, AssignmentForm, SolutionForm, LANGUAGES
-from .utils import clean_solution
+from .utils import clean_solution, user_is_attendee, user_is_organizer
 from ..users.models import UserProfile
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
@@ -45,6 +45,34 @@ def course_list(request):
     return render(request, 'courses/course_list.html', {
         'courses': courses, 'paginator': paginator
     })
+
+
+@require_GET
+@login_required(login_url='/accounts/login/')
+def course_page(request, course_id):
+    course_id = int(course_id)
+    user = request.user
+    user_credentials = (user.username, user.password)
+    course = api.get_course(course_id, auth=user_credentials)
+    params = {}
+    organizer = course.courseOrganizer
+    organizer_img = api.get_user_avatar_url(organizer.id)
+    attendees = [attendee.user for attendee in course.courseAttendees]
+    is_attendee = user_is_attendee(user, attendees)
+    is_organizer = user_is_organizer(user, organizer)
+    if is_attendee or is_organizer:
+        params['assignments'] = api.get_assignments(course_id, auth=user_credentials)
+        if is_organizer:
+            params['attendees'] = attendees
+            params['languages'] = [[l[0], l[1]] for l in LANGUAGES]
+    params.update({
+        'course': course,
+        'organizer': organizer,
+        'organizer_img': organizer_img,
+        'is_attendee': is_attendee,
+        'is_organizer': is_organizer
+    })
+    return render(request, 'courses/course_page.html', params)
 
 
 @require_GET
@@ -86,44 +114,6 @@ def add_course(request):
                 json.dumps({'url': '/courses/{0}/'.format(new_course_id)}),
                 content_type="application/json")
     raise Http404()
-
-
-def course_page(request, pk):
-    try:
-        pk = int(pk)
-    except ValueError:
-        raise Http404()
-    r = requests.get(settings.REST_API+'/courses/{0}'.format(pk), headers=GET_JSON_HEADER)
-    if r.status_code != requests.codes.ok:
-        raise Http404()
-    course = r.json(object_hook=_json_object_hook)
-    user = request.user
-    attendees = course.courseAttendees
-    attendees_id = [attendee.user.id for attendee in attendees]
-    attendees = [attendee.user for attendee in attendees]
-    if user.is_authenticated() and user.is_active and course.courseOrganizer.id == user.id:
-        organizer = user
-    else:
-        organizer = None
-    not_attendee = False
-    if not organizer and (user.id not in attendees_id or not user.is_authenticated()):
-        not_attendee = True
-    assignments = None
-    if not not_attendee or organizer:
-        r = requests.get(settings.REST_API+'/courses/{0}/assignments/'.format(pk), headers=GET_JSON_HEADER,
-                         auth=(user.username, user.password))
-        json_resp = r.json(object_hook=_json_object_hook)
-        assignments = json_resp.assignment
-    avatar = UserProfile.objects.get(user__id=course.courseOrganizer.id).avatar
-    organizer_img = avatar.url
-    return render(request, 'courses/course_page.html',
-                  {'course': course,
-                   'assignments': assignments,
-                   'organizer': organizer,
-                   'not_attendee': not_attendee,
-                   'attendees': attendees,
-                   'organizer_img': organizer_img,
-                   'languages': [[l[0], l[1]] for l in LANGUAGES]})
 
 
 @login_required(login_url='/accounts/login/')

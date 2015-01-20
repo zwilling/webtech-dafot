@@ -25,24 +25,24 @@
     <div class="author-panel">
         <h4 class="section-title">Author</h4>
         <div class="text-center animated fadeInDown animation-delay-1">
-            <h4 class="caption-title">{{course.courseOrganizer.firstName}} {{course.courseOrganizer.lastName}}</h4>
+            <h4 class="caption-title">{{organizer.firstName}} {{organizer.lastName}}</h4>
             <img src="{{organizer_img}}" alt="t2" width="180" class="imageborder">
             <div class="author-info margin-top-10">
                 <i class="fa fa-envelope"></i>
-                <span class="margin-left-5">{{ course.courseOrganizer.email }}</span>
+                <span class="margin-left-5">{{ organizer.email }}</span>
             </div>
         </div>
     </div>
     <div class="buttons">
         <hr/>
-        {% if organizer %}
+        {% if is_organizer %}
             <div id="add-assignment">
                 <a class="btn btn-success btn-wide animated fadeInDown animation-delay-2" data-toggle="modal" data-target="#newAssignmentModal">Add new assignment</a>
             </div>
             <div id="course-delete">
                 <a class="btn btn-danger btn-wide animated fadeInDown animation-delay-2" href="{% url "delete_course" course.id %}">Delete a course</a>
             </div>
-        {% elif user.is_authenticated and not not_attendee %}
+        {% elif user.is_authenticated and is_attendee %}
             <div id="course-registered">
                 <a class="btn btn-success btn-wide btn-no-action animated fadeInDown animation-delay-2" href="" onclick="return false;">You are registered for this course.</a>
             </div>
@@ -58,7 +58,7 @@
     <div class="container margin-top-30">
         <div class="row">
             <div class="col-md-9 col-sm-8">
-                {% if not organizer %}
+                {% if not is_organizer %}
                     <section id="components">
                         <article class="component-element" id="navs">
                             <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
@@ -73,7 +73,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#description"data-toggle="tab">Course Description</a>
+                                    <a href="#course-description"data-toggle="tab">Course Description</a>
                                 </li>
                                 <li>
                                     <a href="#attendees" data-toggle="tab">Course attendees</a>
@@ -82,7 +82,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content padding-15">
-                                <div class="tab-pane active" id="code-description">
+                                <div class="tab-pane active" id="course-description">
                                     {% autoescape off %}{{ course.description }}{% endautoescape %}
                                 </div>
                                 <div class="tab-pane" id="attendees">
@@ -117,7 +117,7 @@
                 <section>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
-                            {% if not_attendee %}
+                            {% if not is_attendee %}
                                 <div class="panel-body">
                                 {% usemacro author_panel %}
                             {% else %}
@@ -307,7 +307,7 @@
                 if( !field.val() ) {
                     var code_mirror = field.siblings('.CodeMirror');
                     code_mirror.addClass('invalid-field');
-                    animate(code_mirror, 'shake')
+                    animate(code_mirror, 'shake');
                     return false;
                 }
                 else {
