@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^courses/(?P<pk>\d+)/assignments/(?P<apk>\d+)/solutions/(?P<spk>\d+)/$', solution_page, name='solution_page'),
 
     url(r'^courses/(?P<pk>\d+)/attend/$', attend_course, name='attend_course'),
-    url(r'^courses/(?P<pk>\d+)/attendee/(?P<apk>\d+)/solutions$', attendee_solutions, name='attendee_solutions'),
+    url(r'^courses/(?P<course_id>\d+)/attendee/(?P<attendee_id>\d+)/solutions$', attendee_solutions, name='attendee_solutions'),
 
     url(r'^courses/add/$', add_course, name='add_course'),
     url(r'^courses/(?P<pk>\d+)/assignments/add/$', add_assignment, name='add_assignment'),

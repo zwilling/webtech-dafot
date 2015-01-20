@@ -1,0 +1,106 @@
+{% extends "main/base.html" %}
+{% block title %}
+   {{ attendee.lastName }} {{ attendee.firsName }} - Solutions - Code
+{% endblock %}
+
+{% load staticfiles %}
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static "css/prism.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/prism.js"%} "></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container margin-top-30">
+        <div class="row">
+            <div class="col-md-9 col-sm-8">
+                <section id="components">
+                    <article class="component-element" id="navs">
+                        <h2 class="underline-title no-margin-top">Solutions of {{attendee.firstName}} {{attendee.lastName}}</h2>
+                        {% if solutions_per_assignment %}
+                            <h4 class="support-message">Please choose assignment and solution you want to check:</h4>
+                            <div class="panel-group" id="assignments">
+                                {% for assignment, solutions in solutions_per_assignment.iteritems %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse"
+                                                   data-parent="#assignments" href="#assignment{{ forloop.counter }}" class="collapsed">{{ assignment.name }}</a>
+                                            </h4>
+                                        </div>
+                                        <div id="assignment{{ forloop.counter }}" class="panel-collapse collapse" style="height: 0px;">
+                                            <div class="panel-body">
+                                                <div class="panel-group" id="solutions">
+                                                    {% for solution in solutions %}
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-parent="#solutions" href="#assignment{{ forloop.parentloop.counter }}solution{{ forloop.counter }}" class="collapsed solution-panel">Solution {{ forloop.counter }}</a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="assignment{{ forloop.parentloop.counter }}solution{{ forloop.counter }}" class="panel-collapse collapse" style="height: 0px;">
+                                                                <div class="panel-body">
+                                                                <h4 class="support-message">Submitted code:</h4>
+                                                                    <pre class="language-{% if assignment.language == 'java' %}clike{% else %}{{ assignment.language }}{% endif %}"><code>{{ solution.code }}</code></pre>
+                                                                    {% if solution.solutionState == 'SUCCESS' %}
+                                                                        <div class="alert alert-success">
+                                                                            <strong>Correct!</strong> Successfully completed assignment.
+                                                                        </div>
+                                                                    {% elif solution.solutionState == 'IN_VERIFICATION' %}
+                                                                        <div class="alert alert-warning">
+                                                                            <strong>In verification.</strong> Please check the result later.
+                                                                        </div>
+                                                                    {% else %}
+                                                                        <div class="alert alert-danger">
+                                                                            <strong>Failed!</strong> Solution is partially or completely wrong.
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if solution.fails %}
+                                                                        {% for fail in solution.fails %}
+                                                                            <h4 class="support-message">Test <code class="test-method">{{ fail.testName }}</code> method caused:</h4>
+                                                                            <pre class="language-{% if assignment.language == 'java' %}clike{% else %}{{ assignment.language }}{% endif %}"><code>{{ fail.exception }}</code></pre>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <h4 class="support-message">Sorry, this user haven't uploaded any solutions yet.</h4>
+                        {% endif %}
+                    </article>
+                </section>
+            </div>
+            <div class="col-md-3">
+                <section>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
+                        <div class="panel-body">
+                            <div class="attendee-panel">
+                                <h4 class="section-title">Attendee</h4>
+                                <div class="text-center animated fadeInDown animation-delay-1">
+                                    <h4 class="caption-title">{{attendee.firstName}} {{attendee.lastName}}</h4>
+                                    <img src="{{attendee_img_url}}" alt="t2" width="180" class="imageborder">
+                                    <div class="attendee-info margin-top-10">
+                                        <i class="fa fa-envelope"></i>
+                                        <span class="margin-left-5">{{ attendee.email }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}

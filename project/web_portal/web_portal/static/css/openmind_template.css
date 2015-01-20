@@ -380,7 +380,7 @@ blockquote.pull-right {
 }
 .panel-group .panel>.panel-heading a.collapsed:before {
     font-family: 'FontAwesome';
-    content: "\f067";
+    content: "\f054";
     font-size: 1.4em;
     margin-right: 10px;
     vertical-align: middle;
@@ -391,7 +391,7 @@ blockquote.pull-right {
 }
 .panel-group .panel>.panel-heading a:before {
     font-family: 'FontAwesome';
-    content: "\f068";
+    content: "\f078";
     font-size: 1.4em;
     margin-right: 10px;
     vertical-align: middle;

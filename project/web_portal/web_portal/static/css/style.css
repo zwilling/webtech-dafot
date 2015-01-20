@@ -80,6 +80,10 @@
     font-size: 1.2em;
 }
 
+.support-message {
+    color: #000000;
+}
+
 .dropdown-login {
     padding-bottom: 5px;
 }
@@ -284,4 +288,12 @@ pre {
 }
 .wrapper {
     min-height: 450px!important;
+}
+
+.solution-panel {
+    background-color: #00a4d6 !important;
+}
+
+.test-method {
+    font-size: 14px;
 }

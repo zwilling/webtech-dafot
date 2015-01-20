@@ -1,7 +1,7 @@
 import json
 import requests
 import urlparse
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -9,9 +9,11 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404, HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 
+import api
 from .forms import CourseForm, AssignmentForm, SolutionForm, LANGUAGES
+from .utils import clean_solution
 from ..users.models import UserProfile
 
 POST_JSON_HEADER = {'content-type': 'application/json'}
@@ -29,23 +31,42 @@ def _json_object_hook(d):
     return namedtuple('X', d.keys())(*d.values())
 
 
+@require_GET
 def course_list(request):
     page, dic = get_page_and_params(request)
-    if request.method == "GET":
-        r = requests.get(settings.REST_API+'/courses/', headers=GET_JSON_HEADER)
-    json_resp = r.json(object_hook=_json_object_hook)
-    courses = json_resp.course
-    paginator = None
-    if request.method == "GET":
-        paginator = Paginator(courses, 4)
-        try:
-            courses = paginator.page(page)
-        except PageNotAnInteger:
-            courses = paginator.page(1)
-        except EmptyPage:
-            courses = paginator.page(paginator.num_pages)
-    return render(request, 'courses/course_list.html',
-                  {'courses': courses, 'paginator': paginator})
+    courses = api.get_courses()
+    paginator = Paginator(courses, 4)
+    try:
+        courses = paginator.page(page)
+    except PageNotAnInteger:
+        courses = paginator.page(1)
+    except EmptyPage:
+        courses = paginator.page(paginator.num_pages)
+    return render(request, 'courses/course_list.html', {
+        'courses': courses, 'paginator': paginator
+    })
+
+
+@require_GET
+@login_required(login_url='/accounts/login/')
+def attendee_solutions(request, course_id, attendee_id):
+    course_id = int(course_id)
+    attendee_id = int(attendee_id)
+    user_credentials = (request.user.username, request.user.password)
+    solutions = api.get_attendee_solutions(course_id, attendee_id, user_credentials)
+    params = {}
+    if solutions:
+        attendee = solutions[0].attendee.user
+        attendee_img_url = api.get_user_avatar_url(attendee.id)
+        solutions_per_assignment = defaultdict(list)
+        for item in solutions:
+            assignment = item.assignment
+            solution = clean_solution(item)
+            solutions_per_assignment[assignment].append(solution)
+        params = {'attendee': attendee,
+                  'attendee_img_url': attendee_img_url,
+                  'solutions_per_assignment': dict(solutions_per_assignment)}
+    return render(request, 'courses/attendee_solutions.html', params)
 
 
 @require_POST
@@ -262,19 +283,6 @@ def attend_course(request, pk):
         return redirect('/courses/{0}/'.format(pk))
     else:
         raise Http404()
-
-
-@login_required(login_url='/accounts/login/')
-def attendee_solutions(request, pk, apk):
-    try:
-        #course id
-        pk = int(pk)
-        #attendee id
-        apk = int(apk)
-    except ValueError:
-        raise Http404()
-    #TODO: change this
-    return render(request, 'main/coming.html')
 
 
 @require_POST
