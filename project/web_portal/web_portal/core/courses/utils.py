@@ -23,7 +23,7 @@ def json_object_hook(response):
 
 def user_is_attendee(user, attendees):
     """Check whether current user is in the attendees list."""
-    return any(user.id == attendee.id for attendee in attendees)
+    return any(user.id == attendee.user.id for attendee in attendees)
 
 
 def user_is_organizer(user, organizer):

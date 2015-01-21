@@ -100,9 +100,9 @@
                                         {% for attendee in attendees %}
                                             <tr class="attendee" onclick="document.location = '{% url 'attendee_solutions' course.id attendee.id %}';">
                                                 <td>{{ forloop.counter }}</td>
-                                                <td>{{ attendee.firstName }}</td>
-                                                <td>{{ attendee.lastName }}</td>
-                                                <td>{{ attendee.email }}</td>
+                                                <td>{{ attendee.user.firstName }}</td>
+                                                <td>{{ attendee.user.lastName}}</td>
+                                                <td>{{ attendee.user.email }}</td>
                                             </tr>
                                         {% endfor %}
                                     </table>

@@ -58,7 +58,7 @@ def course_page(request, course_id):
     params = {}
     organizer = course.courseOrganizer
     organizer_img = api.get_user_avatar_url(organizer.id)
-    attendees = [attendee.user for attendee in course.courseAttendees]
+    attendees = course.courseAttendees
     is_attendee = user_is_attendee(user, attendees)
     is_organizer = user_is_organizer(user, organizer)
     if is_attendee or is_organizer:
