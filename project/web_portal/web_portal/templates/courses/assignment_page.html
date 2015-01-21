@@ -38,7 +38,7 @@
                                 <div class="panel-body">
                                     <textarea id="code" name="code">{{ assignment.templateCode }}</textarea>
                                 </div>
-                                {% if not organizer %}
+                                {% if not is_organizer %}
                                     <button type="submit" id="newSolutionBtn" class="btn btn-success btn-alone pull-right" value="Submit" name="Submit">Submit solution</button>
                                     <button type="button" id="processingBtn" class="btn btn-success btn-alone pull-right" style="display: none">
                                         <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
@@ -95,7 +95,7 @@
                                             </div>
                                         {% else %}
                                             <div class="tab-pane padding-15" id="solutions">
-                                                {% if organizer %}
+                                                {% if is_organizer %}
                                                     <h4>Course organizer can't upload solutions.</h4>
                                                 {% else %}
                                                     <h4>No solutions were added yet.</h4>

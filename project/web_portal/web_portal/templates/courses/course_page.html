@@ -117,7 +117,7 @@
                 <section>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-list-ul"></i>Additional Information</div>
-                            {% if not is_attendee %}
+                            {% if not is_attendee and not is_organizer %}
                                 <div class="panel-body">
                                 {% usemacro author_panel %}
                             {% else %}

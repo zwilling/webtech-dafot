@@ -43,14 +43,21 @@ def clean_solution(solution):
     return namedtuple('Solution', dictionary.keys())(**dictionary)
 
 
-def process_request(method, url, data=None, return_json=True, **kwargs):
+def clean_location(location):
+    """Remove Web Service address from location
+
+    :param: location: Url address"""
+    return location.replace(settings.SERVER_URL, '')
+
+
+def process_request(method, url, data=None, return_only_body=True, **kwargs):
     """Process request by send it, check its status and return response.
 
     :param method: Method of the ``request``.
     :param url: URL for the new :class:`Request` object.
     :param data: (optional) Dictionary, bytes, or file-like object to send in
     the body of the POST :class:`Request`.
-    :param return_json: Return the response as :class:`Response` object or
+    :param return_only_body: Return only message-body of the response as
     JSON-view object.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
     """
@@ -63,7 +70,7 @@ def process_request(method, url, data=None, return_json=True, **kwargs):
     else:
         raise ValueError('Method {} not allowed.'.format(method))
     response.raise_for_status()
-    if return_json:
+    if return_only_body:
         return response.json(object_hook=json_object_hook)
     else:
         return response
@@ -83,7 +90,7 @@ def send_get_request(url, headers=None, **kwargs):
 
 
 @base_request_url(settings.REST_API)
-def send_post_request(url, headers=None, data=None, **kwargs):
+def send_post_request(url, headers=None, json=None, **kwargs):
     """Sends a POST request. Returns :class:`Response` object.
 
     :param url: URL for the new :class:`Request` object.
@@ -94,7 +101,7 @@ def send_post_request(url, headers=None, data=None, **kwargs):
     """
     json_content_type_header = {'content-type': 'application/json'}
     headers = prepare_headers(headers, json_content_type_header)
-    return requests.post(url, headers=headers, data=data, **kwargs)
+    return requests.post(url, headers=headers, json=json, **kwargs)
 
 
 @base_request_url(settings.REST_API)
