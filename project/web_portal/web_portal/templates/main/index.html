@@ -1,199 +1,105 @@
 {% extends "main/base.html" %}
+
 {% load staticfiles %}
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/jquery.backstretch.js" %}"></script>
+{% endblock %}
+
 {% block content %}
     <section>
-        <div id="carousel-example-generic" class="carousel carousel-mind slide" data-ride="carousel" data-interval="5000">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-7">
-                                <div class="carousel-caption">
-                                    <div class="carousel-text">
-                                        <h1 class="animated fadeInDownBig">The template that adapts to all projects</h1>
-                                        <ul class="list-unstyled carousel-list">
-                                            <li class="animated bounceInLeft"><i class="fa fa-code"></i><span>Built with Bootstrap</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-html5"></i><span>HTML5 and CSS3</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-table"></i><span>Responsive Template</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-5 hidden-xs carousel-img-wrap">
-                                <div class="carousel-img">
-                                    <img src="{% static "images/pre.png" %}" alt="pre" width="960" height="518" class="aligncenter size-full wp-image-72 img-responsive animated bounceInUp">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-8">
-                                <div class="carousel-caption">
-                                    <div class="carousel-text">
-                                        <h1 class="animated fadeInDownBig">design your own template very easily</h1>
-                                        <ul class="list-unstyled carousel-list">
-                                            <li class="animated bounceInLeft"><i class="fa fa-eye"></i><span>More Than 15 Colors</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-th-large"></i><span>Customizable Components</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-files-o"></i><span>Over 25 pages ready to use</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-4 hidden-xs carousel-img-wrap">
-                                <div class="carousel-img">
-                                    <img src="{% static "images/pre2.png" %}" alt="pre" class="aligncenter size-full wp-image-72 img-responsive animated bounceInUp">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item active">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-7 col-sm-9">
-                                <div class="carousel-caption">
-                                    <div class="carousel-text">
-                                        <h1 class="animated fadeInDownBig">WordPress version coming soon</h1>
-                                        <ul class="list-unstyled carousel-list">
-                                            <li class="animated bounceInLeft"><i class="fa fa-code"></i><span>Shortcodes For All Components</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-files-o"></i><span>Page Templates Ready For Use</span>
-                                            </li>
-                                            <li class="animated bounceInLeft"><i class="fa fa-upload"></i><span>Free update for HTML orders</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-5 col-sm-3 hidden-xs carousel-img-wrap">
-                                <div class="carousel-img">
-                                    <img src="{% static "images/pre3.png" %}" alt="pre" class="aligncenter size-full wp-image-72 img-responsive animated bounceInUp">
-                                </div>
+        <div class="slider">
+            <div class="intro-body text-center">
+                <div class="container intro-content animated bounceIn" style="opacity: 1;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="intro-text text-center">
+                                <h2>Automatic code verification in Cloud</h2>
+                                <p class="lead">
+                                    You focus on what you do the best. We'll take care of the rest.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="http://razonartificial.com/themes/openmind/wordpress/?PHPSESSID=qrp9g5rk14j161na128jegpri5#carousel-example-generic" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="http://razonartificial.com/themes/openmind/wordpress/?PHPSESSID=qrp9g5rk14j161na128jegpri5#carousel-example-generic" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
         </div>
-        <div class="inverse-wrap">
-            <div class="container">
-                <div class="row dotted">
+    </section>
+    <section id="who-we-are">
+        <div class="container inner-top inner-bottom-sm">
+            <div class="row">
+                <div class="col-md-8 col-sm-9 center-block text-center animated fadeInUp" style="opacity: 0;">
+                    <header>
+                        <h1 class="header-title">Scalable. Effective.Reliable.</h1>
+                        <p>We believe everyone inevitably faces with the need of to work on programming assignments which later have to be verified by the professor or by the assistant. Our strong belief nobody really likes the submission process. Students do not have immediate feedback, solution might be lost. Assistant has to run manually each solution and provide the corresponding grade. But not now. With a help of our service you can simplify this process. Our project is mainly for people who are interested in automatic solution verification.</p>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="quote" class="section section-bgtype-image">
+
+        <div class="section-inner">
+
+            <div class="bg-overlay"></div>
+
+            <div class="container section-content">
+                <div class="row">
                     <div class="col-md-12">
-                        <p class="lead animated fadeIn animation-delay-10">Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit. Culpa, modi, <strong>incidunt</strong> dolores voluptas iusto <strong>temporibus</strong>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="row">
-                <h1 class="center-title">Our Product</h1>
-                <div class="col-md-6">
-                    <img src="http://razonartificial.com/themes/openmind/wordpress/wp-content/uploads/2014/05/bg-devices.png" alt="bg-devices" width="500" height="552" class="aligncenter img-responsive center-block size-full wp-image-157" />
-                </div>
-                <div class="col-md-6">
-                    <ol class="service-list list-unstyled">
-                        <li>Lorem ipsum Tempor sunt dolore ut amet magna ut non exercitation et ad non reprehenderit ex laborum incididunt adipisicing labore eu fugiat et irure velit exercitation irure deserunt amet cillum magna non.</li>
-                        <li>Lorem ipsum Qui enim sint non dolore pariatur dolor dolore consectetur incididunt adipisicing exercitation dolor magna commodo tempor ullamco enim Excepteur ea aliquip culpa culpa ad culpa dolore occaecat eiusmod ullamco enim mollit ut laboris.</li>
-                        <li>Lorem ipsum Ullamco magna voluptate dolore mollit dolore reprehenderit anim eu veniam occaecat fugiat elit in laborum ullamco officia velit laborum consequat commodo in in irure consectetur enim.</li>
-                        <li>Lorem ipsum Ullamco non officia incididunt enim elit qui anim ad laborum ad aliquip reprehenderit occaecat nisi elit occaecat reprehenderit labore do proident dolor deserunt.</li>
-                        <li>Lorem ipsum Laboris aute laboris deserunt deserunt dolor nostrud et Ut consequat ad qui ea adipisicing in labore Excepteur minim laborum officia reprehenderit laboris et in aliquip nisi nostrud pariatur adipisicing non magna non ex deserunt.</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="back">
-        <div class="container">
-            <h1 class="center-title">We create for you</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="icon-item">
-                        <i class="fa fa-globe"></i>
-                        <div class="item-content">
-                            <h3>laborum ad aliquip amet occaecat</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-thumbs-up"></i>
-                        <div class="item-content">
-                            <h3>labore Excepteur minim laborum</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-lock"></i>
-                        <div class="item-content">
-                            <h3>Adipisicing labore eu fugiat et irure</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-upload"></i>
-                        <div class="item-content">
-                            <h3>Confirmatur necessariae videntur</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="icon-item">
-                        <i class="fa fa-code"></i>
-                        <div class="item-content">
-                            <h3>Bello plurimum dissentias turma.</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-users"></i>
-                        <div class="item-content">
-                            <h3>Lorem ipsum dolor sit amet</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-sitemap"></i>
-                        <div class="item-content">
-                            <h3>Perfunctio asperum mel ponatur quos.</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
-                        </div>
-                    </div>
-                    <div class="icon-item">
-                        <i class="fa fa-signal"></i>
-                        <div class="item-content">
-                            <h3>Capti confirmatur necessariae videntur</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.</p>
+                        <div class="quote-text text-center">
+                            <span class="quote-icon animated fadeInUp delayp1" style="opacity: 1;"><i class="fa fa-quote-right fa-4x"></i></span>
+                            <h4>Using CODE was a nice experience! It was really simple to download the template code, implement the solution and upload it to the web service. Syntax highlight is awesome! Since now, no paper programming. Simple than ever!</h4>
+                            <h2 class="lead quote-by animated fadeInUp
+                            delayp3 delayp5" style="opacity: 1;">Tim Graham - USA</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <section id="technologies" class="technologies section">
+            <div class="container text-center">
+                <h2 class="title text-highlight">What technologies we are using</h2>
+                <p class="summary">We only use what really works...</p>
+                <div class="services">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 ux-col">
+                            <h3 class="title title-ux"><span>Client</span></h3>
+                            <ul class="list-unstyled text-right">
+                                <li>Bootstrap</li>
+                                <li>JavaScript, HTML5, CSS3 <span class="sub">(+ jQuery)</span></li>
+                                <li>CodeMirror <span class="sub">(JS library)</span></li>
+                                <li>prism.js <span class="sub">(JS library)
+                                </span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 ui-col">
+                            <h3 class="title title-ui"><span>Server</span></h3>
+                            <ul class="list-unstyled text-left">
+                                <li>Spring<span class="sub"> (IoC, AOP, Security)</span></li>
+                                <li>Django<span class="sub"> (Python Web Framework)</span></li>
+                                <li>Hibernate<span class="sub"> (Java ORM)</span></li>
+                                <li>Heroku PaaS</li>
+                                <li>CloudAMQP<span class="sub"> (RabbitMQ as a Service)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center other-services">
+                        <h3 class="title-other">And a lot more...</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+{% block scripts_bottom %}
+    <script type="text/javascript">
+    (function ($) {
+        $('.slider').backstretch([
+            "{% static "images/slide2.jpg" %}",
+            "{% static "images/slide1.jpg" %}",
+            "{% static "images/slide3.jpg" %}"
+        ], {duration: 3000, fade: 3000});
+    }(jQuery));
+    </script>
 {% endblock %}
