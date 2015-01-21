@@ -58,6 +58,10 @@
                                                                         <div class="alert alert-warning">
                                                                             <strong>In verification.</strong> Please check the result later.
                                                                         </div>
+                                                                    {% elif solution.solutionState == 'COMPILATION_FAIL' %}
+                                                                        <div class="alert alert-danger">
+                                                                            <strong>Compilation fail.</strong> System was unable to compile the submitted code.
+                                                                        </div>
                                                                     {% else %}
                                                                         <div class="alert alert-danger">
                                                                             <strong>Failed!</strong> Solution is partially or completely wrong.
@@ -65,7 +69,7 @@
                                                                     {% endif %}
                                                                     {% if solution.fails %}
                                                                         {% for fail in solution.fails %}
-                                                                            <h4 class="support-message">Test <code class="test-method">{{ fail.testName }}</code> method caused:</h4>
+                                                                            <h4 class="support-message">Test <code class="test-method">{{ fail.testName }}</code> method failed with:</h4>
                                                                             <pre class="language-{% if assignment.language == 'java' %}clike{% else %}{{ assignment.language }}{% endif %}"><code>{{ fail.exception }}</code></pre>
                                                                         {% endfor %}
                                                                     {% endif %}

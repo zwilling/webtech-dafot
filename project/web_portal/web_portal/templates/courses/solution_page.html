@@ -36,6 +36,10 @@
                             <div class="alert alert-warning">
                                 <strong>In verification.</strong> Please check the result later.
                             </div>
+                        {% elif curr_solution.solutionState == 'COMPILATION_FAIL' %}
+                            <div class="alert alert-danger">
+                                <strong>Compilation fail.</strong> System was unable to compile the submitted code.
+                            </div>
                         {% else %}
                             <div class="alert alert-danger">
                                 <strong>Failed!</strong> Your solution is partially or completely wrong.
