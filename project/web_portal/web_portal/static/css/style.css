@@ -573,3 +573,7 @@ header p {
     color: #999;
     font-weight: 400;
 }
+
+#components .content {
+    padding-bottom: 20px;
+}

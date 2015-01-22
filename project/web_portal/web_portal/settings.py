@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'registration',
     'macros',
     'widget_tweaks',
+    'django_markdown2',
 )
 
 MIDDLEWARE_CLASSES = (

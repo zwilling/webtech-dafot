@@ -83,7 +83,8 @@
                             <!-- Tab panes -->
                             <div class="tab-content padding-15">
                                 <div class="tab-pane active" id="course-description">
-                                    {% autoescape off %}{{ course.description }}{% endautoescape %}
+                                    {% load md2 %}
+                                    {{ course.description|markdown }}
                                 </div>
                                 <div class="tab-pane" id="attendees">
                                 {% if not attendees %}

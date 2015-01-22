@@ -26,7 +26,10 @@
                 <section id="components">
                     <article class="component-element" id="navs">
                         <h2 class="underline-title no-margin-top">{{ assignment.name }}</h2>
-                        <div class="content">{% autoescape off %}{{ assignment.description }}{% endautoescape %}</div>
+                        <div class="content">
+                            {% load md2 %}
+                            {{ assignment.description|markdown }}
+                        </div>
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 Please put your code here
