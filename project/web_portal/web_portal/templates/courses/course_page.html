@@ -62,7 +62,10 @@
                     <section id="components">
                         <article class="component-element" id="navs">
                             <h2 class="underline-title no-margin-top">{{ course.name }}</h2>
-                            <div class="content">{% autoescape off %}{{ course.description }}{% endautoescape %}</div>
+                            <div class="content">
+                                {% load md2 %}
+                                {{ course.description|markdown:"safe" }}
+                            </div>
                         </article>
                     </section>
                 {% else %}
@@ -84,7 +87,7 @@
                             <div class="tab-content padding-15">
                                 <div class="tab-pane active" id="course-description">
                                     {% load md2 %}
-                                    {{ course.description|markdown }}
+                                    {{ course.description|markdown:"safe" }}
                                 </div>
                                 <div class="tab-pane" id="attendees">
                                 {% if not attendees %}

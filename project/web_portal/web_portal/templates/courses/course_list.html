@@ -65,7 +65,7 @@
                                     <div class="clearfix"></div>
                                     <p class="module line-clamp no-margin-top">
                                         {% load md2 %}
-                                        {% autoescape on %}{{course.description |markdown| striptags}}{% endautoescape %}
+                                        {% autoescape on %}{{course.description |markdown:"safe"| striptags}}{% endautoescape %}
                                     </p>
                                     <div class="clearfix"></div>
                                     <hr/>
