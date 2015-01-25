@@ -76,11 +76,3 @@ def delete_course(course_id, **kwargs):
     url = '/courses/{}'.format(course_id)
     response = process_request('DELETE', url, return_json=False, **kwargs)
     return response
-
-
-def delete_assignment():
-    pass
-
-
-def delete_solution():
-    pass

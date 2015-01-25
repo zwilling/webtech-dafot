@@ -1,4 +1,5 @@
 import requests
+import urlparse
 from collections import namedtuple
 from functools import wraps
 
@@ -19,6 +20,13 @@ def base_request_url(path):
 def json_object_hook(response):
     """Convert JSON representation of response to object one."""
     return namedtuple('JSONResponse', response.keys())(*response.values())
+
+
+def get_page_from_request(request, key='page'):
+    """Get current page number from the request"""
+    params = dict(urlparse.parse_qsl(request.META['QUERY_STRING']))
+    page = params.pop(key, 1)
+    return page
 
 
 def user_is_attendee(user, attendees):
@@ -47,7 +55,7 @@ def clean_location(location):
     """Remove Web Service address from location
 
     :param: location: Url address"""
-    return location.replace(settings.SERVER_URL, '')
+    return location.replace(settings.REST_API, '')
 
 
 def process_request(method, url, data=None, return_only_body=True, **kwargs):

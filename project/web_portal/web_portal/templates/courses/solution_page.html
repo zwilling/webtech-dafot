@@ -36,9 +36,13 @@
                             <div class="alert alert-warning">
                                 <strong>In verification.</strong> Please check the result later.
                             </div>
-                        {% elif curr_solution.solutionState == 'COMPILATION_FAIL' %}
+                        {% elif curr_solution.solutionState == 'INVALID_CODE' %}
                             <div class="alert alert-danger">
-                                <strong>Compilation fail.</strong> System was unable to compile the submitted code.
+                                <strong>Invalid code.</strong> System was unable to compile the submitted code.
+                            </div>
+                        {% elif curr_solution.solutionState == 'ABORTED' %}
+                            <div class="alert alert-danger">
+                                <strong>Aborted.</strong> Execution of the code was aborted by the system.
                             </div>
                         {% else %}
                             <div class="alert alert-danger">
