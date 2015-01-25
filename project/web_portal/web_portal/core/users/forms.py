@@ -5,7 +5,10 @@ from .models import UserProfile
 
 
 class AppUserForm(forms.ModelForm, RegistrationFormUniqueEmail):
-    """Extended user registration form"""
+    """
+    Extended :class: `RegistrationFormUniqueEmail` form with user's
+    first name and last name
+    """
     first_name = forms.CharField(label="First name", required=True)
     last_name = forms.CharField(label="Last name", required=True)
 
@@ -18,6 +21,7 @@ class AppUserForm(forms.ModelForm, RegistrationFormUniqueEmail):
         super(AppUserForm, self).__init__(*args, **kwargs)
         self.fields['avatar'].widget.attrs.update({'widget': forms.FileInput})
         self.fields['avatar'].required = False
+        # Define error messages if field is invalid
         for field, value in self.fields.iteritems():
             value.error_messages = {
                 'required': 'The {fieldname} field is required'.format(

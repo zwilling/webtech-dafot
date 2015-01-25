@@ -8,19 +8,26 @@ from .models import UserProfile
 
 
 class CustomRegistrationView(RegistrationView):
+    """Extended :class:`RegistrationView` object with :param: `title`."""
 
     def get_context_data(self, **kwargs):
-        """Pass 'title' parameter to the template"""
+        """Pass 'title' parameter to the template
+
+        :param \*\*kwargs: Optional arguments that ``CustomRegistrationView`` takes.
+        :returns: context kwargs
+        """
         context = super(CustomRegistrationView, self).get_context_data(**kwargs)
         if 'title' in self.kwargs:
             context.update({'title': self.kwargs.get('title')})
         return context
 
 
-def user_created(sender, user, request, **kwargs):
+def _user_created(sender, user, request, **kwargs):
     """
     Called via signals when user registers. Creates different profiles and
     associations
+
+    :returns: None
     """
     form = AppUserForm(request.POST, request.FILES)
     # Update first and last name for user
@@ -37,6 +44,6 @@ def user_created(sender, user, request, **kwargs):
 
 # register for signals from django-registration to call function after
 # any registration is processed:
-user_registered.connect(user_created)
+user_registered.connect(_user_created)
 
 

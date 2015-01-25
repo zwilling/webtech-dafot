@@ -1,6 +1,7 @@
 import json
 from collections import defaultdict
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
@@ -9,13 +10,20 @@ from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST, require_GET
 
 import api
-from .forms import CourseForm, AssignmentForm, SolutionForm, LANGUAGES
+from .forms import CourseForm, AssignmentForm, SolutionForm
 from .utils import (clean_location, clean_solution, user_is_attendee,
                     user_is_organizer, get_page_from_request)
 
 
 @require_GET
 def course_list(request):
+    """
+    Course list view. Gets a list of courses, paginates and generates
+    `courses/course_list.html` template as a response.
+
+    :param request: :class `Request` object
+    :return: :class `HttpResponse` object
+    """
     page = get_page_from_request(request)
     courses = api.get_courses()
     paginator = Paginator(courses, 4)
@@ -33,6 +41,15 @@ def course_list(request):
 @require_GET
 @login_required(login_url='/accounts/login/')
 def course_page(request, course_id):
+    """
+    Course page view. Gets a course and generates `courses/course_page.html`
+    template as a response.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the requested course
+    :type course_id: int
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     user = request.user
     user_credentials = (user.username, user.password)
@@ -47,7 +64,7 @@ def course_page(request, course_id):
         params['assignments'] = api.get_assignments(course_id, auth=user_credentials)
         if is_organizer:
             params['attendees'] = attendees
-            params['languages'] = [[l[0], l[1]] for l in LANGUAGES]
+            params['languages'] = [[l[0], l[1]] for l in settings.LANGUAGES]
     params.update({'course': course,
                    'organizer': organizer,
                    'organizer_img': organizer_img,
@@ -59,6 +76,17 @@ def course_page(request, course_id):
 
 @login_required(login_url='/accounts/login/')
 def assignment_page(request, course_id, assignment_id):
+    """
+    Assignment page view. Gets a course and generates `courses/assignment_page.html`
+    template as a response.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to which requested assignment belongs
+    :type course_id: int
+    :param assignment_id: Id of the requested assignment
+    :type assignment_id: int
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
     user = request.user
@@ -79,6 +107,19 @@ def assignment_page(request, course_id, assignment_id):
 @require_GET
 @login_required(login_url='/accounts/login/')
 def solution_page(request, course_id, assignment_id, solution_id):
+    """
+    Solution page view. Gets a course and generates `courses/solution_page.html`
+    template as a response.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to which requested solution belongs
+    :type course_id: int
+    :param assignment_id: Id of the assignment to which requested solution belongs
+    :type assignment_id: int
+    :param solution_id: Id of the requested solution
+    :type solution_id: int
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
     solution_id = int(solution_id)
@@ -99,6 +140,14 @@ def solution_page(request, course_id, assignment_id, solution_id):
 @require_POST
 @login_required(login_url='/accounts/login/')
 def add_course(request):
+    """
+    Add course view. Gets a data from the form and requests an API create a
+    new course with this data.
+
+    :param request: :class `Request` object
+    :raises: HttpResponseBadRequest
+    :return: :class `HttpResponse` object
+    """
     if request.is_ajax():
         form = CourseForm(request.POST)
         if form.is_valid():
@@ -115,6 +164,16 @@ def add_course(request):
 @require_POST
 @login_required(login_url='/accounts/login/')
 def add_assignment(request, course_id):
+    """
+    Add assignment view. Gets a data from the form and requests an API create a
+    new assignment with this data in a course.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to create a new assignment in
+    :type course_id: int
+    :raises: HttpResponseBadRequest
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     if request.is_ajax():
         form = AssignmentForm(request.POST)
@@ -137,6 +196,18 @@ def add_assignment(request, course_id):
 @require_POST
 @login_required(login_url='/accounts/login/')
 def add_solution(request, course_id, assignment_id):
+    """
+    Add solution view. Gets a data from the form and requests an API create a
+    new solution with this data in an assignment in the course.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to create a new solution in
+    :type course_id: int
+    :param assignment_id: Id of the assignment to create a new solution in
+    :type assignment_id: int
+    :raises: HttpResponseBadRequest
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
     if request.is_ajax():
@@ -153,6 +224,15 @@ def add_solution(request, course_id, assignment_id):
 
 @login_required(login_url='/accounts/login/')
 def attend_course(request, course_id):
+    """
+    Attend course view. Requests an API to add a user to the course.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to add new user at
+    :type course_id: int
+    :raises: HttpResponseBadRequest
+    :return: :class `HttpResponseRedirect` object
+    """
     course_id = int(course_id)
     user = request.user
     user_credentials = (user.username, user.password)
@@ -170,6 +250,17 @@ def attend_course(request, course_id):
 @require_GET
 @login_required(login_url='/accounts/login/')
 def attendee_solutions(request, course_id, attendee_id):
+    """
+    Attendee solutions view. Gets a list of attendee solutions, and generates
+    `courses/attendee_solutions.html` template as a response.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to add new user at
+    :type course_id: int
+    :param attendee_id: Id of the attendee to get solutions of
+    :type attendee_id: int
+    :return: :class `HttpResponse` object
+    """
     course_id = int(course_id)
     attendee_id = int(attendee_id)
     user_credentials = (request.user.username, request.user.password)
@@ -191,6 +282,13 @@ def attendee_solutions(request, course_id, attendee_id):
 
 @login_required(login_url='/accounts/login/')
 def delete_course(request, course_id):
+    """
+    Delete course view. Requests an API to delete a course.
+
+    :param request: :class `Request` object
+    :param course_id: Id of the course to delete
+    :return: :class `HttpResponseRedirect` object
+    """
     course_id = int(course_id)
     user_credentials = (request.user.username, request.user.password)
     api.delete_course(course_id, auth=user_credentials)

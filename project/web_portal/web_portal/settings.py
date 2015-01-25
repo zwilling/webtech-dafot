@@ -135,3 +135,9 @@ TEMPLATE_DIRS = (
 # External Web Service information
 SERVER_URL = 'http://codeservice.herokuapp.com'
 REST_API = SERVER_URL + '/rest'
+
+# Supported solution languages
+LANGUAGES = (
+    ('python', u'Python'),
+    ('java', u'Java')
+)

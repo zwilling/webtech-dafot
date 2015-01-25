@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include
 from django.contrib import admin
 from django.conf import settings
 
+# Custom error handlers
 handler400 = 'web_portal.core.errors.views.bad_request'
 handler403 = 'web_portal.core.errors.views.permission_denied'
 handler404 = 'web_portal.core.errors.views.page_not_found'
@@ -12,9 +13,5 @@ urlpatterns = patterns('',
     (r"^", include("web_portal.core.main.urls")),
     (r"^", include("web_portal.core.users.urls")),
     (r"^", include("web_portal.core.courses.urls")),
+    (r'media/(?P<path>.*)', 'serve', {'document_root': settings.MEDIA_ROOT}),
 )
-
-if settings.DEBUG:
-    urlpatterns += patterns('django.views.static',
-        (r'media/(?P<path>.*)', 'serve', {'document_root': settings.MEDIA_ROOT})
-    )
