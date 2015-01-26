@@ -6,8 +6,8 @@ from .models import UserProfile
 
 class AppUserForm(forms.ModelForm, RegistrationFormUniqueEmail):
     """
-    Extended :class: `RegistrationFormUniqueEmail` form with user's
-    first name and last name
+    Extended :class:`django.registration.RegistrationFormUniqueEmail` form
+    with user's first name and last name
     """
     first_name = forms.CharField(label="First name", required=True)
     last_name = forms.CharField(label="Last name", required=True)

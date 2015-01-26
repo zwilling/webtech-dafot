@@ -8,7 +8,8 @@ from .models import UserProfile
 
 
 class CustomRegistrationView(RegistrationView):
-    """Extended :class:`RegistrationView` object with :param: `title`."""
+    """Extended :class:`django.registration.RegistrationView` object with
+    `title`."""
 
     def get_context_data(self, **kwargs):
         """Pass 'title' parameter to the template

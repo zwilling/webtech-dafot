@@ -26,8 +26,8 @@ def json_object_hook(response):
     """
     Convert JSON representation of response to object one.
 
-    :param response: :class: `HTTPResponse` object
-    :returns: :class: `JSONResponse` object
+    :param response: :class:`HTTPResponse` object
+    :returns: :class:`JSONResponse` object
     """
     return namedtuple('JSONResponse', response.keys())(*response.values())
 
@@ -36,7 +36,7 @@ def get_page_from_request(request, key='page'):
     """
     Get current page number from the request
 
-    :param request: :class: `Request` object
+    :param request: :class:`Request` object
     :param key: Optional key to extract from the query string instead of page
     :type key: str
     :returns: Page number
@@ -50,9 +50,9 @@ def user_is_attendee(user, attendees):
     """
     Check whether current user is in the attendees list.
 
-    :param user: `User` object
-    :param attendees: a list of `User` objects, who are attendees of the course
-    :returns: True if a user is attendee, False otherwise
+    :param user: :class:`User` object
+    :param attendees: a list of :class:`User` objects, who are attendees of the course
+    :returns: `True` if a user is attendee, `False` otherwise
     """
     return any(user.id == attendee.user.id for attendee in attendees)
 
@@ -61,9 +61,9 @@ def user_is_organizer(user, organizer):
     """
     Check whether current user is organizer of the course.
 
-    :param user: `User` object
-    :param organizer: `User` object representing organizer of the course
-    :returns: True if a user is organizer, False otherwise
+    :param user: :class:`User` object
+    :param organizer: :class:`User` object representing organizer of the course
+    :returns: `True` if a user is organizer, `False` otherwise
     """
     return user.id == organizer.id
 
@@ -72,8 +72,8 @@ def clean_solution(solution):
     """
     Remove `assignment` and `attendee` attributes from solution
 
-    :param: solution: Solution object of :type:`namedtuple`
-    :returns: `Solution` object
+    :param: solution: :class:`Solution` object
+    :returns: :class:`Solution` object
     """
     clean_fields = ['assignment', 'attendee']
     dictionary = solution._asdict()
@@ -97,13 +97,10 @@ def process_request(method, url, data=None, return_only_body=True, **kwargs):
 
     :param method: Method of the ``request``.
     :param url: URL for the new :class:`Request` object.
-    :param data: (optional) Dictionary, bytes, or file-like object to send in
-    the body of the POST :class:`Request`.
-    :param return_only_body: Return only message-body of the response as
-    JSON-view object.
+    :param data: (optional) Dictionary, bytes, or file-like object to send in the body of the POST :class:`Request`.
+    :param return_only_body: Return only message-body of the response as JSON-view object.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
-    :returns: `HTTPResponse` object if `return_only_body` set to False,
-    else `JSONResponse` object
+    :returns: :class:`HTTPResponse` object if `return_only_body` set to `False`,else :class:`JSONResponse` object
     """
     if method == 'GET':
         response = send_get_request(url, **kwargs)
@@ -125,7 +122,7 @@ def send_get_request(url, headers=None, **kwargs):
     """Sends a GET request.
 
     :param url: URL for the new :class:`Request` object.
-    :param headers: Headers used for the new :class: `Request` object.
+    :param headers: Headers used for the new :class:`Request` object.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
     :returns: :class:`Response` object.
     """
@@ -140,8 +137,7 @@ def send_post_request(url, headers=None, json=None, **kwargs):
 
     :param url: URL for the new :class:`Request` object.
     :param headers: Headers used for the new :class: `Request` object.
-    :param data: (optional) Dictionary, bytes, or file-like object to send in
-    the body of the :class:`Request`.
+    :param data: (optional) Dictionary, bytes, or file-like object to send in the body of the :class:`Request`.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
     :returns: :class:`Response` object.
     """
@@ -156,7 +152,7 @@ def send_delete_request(url, **kwargs):
 
     :param url: URL for the new :class:`Request` object.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
-    :returns: Returns :class:`Response` object.
+    :returns: :class:`Response` object.
     """
     return requests.delete(url, **kwargs)
 
@@ -165,9 +161,8 @@ def prepare_headers(current_headers, obligatory_headers):
     """Adds `obligatory_headers` to `current_headers` if they are not already
     included.
 
-    :param: current_headers: Dict of original headers
-    :param: obligatory_headers: Dict of obligatory headers, which should be
-    added
+    :param current_headers: Dict of original headers
+    :param obligatory_headers: Dict of obligatory headers, which should be added
     :returns: dictionary of headers
     """
     if current_headers is None:

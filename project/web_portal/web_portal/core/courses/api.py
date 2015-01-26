@@ -34,7 +34,7 @@ def get_assignments(course_id, clipped_body=True, **kwargs):
 
     :param course_id: Id of the course
     :type course_id: int
-    :param clipped_body: Return a full response if set to True, otherwise
+    :param clipped_body: Return a full response if set to True, otherwise \
     return only `assignment` attribute of a response.
     :param \*\*kwargs: Optional arguments that ``request`` takes.
     :returns: Json-encoded content of a response, if any.

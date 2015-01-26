@@ -21,8 +21,8 @@ def course_list(request):
     Course list view. Gets a list of courses, paginates and generates
     `courses/course_list.html` template as a response.
 
-    :param request: :class `Request` object
-    :return: :class `HttpResponse` object
+    :param request: :class:`Request` object
+    :return: :class:`HttpResponse` object
     """
     page = get_page_from_request(request)
     courses = api.get_courses()
@@ -45,10 +45,10 @@ def course_page(request, course_id):
     Course page view. Gets a course and generates `courses/course_page.html`
     template as a response.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the requested course
     :type course_id: int
-    :return: :class `HttpResponse` object
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     user = request.user
@@ -80,12 +80,12 @@ def assignment_page(request, course_id, assignment_id):
     Assignment page view. Gets a course and generates `courses/assignment_page.html`
     template as a response.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to which requested assignment belongs
     :type course_id: int
     :param assignment_id: Id of the requested assignment
     :type assignment_id: int
-    :return: :class `HttpResponse` object
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
@@ -111,14 +111,14 @@ def solution_page(request, course_id, assignment_id, solution_id):
     Solution page view. Gets a course and generates `courses/solution_page.html`
     template as a response.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to which requested solution belongs
     :type course_id: int
     :param assignment_id: Id of the assignment to which requested solution belongs
     :type assignment_id: int
     :param solution_id: Id of the requested solution
     :type solution_id: int
-    :return: :class `HttpResponse` object
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
@@ -144,9 +144,9 @@ def add_course(request):
     Add course view. Gets a data from the form and requests an API create a
     new course with this data.
 
-    :param request: :class `Request` object
-    :raises: HttpResponseBadRequest
-    :return: :class `HttpResponse` object
+    :param request: :class:`Request` object
+    :raises: :class:`HttpResponseBadRequest`
+    :return: :class:`HttpResponse` object
     """
     if request.is_ajax():
         form = CourseForm(request.POST)
@@ -168,11 +168,11 @@ def add_assignment(request, course_id):
     Add assignment view. Gets a data from the form and requests an API create a
     new assignment with this data in a course.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to create a new assignment in
     :type course_id: int
-    :raises: HttpResponseBadRequest
-    :return: :class `HttpResponse` object
+    :raises: :class:`HttpResponseBadRequest`
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     if request.is_ajax():
@@ -200,13 +200,13 @@ def add_solution(request, course_id, assignment_id):
     Add solution view. Gets a data from the form and requests an API create a
     new solution with this data in an assignment in the course.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to create a new solution in
     :type course_id: int
     :param assignment_id: Id of the assignment to create a new solution in
     :type assignment_id: int
-    :raises: HttpResponseBadRequest
-    :return: :class `HttpResponse` object
+    :raises: :class:`HttpResponseBadRequest`
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     assignment_id = int(assignment_id)
@@ -227,11 +227,11 @@ def attend_course(request, course_id):
     """
     Attend course view. Requests an API to add a user to the course.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to add new user at
     :type course_id: int
-    :raises: HttpResponseBadRequest
-    :return: :class `HttpResponseRedirect` object
+    :raises: :class:`HttpResponseBadRequest`
+    :return: :class:`HttpResponseRedirect` object
     """
     course_id = int(course_id)
     user = request.user
@@ -254,12 +254,12 @@ def attendee_solutions(request, course_id, attendee_id):
     Attendee solutions view. Gets a list of attendee solutions, and generates
     `courses/attendee_solutions.html` template as a response.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to add new user at
     :type course_id: int
     :param attendee_id: Id of the attendee to get solutions of
     :type attendee_id: int
-    :return: :class `HttpResponse` object
+    :return: :class:`HttpResponse` object
     """
     course_id = int(course_id)
     attendee_id = int(attendee_id)
@@ -285,9 +285,9 @@ def delete_course(request, course_id):
     """
     Delete course view. Requests an API to delete a course.
 
-    :param request: :class `Request` object
+    :param request: :class:`Request` object
     :param course_id: Id of the course to delete
-    :return: :class `HttpResponseRedirect` object
+    :return: :class:`HttpResponseRedirect` object
     """
     course_id = int(course_id)
     user_credentials = (request.user.username, request.user.password)

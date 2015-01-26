@@ -4,7 +4,7 @@ from django.conf import settings
 
 class SiteForm(forms.Form):
     """
-    Extended :class: `Form` object. Removes 'default :' after labels on the
+    Extended :class:`Form` object. Removes 'default :' after labels on the
     form.
     """
     def __init__(self, *args, **kwargs):
@@ -15,7 +15,7 @@ class SiteForm(forms.Form):
 
 class CourseForm(SiteForm):
     """
-    Extended :class: `SiteForm` with `name` and `description` fields.
+    Extended :class:`SiteForm` with `name` and `description` fields.
     """
     name = forms.CharField(
         max_length=255, required=True, label=u'Course name'
@@ -37,7 +37,7 @@ class CourseForm(SiteForm):
 
 class AssignmentForm(SiteForm):
     """
-    Extended :class: `SiteForm` with `name`,`description`, `language`,
+    Extended :class:`SiteForm` with `name`,`description`, `language`,
     `template_code` and `verification_code` fields.
     """
     name = forms.CharField(
@@ -60,7 +60,7 @@ class AssignmentForm(SiteForm):
 
 class SolutionForm(SiteForm):
     """
-    Extended :class: `SiteForm` with `code` field.
+    Extended :class:`SiteForm` with `code` field.
     """
     code = forms.CharField(
         required=True, label=u'Code', widget=forms.Textarea()
