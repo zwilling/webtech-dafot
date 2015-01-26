@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'web_portal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dd60tg9iilfm18',
-        'USER': 'itfefpsmnokpay',
-        'PASSWORD': 'ALM4HcI37eW4H34gcRMt50Spaj',
-        'HOST': 'ec2-54-235-99-22.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'databasename',
+        'USER': 'username',
+        'PASSWORD': 'password',
+        'HOST': 'host',
+        'PORT': 'port',
     }
 }
 
