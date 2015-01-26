@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CODE project documentation &mdash; CODE Project 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="CODE Project 1.0.0 documentation" href="#"/>
+        <link rel="next" title="Web Portal" href="web_portal.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="#" class="fa fa-home"> CODE Project</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="web_portal.html">Web Portal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#developer-interface">Developer Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web_service.html">Web Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workers.html#python-worker">Python worker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workers.html#java-worker">Java worker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="support.html#file-an-issue">File an Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html#e-mail">E-mail</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">CODE Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>CODE project documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="code-project-documentation">
+<span id="library-index"></span><h1>CODE project documentation<a class="headerlink" href="#code-project-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Code project is designed to simplify the life of those who teach or attend
+the course with programming exercises.
+We provide a service for automatic code verification in cloud. Currently,
+we support Python and Java programming languages, but later service can be
+easily extended with any language you want. We use sandboxes to make code
+execution safe.</p>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>Our system consists of separate modules which are written in different
+languages:</p>
+<div class="figure align-center">
+<img alt="_images/architecture.png" src="_images/architecture.png" />
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="web_portal.html">Web Portal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#deployment">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#get-the-code">Get the Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#pip-virtualenv">Pip &amp; Virtualenv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="web_portal.html#developer-interface">Developer Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#main-module">main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#users-module">users module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#courses-module">courses module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web_portal.html#api-py">api.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web_portal.html#forms-py">forms.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web_portal.html#views-py">views.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web_portal.html#utils-py">utils.py</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web_portal.html#errors-module">errors module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web_portal.html#id2">views.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web_service.html">Web Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workers.html#python-worker">Python worker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workers.html#java-worker">Java worker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="support.html#file-an-issue">File an Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html#e-mail">E-mail</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="web_portal.html" class="btn btn-neutral float-right" title="Web Portal"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Oleksandr Zastupailo, Tatiana Vert.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

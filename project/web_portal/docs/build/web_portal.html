@@ -1,0 +1,1179 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Portal &mdash; CODE Project 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="CODE Project 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="web_service.html"/>
+        <link rel="prev" title="CODE project documentation" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> CODE Project</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Web Portal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developer-interface">Developer Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="support.html#file-an-issue">File an Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support.html#e-mail">E-mail</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">CODE Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Web Portal</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/web_portal.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="web-portal">
+<span id="library-web-portal"></span><h1>Web Portal<a class="headerlink" href="#web-portal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><cite>Web Portal</cite> is a part of our project which interacts with the user, like a
+usual web-site. It is built with a Django Web Framework, Bootstrap Framework
+and uses JavaScript, CodeMirror and prism.js library. It consists of several
+modules: main, users, courses, errors.</p>
+</div>
+<div class="section" id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>This part of the documentation covers the deployment of <cite>Web Portal</cite> on local
+system. The first step to using any software package is getting it properly
+installed.</p>
+<div class="section" id="get-the-code">
+<h3>Get the Code<a class="headerlink" href="#get-the-code" title="Permalink to this headline">¶</a></h3>
+<p><cite>Web Portal</cite> is actively developed on GitHub, where the code is
+<a class="reference external" href="https://github.com/azastupailo/Code-Project">always available</a>.</p>
+<p>You can either clone the public repository:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git clone git://github.com/azastupailo/Code-Project.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="pip-virtualenv">
+<h3>Pip &amp; Virtualenv<a class="headerlink" href="#pip-virtualenv" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">pip</span></tt> is a package management system used to install and manage software
+packages written in Python.</p>
+<p>Please install <tt class="docutils literal"><span class="pre">pip</span></tt> by following
+<a class="reference external" href="https://pip.pypa.io/en/latest/installing.html">this link</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Please don&#8217;t proceed to the next steps before installing <tt class="docutils literal"><span class="pre">pip</span></tt>.</p>
+</div>
+<p><tt class="docutils literal"><span class="pre">virtualenv</span></tt> is a tool to create isolated Python environments. It creates
+an environment that has its own installation directories, that doesn&#8217;t share
+libraries with other virtualenv environments (and optionally doesn&#8217;t access
+the globally installed libraries either).
+You can install <tt class="docutils literal"><span class="pre">python-virtualenv</span></tt> and use for a project or you can use
+your regular Python environment in the system. to install <tt class="docutils literal"><span class="pre">virtualenv</span></tt>
+please follow <a class="reference external" href="https://virtualenv.pypa.io/en/latest/installation.html">this link</a>.</p>
+<p>So, if you have installed <tt class="docutils literal"><span class="pre">virtualenv</span></tt>, first you need to create and
+activate it:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd &lt;code-project-dir&gt;
+$ virtualenv venv
+$ source venv/bin/activate
+</pre></div>
+</div>
+<p>To deactivate <tt class="docutils literal"><span class="pre">virtualenv</span></tt> later just simply type:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ deactivate
+</pre></div>
+</div>
+<p>Now we can install all the dependecies for <cite>Web Portal</cite>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><cite>Web Portal</cite> uses <tt class="docutils literal"><span class="pre">PostgreSQL</span></tt> database. Please make sure that it is installed in
+your system.</p>
+</div>
+<p>Installing python packages is simple, just run this in your terminal:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install -r requirements.txt
+</pre></div>
+</div>
+<p>Please specify database connection parameters in the <tt class="docutils literal"><span class="pre">web_portal/settings.py</span></tt> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
+        <span class="s">&#39;NAME&#39;</span><span class="p">:</span> <span class="s">&#39;database-name&#39;</span><span class="p">,</span>
+        <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="s">&#39;user-name&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s">&#39;password&#39;</span><span class="p">,</span>
+        <span class="s">&#39;HOST&#39;</span><span class="p">:</span> <span class="s">&#39;host&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PORT&#39;</span><span class="p">:</span> <span class="s">&#39;port&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And email parameters used for sending activation link to the users at <cite>Web Portal</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_EMAIL</span> <span class="o">=</span> <span class="s">&#39;my.email@gmail.com&#39;</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s">&#39;smtp.gmail.com&#39;</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s">&#39;my.email&#39;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s">&#39;password&#39;</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s synchronize the database now:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python manage.py syncdb
+</pre></div>
+</div>
+<p>And simply run the <cite>Web Portal</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python manage.py runserver
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="developer-interface">
+<h2>Developer Interface<a class="headerlink" href="#developer-interface" title="Permalink to this headline">¶</a></h2>
+<p>This part of the documentation covers all the interfaces of <cite>Web Portal</cite>.
+For parts where <cite>Web Portal</cite> depends on external libraries, we document the most
+important right here and provide links to the canonical documentation.</p>
+<p>As we have already mentioned, <cite>Web Portal</cite> consists of several modules:
+main, users, courses and errors.</p>
+<div class="section" id="main-module">
+<h3>main module<a class="headerlink" href="#main-module" title="Permalink to this headline">¶</a></h3>
+<p>This module is responsible for following views:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://your.domain.com/
+http://your.domain.com/index
+http://your.domain.com/coming
+http://your.domain.com/our-team
+</pre></div>
+</div>
+<dl class="function">
+<dt id="core.main.views.index">
+<tt class="descclassname">core.main.views.</tt><tt class="descname">index</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.main.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main page view. Generates index.html template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><cite>Request</cite> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>HTTPResponse</cite> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.main.views.coming">
+<tt class="descclassname">core.main.views.</tt><tt class="descname">coming</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.main.views.coming" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coming soon view. Generates coming.html template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><cite>Request</cite> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>HTTPResponse</cite> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.main.views.our_team">
+<tt class="descclassname">core.main.views.</tt><tt class="descname">our_team</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.main.views.our_team" title="Permalink to this definition">¶</a></dt>
+<dd><p>Team members view. Generates our_team.html template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><cite>Request</cite> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>HTTPResponse</cite> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="users-module">
+<h3>users module<a class="headerlink" href="#users-module" title="Permalink to this headline">¶</a></h3>
+<p>This module is responsible for following views:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://your.domain.com/accounts/register/
+http://your.domain.com/accounts/register/complete/
+http://your.domain.com/accounts/login/
+http://your.domain.com/accounts/logout/
+http://your.domain.com/accounts/activate/&lt;activation_key&gt;/
+http://your.domain.com/accounts/activate/complete/
+</pre></div>
+</div>
+<dl class="class">
+<dt id="core.users.models.UserProfile">
+<em class="property">class </em><tt class="descclassname">core.users.models.</tt><tt class="descname">UserProfile</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.users.models.UserProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model for storing user&#8217;s avatar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">User:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Avatar:</th><td class="field-body">image uploaded by the <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.users.views.CustomRegistrationView">
+<em class="property">class </em><tt class="descclassname">core.users.views.</tt><tt class="descname">CustomRegistrationView</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#core.users.views.CustomRegistrationView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">django.registration.RegistrationView</span></tt> object with
+<cite>title</cite>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.users.forms.AppUserForm">
+<em class="property">class </em><tt class="descclassname">core.users.forms.</tt><tt class="descname">AppUserForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.users.forms.AppUserForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">django.registration.RegistrationFormUniqueEmail</span></tt> form
+with user&#8217;s first name and last name</p>
+</dd></dl>
+
+</div>
+<div class="section" id="courses-module">
+<h3>courses module<a class="headerlink" href="#courses-module" title="Permalink to this headline">¶</a></h3>
+<p>This module is responsible for following views:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://your.domain.com/courses/
+http://your.domain.com/courses/add/
+http://your.domain.com/courses/&lt;course_id&gt;/
+http://your.domain.com/courses/&lt;course_id&gt;/delete/
+http://your.domain.com/courses/&lt;course_id&gt;/attend/
+http://your.domain.com/courses/&lt;course_id&gt;/assignments/add/
+http://your.domain.com/courses/&lt;course_id&gt;/assignments/&lt;assignment_id&gt;/
+http://your.domain.com/courses/&lt;course_id&gt;/assignments/&lt;assignment_id&gt;/solutions/
+http://your.domain.com/courses/&lt;course_id&gt;/assignments/&lt;assignment_id&gt;/solutions/&lt;solution_id&gt;/
+http://your.domain.com/courses/&lt;course_id&gt;/attendee/&lt;attendee_id&gt;/solutions/
+</pre></div>
+</div>
+<div class="section" id="api-py">
+<h4>api.py<a class="headerlink" href="#api-py" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="core.courses.api.get_courses">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_courses</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_courses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of all courses by sending a GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Json-encoded content of a response, if any.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_course">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_course</tt><big>(</big><em>course_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a course by id by sending a GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_assignments">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_assignments</tt><big>(</big><em>course_id</em>, <em>clipped_body=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_assignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of all assignments of the course by sending a GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course</li>
+<li><strong>clipped_body</strong> &#8211; Return a full response if set to True, otherwise     return only <cite>assignment</cite> attribute of a response.</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_assignment">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_assignment</tt><big>(</big><em>course_id</em>, <em>assignment_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an assignment of the course by id by sending a GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the assignment</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_solutions">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_solutions</tt><big>(</big><em>course_id</em>, <em>assignment_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_solutions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of all solutions of an assignment in the course by sending a
+GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the assignment</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_attendee_solutions">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_attendee_solutions</tt><big>(</big><em>course_id</em>, <em>attendee_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.get_attendee_solutions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of all solutions of an attendee in the course by sending a
+GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course</li>
+<li><strong>attendee_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the attendee of the course</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.get_user_avatar_url">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">get_user_avatar_url</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#core.courses.api.get_user_avatar_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an url of the avatar of the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the user</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Url to user&#8217;s avatar</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.create_course">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">create_course</tt><big>(</big><em>json_data</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.create_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new course by sending a POST request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>json_data</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Course json representation</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Url of the created course</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.create_assignment">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">create_assignment</tt><big>(</big><em>course_id</em>, <em>json_data</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.create_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new assignment by sending a POST request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create new assignment in</li>
+<li><strong>json_data</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Assignment json representation</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Url of the created assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.create_solution">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">create_solution</tt><big>(</big><em>course_id</em>, <em>assignment_id</em>, <em>json_data</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.create_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new solution by sending a POST request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create new solution in</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the assignment to create new solution in</li>
+<li><strong>json_data</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Solution json representation</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Url of the created solution</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.attend_course">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">attend_course</tt><big>(</big><em>course_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.attend_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a user to the course by sending a POST request..</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create new solution in</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Url of the added attendee</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.api.delete_course">
+<tt class="descclassname">core.courses.api.</tt><tt class="descname">delete_course</tt><big>(</big><em>course_id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.api.delete_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a course by sending a DELETE request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create new solution in</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json-encoded content of a response, if any.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="forms-py">
+<h4>forms.py<a class="headerlink" href="#forms-py" title="Permalink to this headline">¶</a></h4>
+<dl class="class">
+<dt id="core.courses.forms.SiteForm">
+<em class="property">class </em><tt class="descclassname">core.courses.forms.</tt><tt class="descname">SiteForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.forms.SiteForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">Form</span></tt> object. Removes &#8216;default :&#8217; after labels on the
+form.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.courses.forms.CourseForm">
+<em class="property">class </em><tt class="descclassname">core.courses.forms.</tt><tt class="descname">CourseForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.forms.CourseForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">SiteForm</span></tt> with <cite>name</cite> and <cite>description</cite> fields.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.courses.forms.AssignmentForm">
+<em class="property">class </em><tt class="descclassname">core.courses.forms.</tt><tt class="descname">AssignmentForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.forms.AssignmentForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">SiteForm</span></tt> with <cite>name</cite>,`description`, <cite>language</cite>,
+<cite>template_code</cite> and <cite>verification_code</cite> fields.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.courses.forms.SolutionForm">
+<em class="property">class </em><tt class="descclassname">core.courses.forms.</tt><tt class="descname">SolutionForm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.forms.SolutionForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended <tt class="xref py py-class docutils literal"><span class="pre">SiteForm</span></tt> with <cite>code</cite> field.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="views-py">
+<h4>views.py<a class="headerlink" href="#views-py" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="core.courses.views.course_list">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">course_list</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.course_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Course list view. Gets a list of courses, paginates and generates
+<cite>courses/course_list.html</cite> template as a response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.course_page">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">course_page</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.course_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Course page view. Gets a course and generates <cite>courses/course_page.html</cite>
+template as a response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the requested course</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.assignment_page">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">assignment_page</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.assignment_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assignment page view. Gets a course and generates <cite>courses/assignment_page.html</cite>
+template as a response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to which requested assignment belongs</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the requested assignment</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.solution_page">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">solution_page</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.solution_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solution page view. Gets a course and generates <cite>courses/solution_page.html</cite>
+template as a response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to which requested solution belongs</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the assignment to which requested solution belongs</li>
+<li><strong>solution_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the requested solution</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.add_course">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">add_course</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.add_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add course view. Gets a data from the form and requests an API create a
+new course with this data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseBadRequest</span></tt></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.add_assignment">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">add_assignment</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.add_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add assignment view. Gets a data from the form and requests an API create a
+new assignment with this data in a course.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create a new assignment in</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseBadRequest</span></tt></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.add_solution">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">add_solution</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.add_solution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add solution view. Gets a data from the form and requests an API create a
+new solution with this data in an assignment in the course.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to create a new solution in</li>
+<li><strong>assignment_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the assignment to create a new solution in</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseBadRequest</span></tt></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.attend_course">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">attend_course</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.attend_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attend course view. Requests an API to add a user to the course.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to add new user at</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseBadRequest</span></tt></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseRedirect</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.attendee_solutions">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">attendee_solutions</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.attendee_solutions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attendee solutions view. Gets a list of attendee solutions, and generates
+<cite>courses/attendee_solutions.html</cite> template as a response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the course to add new user at</li>
+<li><strong>attendee_id</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Id of the attendee to get solutions of</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.views.delete_course">
+<tt class="descclassname">core.courses.views.</tt><tt class="descname">delete_course</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.views.delete_course" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete course view. Requests an API to delete a course.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>course_id</strong> &#8211; Id of the course to delete</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponseRedirect</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="utils-py">
+<h4>utils.py<a class="headerlink" href="#utils-py" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="core.courses.utils.base_request_url">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">base_request_url</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#core.courses.utils.base_request_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for API that adds server address to the url beginning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; url</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.json_object_hook">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">json_object_hook</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#core.courses.utils.json_object_hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert JSON representation of response to object one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">JSONResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.get_page_from_request">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">get_page_from_request</tt><big>(</big><em>request</em>, <em>key='page'</em><big>)</big><a class="headerlink" href="#core.courses.utils.get_page_from_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current page number from the request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</li>
+<li><strong>key</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Optional key to extract from the query string instead of page</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Page number</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.user_is_attendee">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">user_is_attendee</tt><big>(</big><em>user</em>, <em>attendees</em><big>)</big><a class="headerlink" href="#core.courses.utils.user_is_attendee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether current user is in the attendees list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> object</li>
+<li><strong>attendees</strong> &#8211; a list of <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> objects, who are attendees of the course</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>True</cite> if a user is attendee, <cite>False</cite> otherwise</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.user_is_organizer">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">user_is_organizer</tt><big>(</big><em>user</em>, <em>organizer</em><big>)</big><a class="headerlink" href="#core.courses.utils.user_is_organizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether current user is organizer of the course.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> object</li>
+<li><strong>organizer</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> object representing organizer of the course</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><cite>True</cite> if a user is organizer, <cite>False</cite> otherwise</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.process_request">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">process_request</tt><big>(</big><em>method</em>, <em>url</em>, <em>data=None</em>, <em>return_only_body=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.utils.process_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process request by send it, check its status and return response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>method</strong> &#8211; Method of the <tt class="docutils literal"><span class="pre">request</span></tt>.</li>
+<li><strong>url</strong> &#8211; URL for the new <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object.</li>
+<li><strong>data</strong> &#8211; (optional) Dictionary, bytes, or file-like object to send in the body of the POST <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt>.</li>
+<li><strong>return_only_body</strong> &#8211; Return only message-body of the response as JSON-view object.</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object if <cite>return_only_body</cite> set to <cite>False</cite>,else <tt class="xref py py-class docutils literal"><span class="pre">JSONResponse</span></tt> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.send_get_request">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">send_get_request</tt><big>(</big><em>url</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.utils.send_get_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a GET request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> &#8211; URL for the new <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object.</li>
+<li><strong>headers</strong> &#8211; Headers used for the new <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object.</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt> object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.send_post_request">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">send_post_request</tt><big>(</big><em>url</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.utils.send_post_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a POST request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> &#8211; URL for the new <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object.</li>
+<li><strong>headers</strong> &#8211; Headers used for the new :class: <cite>Request</cite> object.</li>
+<li><strong>data</strong> &#8211; (optional) Dictionary, bytes, or file-like object to send in the body of the <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt>.</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt> object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.send_delete_request">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">send_delete_request</tt><big>(</big><em>url</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#core.courses.utils.send_delete_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a DELETE request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> &#8211; URL for the new <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object.</li>
+<li><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">request</span></tt> takes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt> object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.courses.utils.prepare_headers">
+<tt class="descclassname">core.courses.utils.</tt><tt class="descname">prepare_headers</tt><big>(</big><em>current_headers</em>, <em>obligatory_headers</em><big>)</big><a class="headerlink" href="#core.courses.utils.prepare_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <cite>obligatory_headers</cite> to <cite>current_headers</cite> if they are not already
+included.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>current_headers</strong> &#8211; Dict of original headers</li>
+<li><strong>obligatory_headers</strong> &#8211; Dict of obligatory headers, which should be added</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">dictionary of headers</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="errors-module">
+<h3>errors module<a class="headerlink" href="#errors-module" title="Permalink to this headline">¶</a></h3>
+<p>This module is responsible for following custome errors views.</p>
+<div class="section" id="id2">
+<h4>views.py<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="core.errors.views.bad_request">
+<tt class="descclassname">core.errors.views.</tt><tt class="descname">bad_request</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.errors.views.bad_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bad request view. Generates <cite>errors/400.html</cite> template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.errors.views.permission_denied">
+<tt class="descclassname">core.errors.views.</tt><tt class="descname">permission_denied</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.errors.views.permission_denied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permission denied view. Generates <cite>errors/403.html</cite> template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.errors.views.page_not_found">
+<tt class="descclassname">core.errors.views.</tt><tt class="descname">page_not_found</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.errors.views.page_not_found" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page not found view. Generates <cite>errors/404.html</cite> template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.errors.views.server_error">
+<tt class="descclassname">core.errors.views.</tt><tt class="descname">server_error</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#core.errors.views.server_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal server error view. Generates <cite>errors/500.html</cite> template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt> object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">HTTPResponse</span></tt> object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="web_service.html" class="btn btn-neutral float-right" title="&lt;no title&gt;"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="CODE project documentation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Oleksandr Zastupailo, Tatiana Vert.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
